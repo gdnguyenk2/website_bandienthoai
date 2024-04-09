@@ -1,0 +1,191 @@
+﻿@using webbandienthoai.Models;
+@model SanPham
+@{
+    ViewBag.Title = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    IEnumerable<SanPham> tuongtu = (IEnumerable<SanPham>)ViewBag.sptuongtu;
+}
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh)" alt="">
+                    </div>
+
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh2)" alt="">
+                    </div>
+
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh3)" alt="">
+                    </div>
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh2)" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product thumb imgs -->
+            <div class="col-md-2  col-md-pull-5">
+                <div id="product-imgs">
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh)" alt="">
+                    </div>
+
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh2)" alt="">
+                    </div>
+
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh3)" alt="">
+                    </div>
+                    <div class="product-preview">
+                        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh2)" alt="">
+                    </div>
+                </div>
+            </div>
+            <!-- /Product thumb imgs -->
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">@Model.TenSP</h2>
+                    <div>
+                        <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                        <a class="review-link" href="#">@Model.LuotXem Lượt xem</a>
+                    </div>
+                    <div>
+                        <h3 class="product-price">@string.Format("{0:N0} \u20ab", Model.DonGia) <del class="product-old-price"></del></h3>
+                    </div>
+                    <p>@Model.MoTa</p>
+
+                    <div class="product-options">
+                        <div class="color-options">
+                            <label style="font-size:14px">
+                                Màu
+                                @foreach (var item in ViewBag.listMau)
+                                {
+                                    <button class="color-button" type="button" data-color="@item.MaMau">@item.TenMau</button>
+                                }
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="add-to-cart">
+                        <div class="qty-label" style="font-size:14px">
+                            Số lượng
+                            <div class="input-number">
+                                <input type="number" value="1">
+                                <span class="qty-up">+</span>
+                                <span class="qty-down">-</span>
+                            </div>
+                        </div><br /><br />
+                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- Product tab -->
+<div class="col-md-12">
+    <div id="product-tab">
+        <!-- product tab nav -->
+        <ul class="tab-nav">
+            <li class="active"><a data-toggle="tab" href="#tab1">Thông số kỹ thuật</a></li>
+            <li><a data-toggle="tab" href="#tab2">Bình luận</a></li>
+        </ul>
+        <!-- /product tab nav -->
+        <!-- product tab content -->
+        <div class="tab-content">
+            <!-- tab1  -->
+            <div id="tab1" class="tab-pane fade in active">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="text-align:center">@Html.Raw(Model.CauHinh)</p>
+                    </div>
+                </div>
+            </div><br />
+            <!-- /tab1  -->
+            <!-- tab2  -->
+            <div id="tab2" class="tab-pane fade in">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="a">
+                            <div class="fb-comments" data-href="@ViewBag.masp" data-width="100%" data-numposts="5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><br />
+            <!-- /tab2  -->
+            <!-- /tab3  -->
+        </div>
+        <!-- /product tab content  -->
+    </div>
+</div>
+<!-- /product tab -->
+<!-- /SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="title">Sản Phẩm tương tự</h3>
+                </div>
+            </div>
+            @foreach (var item in tuongtu.Take(4))
+            {
+                <div class="col-md-3 col-xs-6">
+                    <div class="product">
+                        <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
+                            <div class="product-img">
+                                <img src="@Url.Content("~/Content/Images/Products/"+ item.HinhAnh)" alt="">
+                                <div class="product-label">
+                                    <span class="sale">-30%</span>
+                                    <span class="new">NEW</span>
+                                </div>
+                            </div>
+                            </a>
+                            <div class="product-body">
+                                <p class="product-category">@item.NhaSanXuat.TenNSX</p>
+                                <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
+                                <h4 class="product-price">@string.Format("{0:N0} \u20ab", item.DonGia)<del class="product-old-price"></del></h4>
+                                <div class="product-rating">
+                                </div>
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">yêu thích</span></button>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">so sánh</span></button>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">chi tiết</span></button>
+                                </div>
+                            </div>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+                            </div>
+                    </div>
+                </div>
+            }
+            <!-- /product -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

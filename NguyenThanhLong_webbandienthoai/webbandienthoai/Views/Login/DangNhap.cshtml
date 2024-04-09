@@ -1,0 +1,72 @@
+﻿@using webbandienthoai.Models
+@model ThanhVien
+<!DOCTYPE html>
+<html lang="en">
+@{
+    Layout = null;
+}
+<head>
+    <title>Đăng Nhập</title>
+    <!-- meta tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Art Sign Up Form Responsive Widget, Audio and Video players, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates,
+		Flat Web Templates, Login Sign-up Responsive Web Template, Smartphone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <!-- /meta tags -->
+    <!-- custom style sheet -->
+    <link href="~/Content_Admin/css/style_login.css" rel="stylesheet" />
+    <!-- /custom style sheet -->
+    <!-- fontawesome css -->
+    <link href="~/Content_Admin/css/fontawesome-all.css" rel="stylesheet" />
+    <!-- /fontawesome css -->
+    <!-- google fonts-->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- /google fonts-->
+
+</head>
+
+
+<body>
+    <h1>Material Login Form</h1>
+    <div class=" w3l-login-form">
+        <h2>Đăng Nhập</h2>
+        @using (Ajax.BeginForm("DangNhap", "Login", FormMethod.Post, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "message" }, new { @class = "signin-form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class=" w3l-form-group">
+                <label>Tài khoản:</label>
+                <div class="group">
+                    <i class="fas fa-user"></i>
+                    @Html.TextBoxFor(model => model.TaiKhoan, new { @id = "taikhoan", @placeholder = "Tài khoản", @required = "" })
+                </div>
+            </div>
+            <div class=" w3l-form-group">
+                <label>Mật Khẩu:</label>
+                <div class="group">
+                    <i class="fas fa-unlock"></i>
+                    @Html.PasswordFor(model => model.MatKhau, new{@id = "password",@placeholder = "Mật khẩu", required = "",oninput = "checkPasswordLength()" })
+                </div>
+            </div>
+            <div class="forgot">
+                <a href="#">Quên mật khẩu?</a>
+                <p><input type="checkbox">Ghi nhớ tài khoản</p>
+            </div>
+            <button type="submit">Đăng nhập</button>
+        }
+        <p class=" w3l-register-p">Bạn chưa có tài khoản?<a href="@Url.Action("DangKy","Register")" class="register"> Đăng ký</a></p>
+    </div>
+</body>
+
+</html>
+<script>
+    function checkPasswordLength() {
+        var passwordField = document.getElementById('password');
+
+        if (passwordField.value.length < 6) {
+            passwordField.setCustomValidity('Mật khẩu phải có ít nhất 6 ký tự.');
+        } else {
+            passwordField.setCustomValidity('');
+        }
+    }
+</script>

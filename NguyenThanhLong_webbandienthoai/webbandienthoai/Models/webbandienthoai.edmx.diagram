@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="729406acfbb7483784517d4114bc9b76" Name="Diagram1">
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.BinhLuan" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.ChiTietDonDatHang" Width="1.5" PointX="11.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.ChiTietGioHang" Width="1.5" PointX="8.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.ChiTietPhieuNhap" Width="1.5" PointX="5.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.CongNo" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.DanhMuc" Width="1.5" PointX="1.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.DonDatHang" Width="1.5" PointX="9" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.GioHang" Width="1.5" PointX="6" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.KhachHang" Width="1.5" PointX="6.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.KhuyenMai" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.LoaiSanPham" Width="1.5" PointX="3.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.LoaiThanhVien" Width="1.5" PointX="1.5" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.LoaiThanhVien_Quyen" Width="1.5" PointX="6.75" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.Mau" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.NhaSanXuat" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.PhieuNhap" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.Quyen" Width="1.5" PointX="4.5" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.SanPham" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.SanPham_Mau" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.ThanhVien" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_BL_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_BL_TV" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTDDH_DDH" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTDDH_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTGH_GH" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTGH_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTPN_PN" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTPN_SP" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CongNo_NCC" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_LSP_DM" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_DDH_KH" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_GIOHANG_TV" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_KH_TV" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_SP_KM" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_SP_LSP" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_LTVQ_TV" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_TV_LTV" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_LTVQ_Q" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_SPMAU_MAU" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_PN_NCC" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_SP_NCC" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_SP_NSX" ManuallyRouted="false" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_SPMAU_SP" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
