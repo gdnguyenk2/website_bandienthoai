@@ -57,5 +57,15 @@ namespace webbandienthoai.Controllers
             ViewBag.masp = id;
             return View(product);
         }
+        public ActionResult SanPhamAll()
+        {
+            return View();
+        }
+        public ActionResult hienThiLoaiSP(int? id)
+        {
+            NhaSanXuat NSXSP = db.NhaSanXuats.SingleOrDefault(m => m.MaNSX == id);
+            List<SanPham> sp = db.SanPhams.Where(m => m.MaNSX == NSXSP.MaNSX).ToList(); 
+            return View(sp);
+        }
     }
 }

@@ -12,9 +12,7 @@ namespace webbandienthoai
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            //chi tiết sản phẩm
             
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

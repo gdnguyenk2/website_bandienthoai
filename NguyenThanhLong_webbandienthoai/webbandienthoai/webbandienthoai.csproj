@@ -132,6 +132,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Models\GioHang.cs">
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GioHangItem.cs" />
     <Compile Include="Models\KhachHang.cs">
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
@@ -458,12 +460,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SanPham\SanPhamPatial.cshtml" />
     <Content Include="Views\SanPham\SanPhamPatial2.cshtml" />
-    <Content Include="Views\Shared\_Layout_chitiepsp.cshtml" />
     <Content Include="Views\SanPham\ChiTietSanPham.cshtml" />
     <Content Include="Views\Register\DangKy.cshtml" />
     <Content Include="Views\Login\DangNhap.cshtml" />
     <Content Include="Views\Register\DangKy1.cshtml" />
     <Content Include="Views\Home\Herder_top.cshtml" />
+    <Content Include="Views\Shared\_Layout_sp.cshtml" />
+    <Content Include="Views\SanPham\hienThiLoaiSP.cshtml" />
+    <Content Include="Views\Shared\_Layout_chitietsp.cshtml" />
+    <Content Include="Views\GioHang\XemGioHang.cshtml" />
+    <Content Include="Views\GioHang\GioHangIcon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -34,9 +35,10 @@
     <![endif]-->
 </head>
 <body>
-    @Html.Partial("~/Views/Shared/Header_top.cshtml")
+    @Html.Action("Herder_top", "Home")
     <!--NAVIGATION-->
     @Html.Action("MenuPar", "Home")
+    <!-- /NAVIGATION -->
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0" nonce="BRw9sXgy"></script>
     <!-- BREADCRUMB -->
@@ -58,6 +60,7 @@
     </div>
     <!-- /BREADCRUMB -->
     @RenderBody()
+
     <!-- NEWSLETTER -->
     <div id="newsletter" class="section">
         <!-- container -->
