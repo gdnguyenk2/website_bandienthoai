@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .addToCartModal {
+            border-radius: 10px;
+            color: #fff; /* Màu chữ trắng cho nội dung modal */
+            text-align: left;
+            display:none;
+        }
+        /* CSS cho tiêu đề modal */
+        .addToCartModal .modal-header {
+            background-color: #1accfd;
+            border: none;
+            color: #fff;
+            
+        }
+
+        /* CSS cho input số lượng */
+        .quantity-selector input[type="number"] {
+            width: 50%;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+            .quantity-selector input[type="number"]:focus-visible {
+                outline: none;
+            }
+
+        /* CSS cho nút "Thêm vào giỏ hàng" */
+        .addToCartModal .addToCartButton-Modal, .addColorButton, .btnQuantityMax {
+            background-color: #1accfd; /* Màu nền nút */
+            color: #fff; /* Màu chữ nút */
+            border-color: #1accfd;
+        }
+
+            .addToCartModal .addToCartButton-Modal:focus, .addColorButton:focus, .btnQuantityMax:focus {
+                outline: none;
+            }
+
+            .addToCartModal .addToCartButton-Modal:hover, .addColorButton:hover, .btnQuantityMax:hover {
+                background: #000;
+                color: #fff;
+                border-color: #000;
+            }
+
+        .addToCartModal .btn-cancel {
+            background: #d9534f;
+            color: #fff;
+        }
+
+            .addToCartModal .btn-cancel:focus {
+                outline: none;
+            }
+
+            .addToCartModal .btn-cancel:hover {
+                background: #c9302c;
+            }
+
+        .addToCartModal .color-button {
+            color: #000;
+            background-color: #fff;
+            height: 40px;
+            width: 100px;
+            border-radius: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .addToCartModal .selected-button {
+            border: 2px solid #1accfd;
+        }
+
+        #quantityAlertModal {
+            z-index: 1500;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div>
+        <div class="modal fade addToCartModal" role="dialog" data-productid="">
+            <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 style="text-align: center; font-weight: bold" class="modal-title"></h4>
+                    </div>
+                    <div style="display: flex" class="modal-body">
+                        <p style="font-weight: bold; color: #000; margin-right: 15px;">Chọn số lượng:</p>
+                        <div class="quantity-selector">
+                            <input id="quantityInput_" name="quantity" style="color: #000" type="number" class="quantity" value="1" min="1" step="1">
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center" class="modal-body">
+                        <p style="font-weight: bold; color: #000; margin-right: 15px;">Chọn màu:</p>
+                        <div class="color-options">
+                            <button class="color-button" type="button" data-color=""></button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Hủy</button>
+                        <a href="#" data-productid="" data-url="@Request.Url.ToString()" data-price="" class="add-to-cart-button">
+                            <button type="button" class="btn btn-primary addToCartButton-Modal" data-productid="">Thêm vào giỏ hàng</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

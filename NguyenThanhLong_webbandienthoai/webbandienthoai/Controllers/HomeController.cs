@@ -29,11 +29,15 @@ namespace webbandienthoai.Controllers
 
                 if (member != null)
                 {
-                    Session["member"] = member;
+                    Session["TaiKhoans"] = member;
                 }
             }
 
             return PartialView();
+        }
+        public ActionResult test()
+        {
+            return View();
         }
     }
 }

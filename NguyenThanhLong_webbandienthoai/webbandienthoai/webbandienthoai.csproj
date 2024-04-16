@@ -470,6 +470,8 @@
     <Content Include="Views\Shared\_Layout_chitietsp.cshtml" />
     <Content Include="Views\GioHang\XemGioHang.cshtml" />
     <Content Include="Views\GioHang\GioHangIcon.cshtml" />
+    <Content Include="Views\GioHang\ThongBaoHetHang.cshtml" />
+    <Content Include="Views\Home\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

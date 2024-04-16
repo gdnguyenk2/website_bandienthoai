@@ -1,6 +1,90 @@
 ﻿@using webbandienthoai.Models;
 @model IEnumerable<SanPham>
 
+<style>
+    .addToCartModal {
+        position: fixed; /* Đảm bảo modal không bị cuốn khi cuộn trang */
+
+        top: 50%; /* Đưa modal về trung tâm theo chiều dọc */
+        left: 50%; /* Đưa modal về trung tâm theo chiều ngang */
+        transform: translate(-50%, -50%); /* Đưa modal về trung tâm hoàn toàn */
+        z-index: 9999; /* Đảm bảo modal hiển thị trên tất cả các phần tử khác */
+        display: none; /* Ẩn modal ban đầu */
+        /* Thêm các thuộc tính khác tùy theo nhu cầu của bạn */
+        border-radius: 10px;
+        color: #fff; /* Màu chữ trắng cho nội dung modal */
+        text-align: left;
+    }
+        /* CSS cho tiêu đề modal */
+        .addToCartModal .modal-header {
+            background-color: #1accfd;
+            border: none;
+            color: #fff;
+        }
+    /* CSS cho input số lượng */
+    .quantity-selector input[type="number"] {
+        width: 50%;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 16px;
+    }
+
+        .quantity-selector input[type="number"]:focus-visible {
+            outline: none;
+        }
+
+    /* CSS cho nút "Thêm vào giỏ hàng" */
+    .addToCartModal .addToCartButton-Modal, .addColorButton, .btnQuantityMax {
+        background-color: #1accfd; /* Màu nền nút */
+        color: #fff; /* Màu chữ nút */
+        border-color: #1accfd;
+    }
+
+        .addToCartModal .addToCartButton-Modal:focus, .addColorButton:focus, .btnQuantityMax:focus {
+            outline: none;
+        }
+
+        .addToCartModal .addToCartButton-Modal:hover, .addColorButton:hover, .btnQuantityMax:hover {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+    .addToCartModal .btn-cancel {
+        background: #d9534f;
+        color: #fff;
+    }
+
+        .addToCartModal .btn-cancel:focus {
+            outline: none;
+        }
+
+        .addToCartModal .btn-cancel:hover {
+            background: #c9302c;
+        }
+
+    .addToCartModal .color-button {
+        color: #000;
+        background-color: #fff;
+        height: 40px;
+        width: 100px;
+        border-radius: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    .addToCartModal .selected-button {
+        border: 2px solid #1accfd;
+    }
+
+    #quantityAlertModal {
+        z-index: 1500;
+    }
+</style>
 <div class="section">
     <!-- container -->
     <div class="container">
@@ -15,76 +99,287 @@
             </div>
             <!-- /section title -->
             <!-- Products tab & slick -->
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="products-tabs">
-                        <!-- tab -->
-                        <div id="tab1" class="tab-pane active">
-                            <div class="products-slick" data-nav="#slick-nav-1">
-                                <!--product-->
-                                @foreach (var item in Model.Take(8))
-                                {
-                                    decimal? deal = item.DonGia;
-                                    decimal percent = 0;
-                                    if (item.MaKhuyenMai != null)
-                                    {
-                                        if (DateTime.Now >= item.KhuyenMai.NgayBatDau && DateTime.Now <= item.KhuyenMai.NgayKetThuc)
-                                        {
-                                            percent = item.KhuyenMai.PhanTramGiamGia;
-                                        }
-                                    }
-                                    decimal? price = deal - (deal * (percent / 100));
+            <div class="row">
+                <!--product-->
+                @foreach (var item in Model.Take(8))
+                {
+                    WebBanDienThoaiEntities db = new WebBanDienThoaiEntities();
 
-                                    <div class="product">
-                                        <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
-                                            <div class="product-img">
-                                                <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="">
-                                                <div class="product-label">
-                                                    <span class="sale">@percent%</span>
-                                                    <span class="new">NEW</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="product-body">
-                                            <p class="product-category">@item.NhaSanXuat.TenNSX</p>
-                                            <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
-                                            <h4 class="product-price">
-                                                @string.Format("{0:N0} \u20ab", price)
-                                                @if (price != deal)
-                                                {
-                                                    <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
-                                                }
-                                            </h4>
-                                            <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm Vào Yêu Thích</span></button>
-                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Thêm So Sánh</span></button>
-                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Chi tiết</span></button>
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                    List<int> corlorIds = db.SanPham_Mau.Where(row => row.MaSP == item.MaSP).Select(row => row.MaMau).ToList();
+                    List<Mau> productColors = db.Maus.Where(row => corlorIds.Contains(row.MaMau)).ToList();
+                    decimal? deal = item.DonGia;
+                    decimal percent = 0;
+                    if (item.MaKhuyenMai != null)
+                    {
+                        if (DateTime.Now >= item.KhuyenMai.NgayBatDau && DateTime.Now <= item.KhuyenMai.NgayKetThuc)
+                        {
+                            percent = item.KhuyenMai.PhanTramGiamGia;
+                        }
+                    }
+                    decimal? price = deal - (deal * (percent / 100));
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="product">
+                            <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
+                                <div class="product-img">
+                                    <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="">
+                                    <div class="product-label">
+                                        <span class="sale">@percent%</span>
+                                        <span class="new">NEW</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="product-body">
+                                <p class="product-category">@item.NhaSanXuat.TenNSX</p>
+                                <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
+                                <h4 class="product-price">
+                                    @string.Format("{0:N0} \u20ab", price)
+                                    @if (price != deal)
+                                    {
+                                        <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
+                                    }
+                                </h4>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm Vào Yêu Thích</span></button>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Thêm So Sánh</span></button>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Chi tiết</span></button>
+                                </div>
+                            </div>
+                            <div class="add-to-cart snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
+                                {
+                                    <button class="add-to-cart-btn addToCartButton" data-productid="@item.MaSP"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                }
+                                else
+                                {
+                                    <button class="add-to-cart-btn addToCartButton" onclick="redirectToLoginPage()"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                }
+
+                            </div>
+
+                        </div>
+
+                        <div class="modal fade addToCartModal" role="dialog" data-productid="@item.MaSP">
+                            <div class="modal-dialog">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 style="text-align: center; font-weight: bold" class="modal-title">@item.TenSP</h4>
+                                    </div>
+                                    <div style="display: flex" class="modal-body">
+                                        <p style="font-weight: bold; color: #000; margin-right: 15px;">Chọn số lượng:</p>
+                                        <div class="quantity-selector">
+                                            <input id="quantityInput_@item.MaSP" name="quantity" style="color: #000" type="number" class="quantity" value="1" min="1" step="1">
                                         </div>
                                     </div>
-                                }
-                                <!--/product-->
+                                    <div style="display: flex; align-items: center" class="modal-body">
+                                        <p style="font-weight: bold; color: #000; margin-right: 15px;">Chọn màu:</p>
+                                        <div class="color-options">
+                                            @foreach (var it in productColors)
+                                            {
+                                                <button class="color-button" type="button" data-color="@it.MaMau">@it.TenMau</button>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Hủy</button>
+                                        <a href="#" data-productid="@item.MaSP" data-url="@Request.Url.ToString()" data-price="@price" class="add-to-cart-button">
+                                            <button type="button" class="btn btn-primary addToCartButton-Modal" data-productid="@item.MaSP">Thêm vào giỏ hàng</button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                            <div id="slick-nav-1" class="products-slick-nav"></div>
                         </div>
-                        <!-- /tab -->
                     </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>>
+<div class="modal fade" id="colorSelectionAlertModal" tabindex="-1" role="dialog" aria-labelledby="colorSelectionAlertModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="text-align: center; background-color: #1accfd; border: none; color: #fff;" class="modal-header">
+                <h4 style="font-weight: bold;" class="modal-title" id="colorSelectionAlertModalLabel">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                Vui lòng chọn màu cho sản phẩm.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary addColorButton" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="quantityAlertModal" tabindex="-1" role="dialog" aria-labelledby="quantityAlertModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="text-align: center; background-color: #1accfd; border: none; color: #fff;" class="modal-header">
+                <h4 style="font-weight: bold;" class="modal-title" id="quantityAlertModalLabel">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center">
+                    <img style="width: 100px; height: 100px" src="@Url.Content("~/Content/Images/Members/default.png")" alt="" />
+                </div>
+                <div>
+                    <p style="color: black">Số lượng sản phẩm đã đạt đến mức tối đa.</p>
+                    <p style="color: black">Đơn hàng của Quý khách sẽ được phòng bán hàng doanh nghiệp T&C Team tiếp nhận và hỗ trợ. Liên hệ nhanh:</p>
+                    <p style="color: black">Mr. Tony: <a href="tel:0342937692">034 29 37692</a></p>
+                    <p style="color: black">Email: <a href="mailto:tcshoptelephone@gmail.com">tcshoptelephone@gmail.com</a></p>
                 </div>
             </div>
-            <!-- Products tab & slick -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btnQuantityMax" data-dismiss="modal">Đóng</button>
+            </div>
         </div>
-        <!-- /row -->
     </div>
-    <!-- /container -->
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lắng nghe sự kiện click trên mỗi nút "Thêm vào giỏ hàng"
+        var addToCartButtons = document.querySelectorAll(".addToCartButton");
+
+        addToCartButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var productId = this.getAttribute("data-productid");
+                var addToCartModal = document.querySelector(".addToCartModal[data-productid='" + productId + "']");
+                $(addToCartModal).modal("show");
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var addToCartModals = document.querySelectorAll(".addToCartModal");
+
+        addToCartModals.forEach(function (modal) {
+            var productId = modal.getAttribute("data-productid");
+            var addToCartButton = document.querySelector(".addToCartButton-Modal[data-productid='" + productId + "']");
+            var quantityInput = document.querySelector("#quantityInput_" + productId);
+
+            addToCartButton.addEventListener("click", function () {
+                $(modal).modal("hide");
+            });
+
+            $(modal).on("hidden.bs.modal", function () {
+                quantityInput.value = 1;
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+
+        addToCartButtons.forEach(function (button) {
+            button.addEventListener("click", function (e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
+
+                var productId = this.getAttribute("data-productid");
+                var price = this.getAttribute("data-price");
+                var quantityInput = document.querySelector("#quantityInput_" + productId);
+                var quantity = quantityInput ? quantityInput.value : 1; // Lấy giá trị SoLuong hoặc mặc định là 1 nếu không tìm thấy
+                var url = this.getAttribute("data-url");
+
+                // Lấy giá trị mã màu từ nút màu được click
+                var selectedColor = document.querySelector(".color-button.active");
+                var colorCode = selectedColor ? selectedColor.getAttribute("data-color") : "";
+
+                if (colorCode == "") {
+                    // Nếu không có màu nào được chọn, hiển thị modal thông báo
+                    $('#colorSelectionAlertModal').modal('show');
+                    return; // Ngăn chặn việc thêm vào giỏ hàng khi không có màu được chọn
+                }
+
+                // Tạo URL với thêm thông tin mã màu
+                url = "@Url.Action("ThemGioHang", "GioHang")" + "?MaSP=" + productId + "&GiaBan=" + price + "&SoLuong=" + quantity + "&MaMau=" + colorCode + "&Url=" + url;
+
+                window.location.href = url;
+            });
+        });
+
+        // Thêm sự kiện click listener cho các nút màu
+        var colorButtons = document.querySelectorAll(".color-button");
+        colorButtons.forEach(function (colorButton) {
+            colorButton.addEventListener("click", function () {
+                // Loại bỏ lớp "active" từ tất cả các nút màu
+                colorButtons.forEach(function (btn) {
+                    btn.classList.remove("active");
+                });
+
+                // Thêm lớp "active" cho nút màu được click
+                this.classList.add("active");
+            });
+        });
+    });
+</script>
+
+<script>
+    // Lấy tất cả các button màu trong div có class "color-options"
+    var colorButtons = document.querySelectorAll('.color-options .color-button');
+
+    // Thêm sự kiện click vào các button màu
+    colorButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            // Loại bỏ lớp "selected-button" từ tất cả các button màu
+            colorButtons.forEach(function (btn) {
+                btn.classList.remove('selected-button');
+            });
+
+            // Thêm lớp "selected-button" vào button được click
+            button.classList.add('selected-button');
+        });
+    });
+</script>
+
+<script>
+    function redirectToLoginPage() {
+        window.location.href = '@Url.Action("DangNhap", "Login")'; // Chuyển hướng đến trang đăng nhập
+    }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy tất cả các ô textbox số lượng
+        var quantityInputs = document.querySelectorAll(".quantity");
+
+        // Thêm sự kiện input cho từng ô textbox
+        quantityInputs.forEach(function (input) {
+            input.addEventListener("input", function () {
+                // Lấy giá trị từ ô textbox
+                var quantityValue = parseInt(this.value);
+
+                // Kiểm tra nếu giá trị lớn hơn 5
+                if (quantityValue > 5) {
+                    $('#quantityAlertModal').modal('show');
+                    this.value = 5;
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        @if (Session["QuantityExceeded"] != null && (bool)Session["QuantityExceeded"] == true)
+        {
+            <text>
+                $('#quantityAlertModal').modal('show');
+            </text>
+
+            Session["QuantityExceeded"] = null;
+        }
+    });
+</script>
 

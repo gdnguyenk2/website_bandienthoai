@@ -1,5 +1,18 @@
 ﻿@using webbandienthoai.Models;
 @model IEnumerable<SanPham>
+
+<style>
+    .addToCartModal {
+        position: fixed; /* Đảm bảo modal không bị cuốn khi cuộn trang */
+
+        top: 50%; /* Đưa modal về trung tâm theo chiều dọc */
+        left: 50%; /* Đưa modal về trung tâm theo chiều ngang */
+        transform: translate(-50%, -50%); /* Đưa modal về trung tâm hoàn toàn */
+        z-index: 9999; /* Đảm bảo modal hiển thị trên tất cả các phần tử khác */
+        display: none; /* Ẩn modal ban đầu */
+        /* Thêm các thuộc tính khác tùy theo nhu cầu của bạn */
+    }
+</style>
 <div class="section">
     <!-- container -->
     <div class="container">
@@ -9,81 +22,125 @@
             <!-- section title -->
             <div class="col-md-12">
                 <div class="section-title">
-                    <h3 class="title">Sản Phẩm Bán Chạy</h3>
+                    <h3 class="title">Sản Phẩm Mới</h3>
                 </div>
             </div>
             <!-- /section title -->
             <!-- Products tab & slick -->
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="products-tabs">
-                        <!-- tab -->
-                        <div id="tab2" class="tab-pane fade in active">
-                            <div class="products-slick" data-nav="#slick-nav-2">
-                                <!-- product -->
-                                @foreach (var item in Model.Take(8))
-                                {
-                                    decimal? deal = item.DonGia;
-                                    decimal percent = 0;
-                                    if (item.MaKhuyenMai != null)
-                                    {
-                                        if (DateTime.Now >= item.KhuyenMai.NgayBatDau && DateTime.Now <= item.KhuyenMai.NgayKetThuc)
-                                        {
-                                            percent = item.KhuyenMai.PhanTramGiamGia;
-                                        }
-                                    }
-                                    decimal? price = deal - (deal * (percent / 100));
+            <div class="row">
+                <!--product-->
+                @foreach (var item in Model.Take(8))
+                {
+                    WebBanDienThoaiEntities db = new WebBanDienThoaiEntities();
 
-                                    <div class="product">
-                                        <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
-                                            <div class="product-img">
-                                                <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="">
-                                                <div class="product-label">
-                                                    <span class="sale">@percent%</span>
-                                                    <span class="new">NEW</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="product-body">
-                                            <p class="product-category">@item.NhaSanXuat.TenNSX</p>
-                                            <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
-                                            <h4 class="product-price">
-                                                @string.Format("{0:N0} \u20ab", price)
-                                                @if (price != deal)
-                                                {
-                                                    <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
-                                                }
-                                            </h4>
-                                            <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm Vào Yêu Thích</span></button>
-                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Thêm So Sánh</span></button>
-                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Chi tiết</span></button>
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
-                                        </div>
+                    List<int> corlorIds = db.SanPham_Mau.Where(row => row.MaSP == item.MaSP).Select(row => row.MaMau).ToList();
+                    List<Mau> productColors = db.Maus.Where(row => corlorIds.Contains(row.MaMau)).ToList();
+                    decimal? deal = item.DonGia;
+                    decimal percent = 0;
+                    if (item.MaKhuyenMai != null)
+                    {
+                        if (DateTime.Now >= item.KhuyenMai.NgayBatDau && DateTime.Now <= item.KhuyenMai.NgayKetThuc)
+                        {
+                            percent = item.KhuyenMai.PhanTramGiamGia;
+                        }
+                    }
+                    decimal? price = deal - (deal * (percent / 100));
+
+                    <div class="col-md-3 col-xs-6">
+                        <div class="product">
+                            <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
+                                <div class="product-img">
+                                    <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="">
+                                    <div class="product-label">
+                                        <span class="sale">@percent%</span>
+                                        <span class="new">NEW</span>
                                     </div>
+                                </div>
+                            </a>
+                            <div class="product-body">
+                                <p class="product-category">@item.NhaSanXuat.TenNSX</p>
+                                <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
+                                <h4 class="product-price">
+                                    @string.Format("{0:N0} \u20ab", price)
+                                    @if (price != deal)
+                                    {
+                                        <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
+                                    }
+                                </h4>
+                                <div class="product-rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm Vào Yêu Thích</span></button>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">Thêm So Sánh</span></button>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Chi tiết</span></button>
+                                </div>
+                            </div>
+                            <div class="add-to-cart snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+                                @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
+                                {
+                                    <button class="add-to-cart-btn addToCartButton" data-productid="@item.MaSP"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
                                 }
-                                <!-- /product -->
+                                else
+                                {
+                                    <button class="add-to-cart-btn addToCartButton" onclick="redirectToLoginPage()"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                }
 
                             </div>
-                            <div id="slick-nav-2" class="products-slick-nav"></div>
+
                         </div>
-                        <!-- /tab -->
+
+                        <div class="modal fade addToCartModal" role="dialog" data-productid="@item.MaSP">
+                            <div class="modal-dialog">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 style="text-align: center; font-weight: bold" class="modal-title">@item.TenSP</h4>
+                                    </div>
+                                    <div style="display: flex" class="modal-body">
+                                        <p style="font-weight: bold; color: #000; margin-right: 15px;">Chọn số lượng:</p>
+                                        <div class="quantity-selector">
+                                            <input id="quantityInput_@item.MaSP" name="quantity" style="color: #000" type="number" class="quantity" value="1" min="1" step="1">
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center" class="modal-body">
+                                        <p style="font-weight: bold; color: #000; margin-right: 15px;">Chọn màu:</p>
+                                        <div class="color-options">
+                                            @foreach (var it in productColors)
+                                            {
+                                                <button class="color-button" type="button" data-color="@it.MaMau">@it.TenMau</button>
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Hủy</button>
+                                        <button type="button" class="btn btn-primary addToCartButton-Modal" data-productid="@item.MaSP" data-url="@Request.Url.ToString()" data-price="@price">Thêm vào giỏ hàng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
-            <!-- /Products tab & slick -->
         </div>
-        <!-- /row -->
     </div>
-    <!-- /container -->
-</div>
+</div>>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lắng nghe sự kiện click trên mỗi nút "Thêm vào giỏ hàng"
+        var addToCartButtons = document.querySelectorAll(".addToCartButton");
+
+        addToCartButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var productId = this.getAttribute("data-productid");
+                var addToCartModal = document.querySelector(".addToCartModal[data-productid='" + productId + "']");
+                $(addToCartModal).modal("show");
+            });
+        });
+    });
+</script>
+
