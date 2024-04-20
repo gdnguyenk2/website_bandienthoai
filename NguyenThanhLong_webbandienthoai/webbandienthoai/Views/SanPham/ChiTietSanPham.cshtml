@@ -72,27 +72,7 @@
                     </div>
                     <p>@Model.MoTa</p>
 
-                    <div class="product-options">
-                        <div class="color-options">
-                            <label style="font-size:14px">
-                                Màu
-                                @foreach (var item in ViewBag.listMau)
-                                {
-                                    <button class="color-button" type="button" data-color="@item.MaMau">@item.TenMau</button>
-                                }
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="add-to-cart">
-                        <div class="qty-label" style="font-size:14px">
-                            Số lượng
-                            <div class="input-number">
-                                <input type="number" value="1">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
-                            </div>
-                        </div><br /><br />
                         <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
                     </div>
                 </div>

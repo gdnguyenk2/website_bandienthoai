@@ -69,7 +69,9 @@
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                            <a href="@Url.Action("ThemGioHang", "GioHang", new {@MaSP=item.MaSP,@Url=Request.Url.ToString()})">
+                                                <button class="add-to-cart-btn btnthem"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                            </a>
                                         </div>
                                     </div>
                                 }

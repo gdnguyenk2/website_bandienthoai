@@ -47,9 +47,6 @@ namespace webbandienthoai.Controllers
             {
                 return HttpNotFound();
             }
-            List<int> corlorIds = db.SanPham_Mau.Where(row => row.MaSP == id).Select(row => row.MaMau).ToList();
-            List<Mau> productColors = db.Maus.Where(row => corlorIds.Contains(row.MaMau)).ToList();
-            ViewBag.listMau = productColors;
 
             LoaiSanPham loaiid= db.LoaiSanPhams.SingleOrDefault(m=>m.MaLoaiSP ==product.MaLoaiSP);
             List<SanPham> sp_tuongtu = db.SanPhams.Where(m => m.MaLoaiSP == loaiid.MaLoaiSP).ToList();

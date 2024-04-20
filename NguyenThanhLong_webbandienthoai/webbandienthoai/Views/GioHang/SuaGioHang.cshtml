@@ -1,0 +1,95 @@
+﻿@using webbandienthoai.Models;
+@model GioHangItem
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Shared/_Layout_sp.cshtml";
+}
+
+@{
+    List<GioHangItem> lstGioHang = ViewBag.GioHang as List<GioHangItem>;
+}
+<style>
+    table, tr, td, th {
+        border: 2px solid #000000;
+    }
+
+    .table {
+        width: 80%;
+        height: auto;
+        position: relative;
+        left: 10%;
+        right: 10%;
+    }
+</style>
+@if (Model == null)
+{
+    <h1>Giỏ hàng rỗng !</h1>
+}
+else
+{
+<table class="table">
+    <tr>
+        <th>Mã Sản Phẩm</th>
+        <th>Hình Ảnh</th>
+        <th>Tên Sản Phẩm</th>
+        <th>Đơn Giá</th>
+        <th>Số Lượng</th>
+        <th>Thành Tiền</th>
+        <th></th>
+    </tr>
+    @foreach (var item in lstGioHang)
+    {
+        //Sản phẩm có mã sản phẩm được chỉnh gửi từ tham số bên trang xem giỏ hàng
+        if (Model.MaSP == item.MaSP)
+        {
+
+
+            using (Html.BeginForm("CapNhatGioHang", "GioHang"))
+            {
+                <tr>
+                    <td>@item.MaSP @Html.Hidden("MaSP",item.MaSP)</td>
+                    <td><img src="@Url.Content("~/Content/Images/Products/" + item.HinhAnh)" width="50" height="50" /></td>
+                    <td>@item.TenSP</td>
+                    <td>@item.DonGia.ToString("#,##") đ</td>
+                    <td>
+                        @Html.TextBox("SoLuong", item.SoLuong)
+                        <p style="color:red" id="tbsoluong"></p>
+                    </td>
+                    <td>@item.ThanhTien.ToString("#,##") đ</td>
+                    <td>
+                        <input type="submit" value="Cập nhật" onclick="return btnCapNhat()"/>
+                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>@item.MaSP</td>
+                <td><img src="@Url.Content("~/Content/Images/Products/"+item.HinhAnh)" width="50" height="50" /></td>
+                <td>@item.TenSP</td>
+                <td>@item.DonGia.ToString("#,##") đ</td>
+                <td>@item.SoLuong</td>
+                <td>@item.ThanhTien.ToString("#,##") đ</td>
+                <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })</td>
+            </tr>
+        }
+    }
+    <tr>
+        <td colspan="6" style="text-align:right">Tổng Tiền: @ViewBag.TongThanhTien</td>
+    </tr>
+
+</table>
+}
+
+<script>
+    function btnCapNhat() {
+        var sl = document.getElementById("SoLuong").value;
+        if (isNaN(sl) || sl < 0) {
+            document.getElementById("tbsoluong").innerText = "Số lượng không hợp lệ!";
+            return false;
+        }
+    }
+</script>
+
