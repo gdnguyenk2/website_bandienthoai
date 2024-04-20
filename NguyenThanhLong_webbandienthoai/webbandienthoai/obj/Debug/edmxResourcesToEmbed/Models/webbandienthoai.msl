@@ -23,18 +23,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ChiTietGioHangs">
-      <EntityTypeMapping TypeName="WebBanDienThoaiModel.ChiTietGioHang">
-        <MappingFragment StoreEntitySet="ChiTietGioHang">
-          <ScalarProperty Name="MaChiTietGH" ColumnName="MaChiTietGH" />
-          <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
-          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ChiTietPhieuNhaps">
       <EntityTypeMapping TypeName="WebBanDienThoaiModel.ChiTietPhieuNhap">
         <MappingFragment StoreEntitySet="ChiTietPhieuNhap">
@@ -75,14 +63,6 @@
           <ScalarProperty Name="QuaTang" ColumnName="QuaTang" />
           <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
           <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GioHangs">
-      <EntityTypeMapping TypeName="WebBanDienThoaiModel.GioHang">
-        <MappingFragment StoreEntitySet="GioHang">
-          <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
-          <ScalarProperty Name="MaTV" ColumnName="MaTV" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -136,14 +116,6 @@
           <ScalarProperty Name="MaLoaiTV" ColumnName="MaLoaiTV" />
           <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Maus">
-      <EntityTypeMapping TypeName="WebBanDienThoaiModel.Mau">
-        <MappingFragment StoreEntitySet="Mau">
-          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
-          <ScalarProperty Name="TenMau" ColumnName="TenMau" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -211,15 +183,6 @@
           <ScalarProperty Name="Moi" ColumnName="Moi" />
           <ScalarProperty Name="BanChay" ColumnName="BanChay" />
           <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SanPham_Mau">
-      <EntityTypeMapping TypeName="WebBanDienThoaiModel.SanPham_Mau">
-        <MappingFragment StoreEntitySet="SanPham_Mau">
-          <ScalarProperty Name="MaSP_Mau" ColumnName="MaSP_Mau" />
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="MaMau" ColumnName="MaMau" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

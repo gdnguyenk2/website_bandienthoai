@@ -9,66 +9,37 @@ namespace webbandienthoai.Models
     {
         public int MaSP { get; set; }
         public string TenSP { get; set; }
-        public int MaMau { get; set; }
-        public string TenMau { get; set; }
         public int SoLuong { get; set; }
         public decimal DonGia { get; set; }
         public decimal ThanhTien { get; set; }
         public string HinhAnh { get; set; }
 
-        public GioHangItem(int MaSP, decimal DonGia, int SoLuong, int MaMau)
+        public GioHangItem(int MaSP)
         {
             using (WebBanDienThoaiEntities db = new WebBanDienThoaiEntities())
             {
                 this.MaSP = MaSP;
-                this.MaMau = MaMau;
-
-                SanPham product = db.SanPhams.Where(row => row.MaSP == MaSP).SingleOrDefault();
-
-                Mau color = db.Maus.Where(row => row.MaMau == MaMau).SingleOrDefault();
-
-                this.TenMau = color.TenMau;
-                this.TenSP = product.TenSP + " - " + this.TenMau;
-
-                this.SoLuong = SoLuong;
-                this.DonGia = DonGia;
-                this.ThanhTien = this.SoLuong * this.DonGia;
-                this.HinhAnh = product.HinhAnh;
+                SanPham sp = db.SanPhams.Single(n => n.MaSP == MaSP);
+                this.TenSP = sp.TenSP;
+                this.HinhAnh = sp.HinhAnh;
+                this.SoLuong = 1;
+                this.DonGia = sp.DonGia.Value;
+                this.ThanhTien = this.DonGia * SoLuong;
             }
         }
-
-        public GioHangItem(int MaSP, decimal DonGia, int SoLuong)
+        public GioHangItem(int iMaSP, int sl) 
         {
             using (WebBanDienThoaiEntities db = new WebBanDienThoaiEntities())
             {
-                this.MaSP = MaSP;
-
-                SanPham product = db.SanPhams.Where(row => row.MaSP == MaSP).SingleOrDefault();
-
-                this.TenSP = product.TenSP;
-
-                this.SoLuong = SoLuong;
-                this.DonGia = DonGia;
-                this.ThanhTien = this.SoLuong * this.DonGia;
-                this.HinhAnh = product.HinhAnh;
+                this.MaSP = iMaSP;
+                SanPham sp = db.SanPhams.Single(n => n.MaSP == iMaSP);
+                this.TenSP = sp.TenSP;
+                this.HinhAnh = sp.HinhAnh;
+                this.SoLuong = sl;
+                this.DonGia = sp.DonGia.Value;
+                this.ThanhTien = DonGia * SoLuong;
             }
         }
-
-        public GioHangItem(string TenSP, int MaSP, decimal DonGia, int SoLuong)
-        {
-            using (WebBanDienThoaiEntities db = new WebBanDienThoaiEntities())
-            {
-                this.MaSP = MaSP;
-
-                SanPham product = db.SanPhams.Where(row => row.MaSP == MaSP).SingleOrDefault();
-
-                this.TenSP = TenSP;
-
-                this.SoLuong = SoLuong;
-                this.DonGia = DonGia;
-                this.ThanhTien = this.SoLuong * this.DonGia;
-                this.HinhAnh = product.HinhAnh;
-            }
-        }
+        public GioHangItem() { }
     }
 }
