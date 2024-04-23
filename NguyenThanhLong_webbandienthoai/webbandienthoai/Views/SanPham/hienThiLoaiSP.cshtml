@@ -1,7 +1,8 @@
 ﻿@using webbandienthoai.Models;
-@model IEnumerable<SanPham>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<SanPham>
 @{
-    ViewBag.Title = "SanPhamAll";
+    ViewBag.Title = "Sản Phẩm";
     Layout = "~/Views/Shared/_Layout_sp.cshtml";
 }
 
@@ -284,7 +285,9 @@
                                     </div>
                                 </div>
                                 <div class="add-to-cart">
-                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new {@MaSP=item.MaSP,@Url=Request.Url.ToString()})">
+                                        <button class="add-to-cart-btn btnthem"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -293,15 +296,9 @@
                 </div>
                 <!-- /store products -->
                 <!-- store bottom filter -->
-                <div class="store-filter clearfix">
-                    <span class="store-qty">Showing 20-100 products</span>
-                    <ul class="store-pagination">
-                        <li class="active">1</li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul>
+                <div class="dlink" >
+                    
+                    @Html.PagedListPager(Model, page => Url.Action("hienThiLoaiSP", new { page = page,@MaNSX = ViewBag.MaNSX }))
                 </div>
                 <!-- /store bottom filter -->
             </div>
