@@ -54,7 +54,7 @@
                                     {
                                         if (gritem.Key != null)
                                         {
-                                            <li><a href="@Url.Action("hienThiLoaiSP","SanPham",new {id = @gritem.Key.MaNSX})">@gritem.Key.TenNSX</a></li>
+                                            <li><a href="@Url.Action("hienThiLoaiSP","SanPham",new {MaNSX=@gritem.Key.MaNSX})">@gritem.Key.TenNSX</a></li>
                                         }
                                     }
                                 </ul>

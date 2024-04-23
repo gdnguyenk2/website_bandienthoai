@@ -166,6 +166,7 @@
           <Property Name="HinhAnh" Type="nvarchar(max)" />
           <Property Name="HinhAnh2" Type="nvarchar(max)" />
           <Property Name="HinhAnh3" Type="nvarchar(max)" />
+          <Property Name="HinhAnh4" Type="nvarchar(max)" />
           <Property Name="SoLuongTon" Type="int" Nullable="false" />
           <Property Name="LuotXem" Type="int" />
           <Property Name="LuotBinhChon" Type="int" />
@@ -702,6 +703,7 @@
           <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HinhAnh4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SoLuongTon" Type="Int32" Nullable="false" />
           <Property Name="LuotXem" Type="Int32" />
           <Property Name="LuotBinhChon" Type="Int32" />
@@ -1236,6 +1238,7 @@
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="HinhAnh2" ColumnName="HinhAnh2" />
                 <ScalarProperty Name="HinhAnh3" ColumnName="HinhAnh3" />
+                <ScalarProperty Name="HinhAnh4" ColumnName="HinhAnh4" />
                 <ScalarProperty Name="SoLuongTon" ColumnName="SoLuongTon" />
                 <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
                 <ScalarProperty Name="LuotBinhChon" ColumnName="LuotBinhChon" />

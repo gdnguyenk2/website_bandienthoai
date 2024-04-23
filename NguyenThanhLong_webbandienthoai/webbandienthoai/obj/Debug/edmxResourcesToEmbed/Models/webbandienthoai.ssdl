@@ -161,6 +161,7 @@
     <Property Name="HinhAnh" Type="nvarchar(max)" />
     <Property Name="HinhAnh2" Type="nvarchar(max)" />
     <Property Name="HinhAnh3" Type="nvarchar(max)" />
+    <Property Name="HinhAnh4" Type="nvarchar(max)" />
     <Property Name="SoLuongTon" Type="int" Nullable="false" />
     <Property Name="LuotXem" Type="int" />
     <Property Name="LuotBinhChon" Type="int" />

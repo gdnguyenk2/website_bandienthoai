@@ -187,6 +187,7 @@
     <Property Name="HinhAnh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="HinhAnh2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="HinhAnh3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnh4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SoLuongTon" Type="Int32" Nullable="false" />
     <Property Name="LuotXem" Type="Int32" />
     <Property Name="LuotBinhChon" Type="Int32" />

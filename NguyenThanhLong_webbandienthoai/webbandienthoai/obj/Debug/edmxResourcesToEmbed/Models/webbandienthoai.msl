@@ -175,6 +175,7 @@
           <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
           <ScalarProperty Name="HinhAnh2" ColumnName="HinhAnh2" />
           <ScalarProperty Name="HinhAnh3" ColumnName="HinhAnh3" />
+          <ScalarProperty Name="HinhAnh4" ColumnName="HinhAnh4" />
           <ScalarProperty Name="SoLuongTon" ColumnName="SoLuongTon" />
           <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
           <ScalarProperty Name="LuotBinhChon" ColumnName="LuotBinhChon" />

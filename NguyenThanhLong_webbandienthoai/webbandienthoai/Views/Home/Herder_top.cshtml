@@ -43,10 +43,11 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <input class="input" placeholder="Search here" style="width: calc(100% - 160px); margin-right: -4px; border-radius: 40px 0px 0px 40px;">
-                            <button class="search-btn">Search</button>
-                        </form>
+                        @using (Html.BeginForm("LayTuKhoaTimKiem", "TimKiem"))
+                        { 
+                            <input type="text" name="sTuKhoa" class="input" placeholder="Tìm kiếm ở đây" style="width: calc(100% - 160px); margin-right: -4px; border-radius: 40px 0px 0px 40px;">
+                            <input type="submit" class="search-btn" value="Tìm Kiếm"/>
+                        }
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
@@ -62,7 +63,7 @@
                             </a>
                         </div>
                         <!-- /Wishlist -->
-                        @Html.Action("GioHangIcon","GioHang")
+                        @Html.Action("GioHangIcon", "GioHang")
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
                             <a href="#">

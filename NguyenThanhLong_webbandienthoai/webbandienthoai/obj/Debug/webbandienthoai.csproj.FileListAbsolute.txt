@@ -84,3 +84,7 @@ D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\obj\Debug\webbandienthoa
 D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\bin\CaptchaMvc.dll
 D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\bin\CaptchaMvc.pdb
 D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\bin\CaptchaMvc.xml
+D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\bin\PagedList.dll
+D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\bin\PagedList.Mvc.dll
+D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\bin\PagedList.xml
+D:\DoAn\NguyenThanhLong_webbandienthoai\webbandienthoai\bin\PagedList.Mvc.xml
