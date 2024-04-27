@@ -7,6 +7,7 @@
 @{
     IEnumerable<SanPham> tuongtu = (IEnumerable<SanPham>)ViewBag.sptuongtu;
 }
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -70,10 +71,26 @@
                     <div>
                         <h3 class="product-price">@string.Format("{0:N0} \u20ab", Model.DonGia) <del class="product-old-price"></del></h3>
                     </div>
-                    <p>@Model.MoTa</p>
-
+                    <p>@Html.Raw(Model.MoTa)</p>
+                    <div class="qty-label">
+                        Số Lượng
+                        <div class="input-number">
+                            <input type="number" class="qutity" value="1">
+                            <span class="qty-up">+</span>
+                            <span class="qty-down">-</span>
+                        </div>
+                    </div>
                     <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                        @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
+                        {
+                            <a href="#" data-id="@Model.MaSP" data-url="@Request.Url.ToString()" class="aurl">
+                                <button class="add-to-cart-btn btnthemgiohang" data-id="@Model.MaSP" ><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                            </a>
+                        }
+                        else
+                        {
+                            <button class="add-to-cart-btn btnthem" onclick="redirectToLoginPage()"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -169,3 +186,21 @@
     </div>
     <!-- /container -->
 </div>
+<script>
+    $(document).ready(function () {
+        $(".btnthemgiohang").click(function (e) {
+            e.preventDefault();
+            var soluong = $(".qutity").val();
+            var id = $(".aurl").attr("data-id");
+            var url = $(".aurl").attr("data-url");
+            url = "@Url.Action("ThemGioHang", "GioHang")" + "?iMaSP=" + id + "&sl=" + soluong + "&Url=" + url;
+
+            window.location.href = url;
+        })
+    })
+</script>
+<script>
+    function redirectToLoginPage() {
+        window.location.href = '@Url.Action("DangNhap", "Login")'; // Chuyển hướng đến trang đăng nhập
+    }
+</script>

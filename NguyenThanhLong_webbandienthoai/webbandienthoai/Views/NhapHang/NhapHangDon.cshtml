@@ -1,0 +1,96 @@
+﻿@using webbandienthoai.Models;
+@model SanPham
+@{
+    ViewBag.Title = "NhapHangDon";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script src="~/Scripts/jquery-3.7.1.js"></script>
+@*Hiển thị ngày*@
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+</script>
+<div class="col-md-12">
+    <h1>Sản Phẩm: <b>@Model.TenSP</b></h1>
+</div>
+<br />
+<br />
+<br />
+<div class="ThongTinSP row">
+    <div class="hinhanh col-md-3">
+        <img src="@Url.Content("~/Content/Images/Products/"+Model.HinhAnh)" style="width:180px;height:150px" />
+    </div>
+    <div class="col-md-9">
+        <h2>Hãng Sản Xuất: @Model.NhaSanXuat.TenNSX</h2>
+        <h2>Loại Sản Phẩm: @Model.LoaiSanPham.TenLoaiSP</h2>
+        <h2>Số Lượng Tồn: @Model.SoLuongTon</h2>
+    </div>
+</div>
+<br /><br /><br />
+<div class="row">
+    <h3>Thông tin nhập hàng</h3>
+</div>
+<br />
+@using (Html.BeginForm("NhapHangDon", "NhapHang"))
+{
+    <div class="row">
+        @Html.Hidden("MaSP",Model.MaSP)
+        <div class="col-md-3">
+            @{ var lstNCC = (SelectList)ViewBag.MaNCC;}
+            Nhà cung cấp:@Html.DropDownList("MaNCC", lstNCC, new { @class = "MaNCC" })
+        </div>
+        <div class="col-md-3">
+            Số lượng nhập:@Html.TextBox("SoLuongNhap", 0, new { @class = "txtSoLuong" })
+        </div>
+        <div class="col-md-3">
+            Đơn giá nhập:@Html.TextBox("DonGiaNhap", 0, new {@class="txtDonGia"})
+        </div>
+        <div class="col-md-3">
+            Ngày nhập:@Html.TextBox("NgayNhap", "", new { @class = "datepicker" })
+        </div>
+    </div>
+    <br />
+    <div class="col-md-12">
+        <input type="submit" id="btnNhapHang" class="btn btn-primary" value="Nhập Hàng"/>
+    </div>
+}
+<script>
+    $("#btnNhapHang").click(function () {
+        if (kiemtranhapdongia() == false) {
+            return false;
+        }
+        if (kiemtranhapsoluong() == false) {
+            return false;
+        }
+        return true;
+    });
+
+    function kiemtranhapdongia() {
+        var bl = true;
+            var giatri = $(".txtDonGia").val();
+            if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+                alert("Đơn giá nhập không hợp lệ");
+                bl = false;
+                return bl;
+            }
+        return bl;
+    }
+    function kiemtranhapsoluong() {
+        var bl = true;
+            var giatri = $(".txtSoLuong").val();
+            if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+                alert("Số lượng nhập không hợp lệ");
+                bl = false;
+                return bl;
+            }
+        return bl;
+    }
+</script>
+
+

@@ -153,6 +153,7 @@ namespace webbandienthoai.Controllers
             product.TenSP = sp.TenSP;
             product.MaKhuyenMai = sp.MaKhuyenMai;
             product.NgayCapNhat = sp.NgayCapNhat;
+            product.SoLuongTon = sp.SoLuongTon;
             product.MoTa = sp.MoTa;
             product.CauHinh = sp.CauHinh;
             product.MoTa = sp.MoTa;
