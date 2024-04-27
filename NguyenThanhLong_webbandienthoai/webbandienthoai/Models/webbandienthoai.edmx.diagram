@@ -40,6 +40,11 @@
         <AssociationConnector Association="WebBanDienThoaiModel.FK_PN_NCC" ManuallyRouted="false" />
         <AssociationConnector Association="WebBanDienThoaiModel.FK_SP_NCC" ManuallyRouted="false" />
         <AssociationConnector Association="WebBanDienThoaiModel.FK_SP_NSX" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.ChiTietGioHang" Width="1.5" PointX="11.5" PointY="12.75" />
+        <EntityTypeShape EntityType="WebBanDienThoaiModel.GioHang" Width="1.5" PointX="8.25" PointY="23.25" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTGH_GH" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_CTGH_SP" />
+        <AssociationConnector Association="WebBanDienThoaiModel.FK_GIOHANG_TV" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

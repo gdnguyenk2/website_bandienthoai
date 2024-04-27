@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WebBanDienThoaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WebBanDienThoaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BinhLuan">
           <Key>
             <PropertyRef Name="MaBinhLuan" />
@@ -24,6 +24,15 @@
           <Property Name="TenSP" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="DonGia" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChiTietGioHang">
+          <Key>
+            <PropertyRef Name="MaChiTietGH" />
+          </Key>
+          <Property Name="MaChiTietGH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaGioHang" Type="int" Nullable="false" />
+          <Property Name="MaSP" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietPhieuNhap">
           <Key>
@@ -63,6 +72,13 @@
           <Property Name="QuaTang" Type="nvarchar" MaxLength="255" />
           <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
           <Property Name="DaXoa" Type="bit" />
+        </EntityType>
+        <EntityType Name="GioHang">
+          <Key>
+            <PropertyRef Name="MaGioHang" />
+          </Key>
+          <Property Name="MaGioHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaTV" Type="int" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -256,6 +272,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CTGH_GH">
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="1" />
+          <End Role="ChiTietGioHang" Type="Self.ChiTietGioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GioHang">
+              <PropertyRef Name="MaGioHang" />
+            </Principal>
+            <Dependent Role="ChiTietGioHang">
+              <PropertyRef Name="MaGioHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTGH_SP">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+          <End Role="ChiTietGioHang" Type="Self.ChiTietGioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="ChiTietGioHang">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CTPN_PN">
           <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
           <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
@@ -291,6 +331,20 @@
             </Principal>
             <Dependent Role="DonDatHang">
               <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIOHANG_TV">
+          <End Role="ThanhVien" Type="Self.ThanhVien" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GioHang" Type="Self.GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThanhVien">
+              <PropertyRef Name="MaTV" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="MaTV" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -423,10 +477,12 @@
         <EntityContainer Name="WebBanDienThoaiModelStoreContainer">
           <EntitySet Name="BinhLuan" EntityType="Self.BinhLuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietDonDatHang" EntityType="Self.ChiTietDonDatHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietGioHang" EntityType="Self.ChiTietGioHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietPhieuNhap" EntityType="Self.ChiTietPhieuNhap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CongNo" EntityType="Self.CongNo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonDatHang" EntityType="Self.DonDatHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhuyenMai" EntityType="Self.KhuyenMai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoaiSanPham" EntityType="Self.LoaiSanPham" Schema="dbo" store:Type="Tables" />
@@ -458,6 +514,14 @@
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="ChiTietDonDatHang" EntitySet="ChiTietDonDatHang" />
           </AssociationSet>
+          <AssociationSet Name="FK_CTGH_GH" Association="Self.FK_CTGH_GH">
+            <End Role="GioHang" EntitySet="GioHang" />
+            <End Role="ChiTietGioHang" EntitySet="ChiTietGioHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTGH_SP" Association="Self.FK_CTGH_SP">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="ChiTietGioHang" EntitySet="ChiTietGioHang" />
+          </AssociationSet>
           <AssociationSet Name="FK_CTPN_PN" Association="Self.FK_CTPN_PN">
             <End Role="PhieuNhap" EntitySet="PhieuNhap" />
             <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
@@ -469,6 +533,10 @@
           <AssociationSet Name="FK_DDH_KH" Association="Self.FK_DDH_KH">
             <End Role="KhachHang" EntitySet="KhachHang" />
             <End Role="DonDatHang" EntitySet="DonDatHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIOHANG_TV" Association="Self.FK_GIOHANG_TV">
+            <End Role="ThanhVien" EntitySet="ThanhVien" />
+            <End Role="GioHang" EntitySet="GioHang" />
           </AssociationSet>
           <AssociationSet Name="FK_KH_TV" Association="Self.FK_KH_TV">
             <End Role="ThanhVien" EntitySet="ThanhVien" />
@@ -511,8 +579,7 @@
             <End Role="ThanhVien" EntitySet="ThanhVien" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WebBanDienThoaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -719,6 +786,7 @@
           <NavigationProperty Name="LoaiSanPham" Relationship="Self.FK_SP_LSP" FromRole="SanPham" ToRole="LoaiSanPham" />
           <NavigationProperty Name="NhaCungCap" Relationship="Self.FK_SP_NCC" FromRole="SanPham" ToRole="NhaCungCap" />
           <NavigationProperty Name="NhaSanXuat" Relationship="Self.FK_SP_NSX" FromRole="SanPham" ToRole="NhaSanXuat" />
+          <NavigationProperty Name="ChiTietGioHangs" Relationship="WebBanDienThoaiModel.FK_CTGH_SP" FromRole="SanPham" ToRole="ChiTietGioHang" />
         </EntityType>
         <EntityType Name="ThanhVien">
           <Key>
@@ -740,6 +808,7 @@
           <NavigationProperty Name="BinhLuans" Relationship="Self.FK_BL_TV" FromRole="ThanhVien" ToRole="BinhLuan" />
           <NavigationProperty Name="KhachHangs" Relationship="Self.FK_KH_TV" FromRole="ThanhVien" ToRole="KhachHang" />
           <NavigationProperty Name="LoaiThanhVien" Relationship="Self.FK_TV_LTV" FromRole="ThanhVien" ToRole="LoaiThanhVien" />
+          <NavigationProperty Name="GioHangs" Relationship="WebBanDienThoaiModel.FK_GIOHANG_TV" FromRole="ThanhVien" ToRole="GioHang" />
         </EntityType>
         <Association Name="FK_BL_SP">
           <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
@@ -1057,7 +1126,79 @@
             <End Role="NhaSanXuat" EntitySet="NhaSanXuats" />
             <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
+          <EntitySet Name="ChiTietGioHangs" EntityType="WebBanDienThoaiModel.ChiTietGioHang" />
+          <EntitySet Name="GioHangs" EntityType="WebBanDienThoaiModel.GioHang" />
+          <AssociationSet Name="FK_CTGH_GH" Association="WebBanDienThoaiModel.FK_CTGH_GH">
+            <End Role="GioHang" EntitySet="GioHangs" />
+            <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTGH_SP" Association="WebBanDienThoaiModel.FK_CTGH_SP">
+            <End Role="SanPham" EntitySet="SanPhams" />
+            <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GIOHANG_TV" Association="WebBanDienThoaiModel.FK_GIOHANG_TV">
+            <End Role="ThanhVien" EntitySet="ThanhViens" />
+            <End Role="GioHang" EntitySet="GioHangs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ChiTietGioHang">
+          <Key>
+            <PropertyRef Name="MaChiTietGH" />
+          </Key>
+          <Property Name="MaChiTietGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaGioHang" Type="Int32" Nullable="false" />
+          <Property Name="MaSP" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GioHang" Relationship="WebBanDienThoaiModel.FK_CTGH_GH" FromRole="ChiTietGioHang" ToRole="GioHang" />
+          <NavigationProperty Name="SanPham" Relationship="WebBanDienThoaiModel.FK_CTGH_SP" FromRole="ChiTietGioHang" ToRole="SanPham" />
+        </EntityType>
+        <EntityType Name="GioHang">
+          <Key>
+            <PropertyRef Name="MaGioHang" />
+          </Key>
+          <Property Name="MaGioHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaTV" Type="Int32" />
+          <NavigationProperty Name="ChiTietGioHangs" Relationship="WebBanDienThoaiModel.FK_CTGH_GH" FromRole="GioHang" ToRole="ChiTietGioHang" />
+          <NavigationProperty Name="ThanhVien" Relationship="WebBanDienThoaiModel.FK_GIOHANG_TV" FromRole="GioHang" ToRole="ThanhVien" />
+        </EntityType>
+        <Association Name="FK_CTGH_GH">
+          <End Type="WebBanDienThoaiModel.GioHang" Role="GioHang" Multiplicity="1" />
+          <End Type="WebBanDienThoaiModel.ChiTietGioHang" Role="ChiTietGioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GioHang">
+              <PropertyRef Name="MaGioHang" />
+            </Principal>
+            <Dependent Role="ChiTietGioHang">
+              <PropertyRef Name="MaGioHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTGH_SP">
+          <End Type="WebBanDienThoaiModel.SanPham" Role="SanPham" Multiplicity="1" />
+          <End Type="WebBanDienThoaiModel.ChiTietGioHang" Role="ChiTietGioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="ChiTietGioHang">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GIOHANG_TV">
+          <End Type="WebBanDienThoaiModel.ThanhVien" Role="ThanhVien" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="WebBanDienThoaiModel.GioHang" Role="GioHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThanhVien">
+              <PropertyRef Name="MaTV" />
+            </Principal>
+            <Dependent Role="GioHang">
+              <PropertyRef Name="MaTV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1266,6 +1407,24 @@
                 <ScalarProperty Name="HinhDaiDien" ColumnName="HinhDaiDien" />
                 <ScalarProperty Name="MaToken" ColumnName="MaToken" />
                 <ScalarProperty Name="ThoiGianMaToken" ColumnName="ThoiGianMaToken" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietGioHangs">
+            <EntityTypeMapping TypeName="WebBanDienThoaiModel.ChiTietGioHang">
+              <MappingFragment StoreEntitySet="ChiTietGioHang">
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
+                <ScalarProperty Name="MaChiTietGH" ColumnName="MaChiTietGH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GioHangs">
+            <EntityTypeMapping TypeName="WebBanDienThoaiModel.GioHang">
+              <MappingFragment StoreEntitySet="GioHang">
+                <ScalarProperty Name="MaTV" ColumnName="MaTV" />
+                <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

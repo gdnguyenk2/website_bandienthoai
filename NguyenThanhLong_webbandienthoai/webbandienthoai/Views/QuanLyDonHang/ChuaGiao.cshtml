@@ -1,0 +1,69 @@
+﻿@using webbandienthoai.Models;
+@model IEnumerable<DonDatHang>
+@{
+    ViewBag.Title = "Quản lý đơn hàng";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    //khởi tạo control webgrid
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<style>
+    .Footer {
+        height: 100px;
+    }
+
+        .Footer a {
+            display: inline-block;
+            text-decoration: none;
+            border: 2px solid #808080;
+            color: #ffffff;
+            background: #2987f0;
+            padding: 5px 10px;
+        }
+
+    .Table, th, tr, td {
+        text-align: center;
+        border: 1px solid #000000;
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    .Header {
+        background-color: #e6dada;
+    }
+
+    img {
+        width: 150px;
+        height: 120px;
+    }
+
+    .nav li {
+        width: 49.88%;
+        text-align: center;
+    }
+</style>
+<ul class="nav nav-pills" style="background-color:aqua; width:100%">
+    <li role="presentation" class="active"><a href="@Url.Action("ChuaGiao","QuanLyDonHang")">Chưa Giao Hàng</a></li>
+    <li role="presentation"><a href="@Url.Action("DaGiaoDaThanhToan","QuanLyDonHang")">Đã Giao Và Thanh Toán</a></li>
+</ul>
+<br />
+<br />
+<br />
+@grid.GetHtml(
+    tableStyle: "Table",
+    headerStyle: "Header",
+    footerStyle: "Footer",
+    rowStyle: "Row",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+    grid.Column("MaDDH", "Mã Đơn ĐH"),
+    grid.Column("MaKH", "Tên Khách Hàng", format: p => p.MaKH != null ? p.KhachHang.TenKH : ""),
+    grid.Column("NgayDatHang", "Ngày Đặt Hàng"),
+    grid.Column("DaThanhToan", "Thanh Toán", format: p => p.DaThanhToan == true ? "Đã Thanh Toán" : "Chưa Thanh Toán"),
+    grid.Column("QuaTang", "Quà tặng"),
+    grid.Column("TinhTrang", "Tình Trạng"),
+    grid.Column("DaXoa", "Đã Xóa"),
+    grid.Column(format: p => Html.ActionLink("Duyệt Đơn Hàng", "DuyetDonHang", new { id = p.MaDDH }, new { style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" }))
+    )
+)
+

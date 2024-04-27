@@ -42,5 +42,7 @@ namespace webbandienthoai.Models
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<ThanhVien> ThanhViens { get; set; }
+        public virtual DbSet<ChiTietGioHang> ChiTietGioHangs { get; set; }
+        public virtual DbSet<GioHang> GioHangs { get; set; }
     }
 }

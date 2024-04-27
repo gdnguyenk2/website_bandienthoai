@@ -1,0 +1,176 @@
+﻿@using webbandienthoai.Models
+@model PhieuNhap
+@{
+    ViewBag.Title = "NhapHang";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+
+
+}
+@{
+    IEnumerable<NhaCungCap> lstNCC = ViewBag.MaNCC as IEnumerable<NhaCungCap>;
+}
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script src="~/Scripts/jquery-3.7.1.js"></script>
+@*Hiển thị ngày*@
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+    $(function () {
+        $(".datepicker").datepicker();
+    });
+</script>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="ThongTinPhieuNhap col-md-12">
+            <div class="col-md-2">
+                Nhà cung cấp
+            </div>
+            <div class="col-md-5">
+                <select class="MaNCC" name="MaNCC">
+                    @foreach (var item in lstNCC)
+                    {
+                        <option value="@item.MaNCC">@item.TenNCC</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <div class="col-md-12">
+        <div class="col-md-2">
+            Ngày Nhập
+        </div>
+        <div class="col-md-5">
+            <input name="NgayNhap" type="text" class="datepicker" />
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <br />
+    <br />
+    <br />
+    //Chi tiết nhập hàng
+    <table class="table tbChiTietNhapHang">
+        @{ IEnumerable<SanPham> lstSanPham = ViewBag.ListSanPham as IEnumerable<SanPham>;}
+        <tr class="trAppend" style="display:none">
+            <td>
+                <select class="ddlSanPham" name="">
+                    @foreach (var item in lstSanPham)
+                    {
+                        <option value="@item.MaSP">@item.TenSP</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <input class="txtDonGia" name="" value="0" />
+            </td>
+            <td>
+                <input class="txtSoLuong" name="" value="0" />
+            </td>
+            <td>
+                <input type="button" class="btnDelete btn btn-danger" value="-" style="width:35px;height:35px" />
+            </td>
+        </tr>
+        <tr class="trFirstChild" data-id="-1">
+            <td>Sản Phẩm</td>
+            <td>Đơn Giá Nhập</td>
+            <td>Số Lượng Nhập</td>
+            <td></td>
+        </tr>
+    </table>
+    //Các nút button
+    <input type="button" value="+" class="btn btn-success" id="btnAdd" style="width:35px;height:35px" />
+    <input type="submit" value="Nhập Hàng" class="btn btn-primary" id="btnNhapHang" style="height:35px;width:auto" />
+}
+
+<script>
+    $("body").on("click", "#btnAdd", function () {
+        // Lấy id của 1 thẻ tr có trong bảng class tbChiTietNhapHang
+        var id_cuoi = $(".tbChiTietNhapHang").find("tr:last-child").attr("data-id");
+
+        // Kiểm tra xem id_cuoi có tồn tại không
+        if (typeof id_cuoi === "undefined") {
+            id_cuoi = -1; // Gán một giá trị mặc định nếu không tồn tại
+        }
+
+        i = parseInt(id_cuoi) + 1;
+        // Lấy nội dung trong thẻ trAppend
+        var tdNoiDung = $(".trAppend").html();
+        // Tạo một thẻ bao ngoài nội dung
+        var trNoiDung = "<tr class=\"trAppended\" data-id=\"" + i + "\">" + tdNoiDung + "</tr>";
+        // Lấy thẻ table append vào 1 tr
+        $(".tbChiTietNhapHang").append(trNoiDung);
+        loadIDLenThe();
+    });
+    function loadIDLenThe() {
+        $(".trAppended").each(function () {
+            var id = $(this).attr("data-id");
+            var nameMaSanPham = "[" + id + "].MaSP";//Tạo ra mã sản phẩm
+            var nameSoLuongNhap = "[" + id + "].SoLuongNhap";
+            var nameDonGiaNhap = "[" + id + "].DonGiaNhap";
+            $(this).find(".ddlSanPham").attr("name", nameMaSanPham);//Gán name cho dropdownlist
+            $(this).find(".txtDonGia").attr("name", nameDonGiaNhap);
+            $(this).find(".txtSoLuong").attr("name", nameSoLuongNhap);
+        });
+    };
+    function CapNhapID() {
+        //Lấy lại tr 1
+        var id_cuoi = $(".tbChiTietNhapHang").find(".trFirstChild").attr("data-id");
+        i = parseInt(id_cuoi) + 1;
+        $(".trAppended").each(function () {
+            var id = i;
+            $(this).attr("data-id", i);
+            //Cập nhật lại id khi xóa
+            var nameMaSanPham = "[" + id + "].MaSP";//Tạo ra mã sản phẩm
+            var nameSoLuongNhap = "[" + id + "].SoLuongNhap";
+            var nameDonGiaNhap = "[" + id + "].DonGiaNhap";
+            $(this).find(".ddlSanPham").attr("name", nameMaSanPham);//Gán name cho dropdownlist
+            $(this).find(".txtDonGia").attr("name", nameDonGiaNhap);
+            $(this).find(".txtSoLuong").attr("name", nameSoLuongNhap);
+            i++;
+        });
+    };
+    //event sự kiện cho nút xóa
+    $("body").delegate(".btnDelete", "click", function () {
+        $(this).closest(".trAppended").remove();
+        CapNhapID();
+    });
+    $("#btnNhapHang").click(function () {
+        if (kiemtranhapdongia() == false) {
+            return false;
+        }
+        if (kiemtranhapsoluong() == false) {
+            return false;
+        }
+        return true;
+    });
+
+    function kiemtranhapdongia() {
+        var bl = true;
+        $(".txtDonGia").each(function () {
+            var giatri = $(this).val();
+            if (isNaN(giatri) == true || parseInt(giatri)<0) {
+                alert("Đơn giá nhập không hợp lệ");
+                bl = false;
+                return bl;
+            }
+        });
+        return bl;
+    }
+    function kiemtranhapsoluong() {
+        var bl = true;
+        $(".txtSoLuong").each(function () {
+            var giatri = $(this).val();
+            if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+                alert("Số lượng nhập không hợp lệ");
+                bl = false;
+                return bl;
+            }
+        });
+        return bl;
+    }
+</script>

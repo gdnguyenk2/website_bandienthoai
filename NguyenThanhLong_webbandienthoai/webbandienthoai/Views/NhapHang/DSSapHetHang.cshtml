@@ -1,7 +1,7 @@
 ﻿@using webbandienthoai.Models;
 @model IEnumerable<SanPham>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sản phẩm sắp hết Hàng";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     //khởi tạo control webgrid
     WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
@@ -26,6 +26,11 @@
         font-size: 16px;
         padding: 5px 10px;
     }
+    .Table {
+        min-width: 100%;
+        height:auto;
+    }
+
     .Header {
         background-color: #e6dada;
     }
@@ -35,8 +40,6 @@
         height: 120px;
     }
 </style>
-@Html.ActionLink("Thêm Sản Phẩm", "TaoMoi",null, new {@class="btn btn-success"})
-<br /><br />
 @grid.GetHtml(
     tableStyle: "Table",
     headerStyle: "Header",
@@ -46,13 +49,11 @@
     columns: grid.Columns(
     grid.Column("MaSP", "Mã Sản Phẩm"),
     grid.Column("TenSP", "Tên Sản Phẩm"),
-    grid.Column("MoTa", "Mô Tả", format: p => @Html.Raw(p.MoTa)),
-    grid.Column("HinhAnh", "Hình Ảnh", format: p => @Html.Raw("<img src=\"../Content/Images/Products/" +p.HinhAnh + "\">")),
+    grid.Column("HinhAnh", "Hình Ảnh", format: p => @Html.Raw("<img src=\"../Content/Images/Products/" + p.HinhAnh + "\">")),
     grid.Column("DonGia", "Đơn Giá", format: p => Html.Raw(p.DonGia.ToString("#,##") + " đ")),
     grid.Column("SoLuongTon", "Số Lượng Tồn"),
-    grid.Column("Moi", "Mới"),
-    grid.Column("BanChay", "Bán Chạy"),
-    grid.Column(format: p => Html.ActionLink("Sửa", "SuaSP", new { id = p.MaSP },new {style= "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })),
-    grid.Column(format: p => Html.ActionLink("Xóa", "XoaSP", new { id = p.MaSP }, new { style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" }))
+    grid.Column(format: p => Html.ActionLink("Nhập Hàng", "NhapHangDon", new { MaSP = p.MaSP }, new { style = "display: block;text-decoration: none;background-color: green;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" }))
     )
 )
+
+

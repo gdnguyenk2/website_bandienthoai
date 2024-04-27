@@ -203,6 +203,7 @@
     <NavigationProperty Name="LoaiSanPham" Relationship="Self.FK_SP_LSP" FromRole="SanPham" ToRole="LoaiSanPham" />
     <NavigationProperty Name="NhaCungCap" Relationship="Self.FK_SP_NCC" FromRole="SanPham" ToRole="NhaCungCap" />
     <NavigationProperty Name="NhaSanXuat" Relationship="Self.FK_SP_NSX" FromRole="SanPham" ToRole="NhaSanXuat" />
+    <NavigationProperty Name="ChiTietGioHangs" Relationship="WebBanDienThoaiModel.FK_CTGH_SP" FromRole="SanPham" ToRole="ChiTietGioHang" />
   </EntityType>
   <EntityType Name="ThanhVien">
     <Key>
@@ -224,6 +225,7 @@
     <NavigationProperty Name="BinhLuans" Relationship="Self.FK_BL_TV" FromRole="ThanhVien" ToRole="BinhLuan" />
     <NavigationProperty Name="KhachHangs" Relationship="Self.FK_KH_TV" FromRole="ThanhVien" ToRole="KhachHang" />
     <NavigationProperty Name="LoaiThanhVien" Relationship="Self.FK_TV_LTV" FromRole="ThanhVien" ToRole="LoaiThanhVien" />
+    <NavigationProperty Name="GioHangs" Relationship="WebBanDienThoaiModel.FK_GIOHANG_TV" FromRole="ThanhVien" ToRole="GioHang" />
   </EntityType>
   <Association Name="FK_BL_SP">
     <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
@@ -541,5 +543,77 @@
       <End Role="NhaSanXuat" EntitySet="NhaSanXuats" />
       <End Role="SanPham" EntitySet="SanPhams" />
     </AssociationSet>
+    <EntitySet Name="ChiTietGioHangs" EntityType="WebBanDienThoaiModel.ChiTietGioHang" />
+    <EntitySet Name="GioHangs" EntityType="WebBanDienThoaiModel.GioHang" />
+    <AssociationSet Name="FK_CTGH_GH" Association="WebBanDienThoaiModel.FK_CTGH_GH">
+      <End Role="GioHang" EntitySet="GioHangs" />
+      <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTGH_SP" Association="WebBanDienThoaiModel.FK_CTGH_SP">
+      <End Role="SanPham" EntitySet="SanPhams" />
+      <End Role="ChiTietGioHang" EntitySet="ChiTietGioHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GIOHANG_TV" Association="WebBanDienThoaiModel.FK_GIOHANG_TV">
+      <End Role="ThanhVien" EntitySet="ThanhViens" />
+      <End Role="GioHang" EntitySet="GioHangs" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ChiTietGioHang">
+    <Key>
+      <PropertyRef Name="MaChiTietGH" />
+    </Key>
+    <Property Name="MaChiTietGH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaGioHang" Type="Int32" Nullable="false" />
+    <Property Name="MaSP" Type="Int32" Nullable="false" />
+    <Property Name="SoLuong" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GioHang" Relationship="WebBanDienThoaiModel.FK_CTGH_GH" FromRole="ChiTietGioHang" ToRole="GioHang" />
+    <NavigationProperty Name="SanPham" Relationship="WebBanDienThoaiModel.FK_CTGH_SP" FromRole="ChiTietGioHang" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="GioHang">
+    <Key>
+      <PropertyRef Name="MaGioHang" />
+    </Key>
+    <Property Name="MaGioHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaTV" Type="Int32" />
+    <NavigationProperty Name="ChiTietGioHangs" Relationship="WebBanDienThoaiModel.FK_CTGH_GH" FromRole="GioHang" ToRole="ChiTietGioHang" />
+    <NavigationProperty Name="ThanhVien" Relationship="WebBanDienThoaiModel.FK_GIOHANG_TV" FromRole="GioHang" ToRole="ThanhVien" />
+  </EntityType>
+  <Association Name="FK_CTGH_GH">
+    <End Type="WebBanDienThoaiModel.GioHang" Role="GioHang" Multiplicity="1" />
+    <End Type="WebBanDienThoaiModel.ChiTietGioHang" Role="ChiTietGioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GioHang">
+        <PropertyRef Name="MaGioHang" />
+      </Principal>
+      <Dependent Role="ChiTietGioHang">
+        <PropertyRef Name="MaGioHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTGH_SP">
+    <End Type="WebBanDienThoaiModel.SanPham" Role="SanPham" Multiplicity="1" />
+    <End Type="WebBanDienThoaiModel.ChiTietGioHang" Role="ChiTietGioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="MaSP" />
+      </Principal>
+      <Dependent Role="ChiTietGioHang">
+        <PropertyRef Name="MaSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GIOHANG_TV">
+    <End Type="WebBanDienThoaiModel.ThanhVien" Role="ThanhVien" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="WebBanDienThoaiModel.GioHang" Role="GioHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ThanhVien">
+        <PropertyRef Name="MaTV" />
+      </Principal>
+      <Dependent Role="GioHang">
+        <PropertyRef Name="MaTV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
