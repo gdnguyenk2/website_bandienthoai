@@ -1,7 +1,7 @@
 ﻿@using webbandienthoai.Models;
 @model IEnumerable<SanPham>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản Lý Sản Phẩm";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     //khởi tạo control webgrid
     WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
@@ -35,7 +35,26 @@
         height: 120px;
     }
 </style>
-@Html.ActionLink("Thêm Sản Phẩm", "TaoMoi",null, new {@class="btn btn-success"})
+<h2 style="margin:10px 0">Quản Lý Sản Phẩm</h2>
+<div class="container_pro">
+    <div class="col-md-6">
+        @Html.ActionLink("Thêm Sản Phẩm", "TaoMoi", null, new { @class = "btn btn-success" })
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("TimTenSP", "QuanLySanPham", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div style="float: right">
+                <div class="form-group">
+                    @Html.TextBox("Search", ViewBag.Search as string, new { @class = "form-control", placeholder = "Tìm tên sản phẩm ...", style = "width: 400px" })
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Tìm" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="clearfix"></div>
 <br /><br />
 @grid.GetHtml(
     tableStyle: "Table",
@@ -50,9 +69,26 @@
     grid.Column("HinhAnh", "Hình Ảnh", format: p => @Html.Raw("<img src=\"../Content/Images/Products/" +p.HinhAnh + "\">")),
     grid.Column("DonGia", "Đơn Giá", format: p => Html.Raw(p.DonGia.ToString("#,##") + " đ")),
     grid.Column("SoLuongTon", "Số Lượng Tồn"),
+    grid.Column("SoLanMua", "Đã bán"),
     grid.Column("Moi", "Mới"),
-    grid.Column("BanChay", "Bán Chạy"),
+    grid.Column("DaXoa", "Đã xóa"),
     grid.Column(format: p => Html.ActionLink("Sửa", "SuaSP", new { id = p.MaSP },new {style= "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })),
     grid.Column(format: p => Html.ActionLink("Xóa", "XoaSP", new { id = p.MaSP }, new { style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" }))
     )
 )
+<script>
+    $(document).ready(function () {
+        var themsp = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["themsp"]))';// HttpUtility.JavascriptStringEncode để đảm báo mã hóa chuỗi an toàn khi dùng các ký tự đặc biệt
+        var xoasp = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["xoasp"]))';
+        var suasp = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["suasp"]))';
+        if (themsp) {
+            alert(themsp);
+        }
+        if (xoasp) {
+            alert(xoasp);
+        }
+        if (suasp) {
+            alert(suasp);
+        }
+    });
+</script>

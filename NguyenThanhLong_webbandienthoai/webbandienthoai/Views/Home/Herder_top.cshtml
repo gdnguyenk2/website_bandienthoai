@@ -6,14 +6,15 @@
         <div class="container">
             <ul class="header-links pull-left">
                 <li><a href="#"><i class="fa fa-phone"></i> +8439 667 1002</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> dragonphone@gmail.com</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> dragonphone17@gmail.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> An Tân - Thái Thụy - Thái Bình</a></li>
             </ul>
             <ul class="header-links pull-right">
-                @if (Session["TaiKhoans"] != null)
+                @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
                 {
                     ThanhVien tv = (ThanhVien)Session["TaiKhoans"];
-                    <li style="color:#fff"><i class="fa fa-user-o"></i>@tv.HoTen </li>
+                    <li><i class="fa fa-car"></i>@Html.ActionLink("Đơn Hàng", "XemDonHang", "DonHang")</li>
+                    <li style="color:#fff"><a href="@Url.Action("ThongTinCaNhan","Home")"><i class="fa fa-user-o"></i>@tv.HoTen </a></li>
                     <li><i class="fa fa-lock"></i>@Html.ActionLink("Đăng Xuất", "DangXuat", "Login")</li>
                 }
                 else
@@ -35,7 +36,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a href="#" class="logo">
-                            <img src="~/Content/img/logo.png" alt="">
+                            <img src="@Url.Content("~/Content/Images/Logo/logo.png")" alt="" style="width:auto;height:65px">
                         </a>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                     <div class="header-search">
                         @using (Html.BeginForm("LayTuKhoaTimKiem", "TimKiem"))
                         { 
-                            <input type="text" name="sTuKhoa" class="input" placeholder="Tìm kiếm ở đây" style="width: calc(100% - 160px); margin-right: -4px; border-radius: 40px 0px 0px 40px;">
+                            <input type="text" name="sTuKhoa" class="input" placeholder="Tìm kiếm ở đây" style="width: calc(100% - 160px); margin-right: -4px; border-radius: 40px 0px 0px 40px;" required="">
                             <input type="submit" class="search-btn" value="Tìm Kiếm"/>
                         }
                     </div>

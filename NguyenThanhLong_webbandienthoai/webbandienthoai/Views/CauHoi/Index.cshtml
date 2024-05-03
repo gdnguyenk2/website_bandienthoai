@@ -1,0 +1,232 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .faqs {
+        padding: 0;
+        font-size: 18px;
+    }
+
+        .faqs .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .faqs .tittle {
+            font-size: 2.0em;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+            .faqs .tittle .heading-style {
+                position: absolute;
+                bottom: -20px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+            }
+
+                .faqs .tittle .heading-style i {
+                    display: block;
+                    width: 30px;
+                    height: 2px;
+                    background: #000;
+                    margin: 0 10px;
+                    position: relative;
+                }
+
+        .faqs .head {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .faqs .faq-agile ul.faq {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+            .faqs .faq-agile ul.faq li {
+                margin-bottom: 30px;
+            }
+
+                .faqs .faq-agile ul.faq li a {
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    color: #000;
+                    text-decoration: none;
+                    display: block;
+                    padding-bottom: 10px;
+                    border-bottom: 1px solid #ccc;
+                }
+
+                    .faqs .faq-agile ul.faq li a:hover {
+                        color: #ff6a00;
+                    }
+
+                .faqs .faq-agile ul.faq li .subitem1 p {
+                    margin-top: 10px;
+                    font-size: 1em;
+                }
+</style>
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                    <li><a href="#" class="active">Câu Hỏi</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<div class="faqs">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle">
+            Câu hỏi thường gặp?
+            <span class="heading-style">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </h3>
+        <!-- //tittle heading -->
+        <h3 class="head">Top 10 câu hỏi thường gặp</h3>
+        <div class="faq-agile">
+            <ul class="faq">
+                <li class="item1">
+                    <a href="#" title="click here">Điện thoại của tôi có được hỗ trợ không?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Chúng tôi cung cấp một loạt sản phẩm tương thích với đa dạng các dòng điện thoại di động. Bạn có thể tìm sản phẩm phù hợp bằng cách sử dụng bộ lọc trên trang web.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item2">
+                    <a href="#" title="click here">Làm thế nào để tìm kiếm sản phẩm phù hợp?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Để tìm sản phẩm phù hợp, bạn có thể sử dụng thanh tìm kiếm hoặc chọn danh mục sản phẩm từ trang chủ. Bạn cũng có thể sắp xếp sản phẩm theo giá, thương hiệu, hoặc đánh giá khách hàng.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item3">
+                    <a href="#" title="click here">Làm sao để đặt hàng?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Để đặt hàng, bạn chỉ cần thêm sản phẩm vào giỏ hàng và làm theo hướng dẫn để hoàn tất quy trình đặt hàng. Chúng tôi hỗ trợ nhiều phương thức thanh toán tiện lợi.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item4">
+                    <a href="#" title="click here">Bảo hành và chính sách đổi trả ra sao?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Sản phẩm của chúng tôi đi kèm với chính sách bảo hành và đổi trả. Thông tin chi tiết về chính sách này có sẵn trên trang web của chúng tôi.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item5">
+                    <a href="#" title="click here">Sản phẩm có sẵn hàng không?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Chúng tôi luôn cập nhật tình trạng hàng tồn kho trên trang web. Nếu sản phẩm hiện đang hết hàng, bạn sẽ được thông báo về thời gian dự kiến để có hàng.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item6">
+                    <a href="#" title="click here">Tôi có thể đọc đánh giá và nhận xét của khách hàng khác không?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Đúng vậy, bạn có thể đọc đánh giá và nhận xét của khách hàng khác trên trang sản phẩm. Điều này giúp bạn đưa ra quyết định thông thái hơn.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item7">
+                    <a href="#" title="click here">Làm thế nào để liên hệ với dịch vụ khách hàng?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Thời gian giao hàng có thể khác nhau tùy thuộc vào địa điểm và phương thức vận chuyển. Thông tin chi tiết về thời gian giao hàng được cung cấp khi bạn hoàn tất đặt hàng.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item8">
+                    <a href="#" title="click here">Sản phẩm được đảm bảo chất lượng không?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Chúng tôi cam kết cung cấp các sản phẩm đạt chất lượng tốt nhất và đều được bảo hành. Sản phẩm của chúng tôi đến từ các nhà sản xuất uy tín.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item9">
+                    <a href="#" title="click here">Có khuyến mãi hoặc giảm giá hiện tại không?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Chúng tôi thường xuyên có các chương trình khuyến mãi và giảm giá. Bạn có thể xem các ưu đãi hiện tại trên trang web hoặc đăng ký nhận thông báo để nhận thông tin cập nhật.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item10">
+                    <a href="#" title="click here">Tôi có thể thay đổi hoặc hủy đơn hàng sau khi đã đặt không?</a>
+                    <ul>
+                        <li class="subitem1">
+                            <p>
+                                Bạn có thể thay đổi hoặc hủy đơn hàng nếu đơn hàng của bạn chưa được xử lý. Hãy liên hệ với dịch vụ khách hàng của chúng tôi để biết thêm chi tiết.
+                            </p>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+    $(function () {
+
+        var menu_ul = $('.faq > li > ul'),
+            menu_a = $('.faq > li > a');
+
+        menu_ul.hide();
+
+        menu_a.click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true, true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true, true).slideUp('normal');
+            }
+        });
+
+    });
+</script>

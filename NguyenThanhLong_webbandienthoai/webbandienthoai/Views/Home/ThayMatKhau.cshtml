@@ -1,0 +1,117 @@
+﻿@using webbandienthoai.Models
+@model ThanhVien
+@{
+    ViewBag.Title = "Thay mật khẩu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<style>
+    .btn-update {
+        padding: 10px;
+        border: none;
+        background-color: #1accfd;
+        color: #fff;
+        font-weight: bold;
+        width: 100%;
+    }
+
+        .btn-update:hover, .btn-update:focus, .btn-update:focus:active {
+            outline: none;
+            background-color: #FF5722;
+            color: #fff;
+        }
+
+        .btn-update:focus-visible {
+            outline: none;
+        }
+
+    .modal .btn-cancel:focus {
+        outline: none !important;
+        border-color: transparent !important;
+    }
+</style>
+
+<div class="ads-grid">
+    <div style="display:flex; justify-content: center" class="container">
+        <div class="col-md-9 mx-auto">
+            <div class="product-sec1">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center" style="margin:20px 10px"><strong>Đổi Mật Khẩu</strong></h2>
+                        <p style="color: #000;text-align:center">Đổi mật khẩu để bảo mật tài khoản</p>
+                        <hr />
+                        <div style="text-align: center; margin-block: 20px">
+                            <img id="imgAvartar" src="@Url.Content("~/Content/Images/Members/" + Model.HinhDaiDien)" alt="Ảnh Đại Diện" style="width: 100px; max-height: 100px; display: block; margin: 0 auto; border-radius: 50%; margin-bottom: 10px" />
+                        </div>
+                        @using (Html.BeginForm("ThayMatKhau", "Home", FormMethod.Post, new { @style = "margin-top: 10px", @id = "changePasswordForm" }))
+                        {
+                            @Html.HiddenFor(model => model.MaTV);
+                            @Html.HiddenFor(model => model.MatKhau);
+
+                            <div class="form-group">
+                                <label class="col-form-label mt-4" for="oldPassword">Nhập mật khẩu hiện tại</label>
+                                @Html.TextBox("oldPassword", null, new { @class = "form-control password", id = "oldPassword", @required = "", @type = "password" })
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-form-label mt-4" for="newPassword">Nhập mật khẩu mới của bạn</label>
+                                @Html.TextBox("newPassword", null, new { @class = "form-control", id = "newPassword", @required = "", @type = "password", oninput = "checkPasswordLength()" })
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-form-label mt-4" for="confirmPassword">Xác nhận lại mật khẩu</label>
+                                @Html.TextBox("confirmPassword", null, new { @class = "form-control", id = "confirmPassword", @required = "", @type = "password" })
+                            </div>
+
+                            <div class="form-group">
+                                <div style="text-align: center">
+                                    <button type="submit" class="btn btn-update">Đổi mật khẩu</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkPasswordLength() {
+        var passwordField = document.getElementById('newPassword');
+
+        if (passwordField.value.length < 6) {
+            passwordField.setCustomValidity('Mật khẩu phải có ít nhất 6 ký tự.');
+        } else {
+            passwordField.setCustomValidity('');
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#changePasswordForm").submit(function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ThayMatKhau", "Home")",
+                data: $('#changePasswordForm').serialize(),
+                success: function (response) {
+                    alert(response.message);
+
+                    if (response.message === "Đổi mật khẩu thành công.") {
+                        $("#oldPassword").val('');
+                        $("#newPassword").val('');
+                        $("#confirmPassword").val('');
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Đã xảy ra lỗi khi xử lý yêu cầu.");
+                }
+            });
+        });
+    });
+</script>
+

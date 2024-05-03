@@ -116,7 +116,7 @@ a:focus, a:hover {
 }
 body {
     padding: 4em 0;
-    background: url(../images/4.jpg); 
+    background: url(../images/cover4.jpg); 
 	background-attachment:fixed;
 	background-size:cover;
 }

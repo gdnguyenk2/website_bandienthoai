@@ -1,0 +1,133 @@
+﻿@using webbandienthoai.Models
+@model IEnumerable<DonDatHang>
+@{
+    ViewBag.Title = "XemDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .contact .tittle {
+        font-size: 2.5em;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+        .contact .tittle .heading-style {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+            .contact .tittle .heading-style i {
+                display: block;
+                width: 30px;
+                height: 2px;
+                background: #000;
+                margin: 0 10px;
+                position: relative;
+            }
+
+    .all {
+        width: 80%;
+        height: auto;
+        position: relative;
+        left: 10%;
+        right: 10%;
+        top: 20px;
+        font-size: 16px;
+    }
+
+    .ab, .ab tr, .ab td, .ab th {
+        border: 2px solid #000000;
+    }
+
+    .ac, .ac tr, .ac td, .ac th {
+        border: hidden;
+    }
+
+    .kichthuoc {
+        width: 100%;
+    }
+
+    .nav-pills > li.active > a {
+        background-color: #000;
+    }
+
+    .nav-pills > li.active:hover > a {
+        background-color: #000;
+    }
+</style>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                    <li><a href="#" class="active">Đơn Hàng</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<div class="col-md-12 menudh">
+    <ul class="nav nav-pills" style="background-color:#ff6a00">
+        <li role="presentation" style="width: 24.9%; text-align: center"><a href="@Url.Action("XemDonHang","DonHang")">Đơn Hàng</a></li>
+        <li role="presentation" class="active" style="width: 24.9%; text-align: center"><a href="@Url.Action("DangGiao","DonHang")">Đang Giao Hàng</a></li>
+        <li role="presentation" style="width: 24.9%; text-align: center"><a href="@Url.Action("DaHoanThanh","DonHang")">Đã Giao Hàng</a></li>
+        <li role="presentation" style="width: 24.8%; text-align: center"><a href="@Url.Action("DaHuy","DonHang")">Đã Hủy</a></li>
+    </ul>
+</div>
+<div class="clearfix"></div>
+<div class="all">
+    @if (Model == null)
+    {
+        <h1 style="text-align:center">Đơn hàng rỗng !</h1>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <table class="table ab">
+                <tr>
+                    <th>Mã Sản Phẩm</th>
+                    <th>Hình Ảnh</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Đơn Giá</th>
+                    <th>Số Lượng</th>
+                    <th>Thành Tiền</th>
+                </tr>
+                @{decimal thanhtien = decimal.Zero;
+                    decimal tongtien = decimal.Zero;
+                }
+                @foreach (var item2 in item.ChiTietDonDatHangs)
+                {
+                    <tr>
+                        <td>@item2.MaSP</td>
+                        <td><img src="@Url.Content("~/Content/Images/Products/" + item2.SanPham.HinhAnh)" width="50" height="50" /></td>
+                        <td>@item2.TenSP</td>
+                        <td>@item2.DonGia.ToString("#,##") đ</td>
+                        <td>@item2.SoLuong</td>
+                        @{thanhtien = item2.DonGia * item2.SoLuong;
+                            tongtien += thanhtien;}
+                        <td>@thanhtien.ToString("#,##") đ</td>
+                    </tr>
+
+                }
+                <tr>
+                    <td class="text-right" colspan="6">
+                        <p>Tổng Tiền: @tongtien.ToString("#,##") đ</p>
+                    </td>
+                </tr>
+            </table>
+        }
+    }
+</div>

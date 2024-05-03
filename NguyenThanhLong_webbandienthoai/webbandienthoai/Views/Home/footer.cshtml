@@ -1,0 +1,25 @@
+﻿@using webbandienthoai.Models;
+@model IEnumerable<SanPham>
+
+@foreach (var groupitem in Model.GroupBy(n => n.LoaiSanPham.DanhMuc))
+{
+    if (groupitem.Key != null)
+    {
+        <div class="col-md-3 col-xs-6">
+            <div class="footer">
+                <h3 class="footer-title">@groupitem.Key.TenDanhMuc</h3>
+                <div class="">
+                    <ul class="footer-links">
+                        @foreach (var gritem in groupitem.GroupBy(n => n.NhaSanXuat))
+                        {
+                            if (gritem.Key != null)
+                            {
+                                <li><a href="@Url.Action("hienThiLoaiSP", "SanPham", new { MaNSX = @gritem.Key.MaNSX })">@gritem.Key.TenNSX</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+}

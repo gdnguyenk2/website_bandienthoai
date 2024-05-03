@@ -36,7 +36,14 @@ namespace webbandienthoai.Models
                 this.TenSP = sp.TenSP;
                 this.HinhAnh = sp.HinhAnh;
                 this.SoLuong = sl;
-                this.DonGia = sp.DonGia.Value;
+                if (sp.MaKhuyenMai == null || sp.MaKhuyenMai==0)
+                {
+                    this.DonGia = sp.DonGia.Value;
+                }
+                else
+                {
+                    this.DonGia = sp.DonGia.Value - (sp.DonGia.Value * sp.KhuyenMai.PhanTramGiamGia / 100);
+                }
                 this.ThanhTien = DonGia * SoLuong;
             }
         }

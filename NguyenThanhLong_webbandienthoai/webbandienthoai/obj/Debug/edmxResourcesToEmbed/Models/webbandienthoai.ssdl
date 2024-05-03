@@ -7,6 +7,8 @@
     <Property Name="MaBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaTV" Type="int" Nullable="false" />
     <Property Name="MaSP" Type="int" Nullable="false" />
+    <Property Name="DanhGia" Type="int" Nullable="false" />
+    <Property Name="NgayBL" Type="datetime" Nullable="false" />
     <Property Name="NoiDungBL" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ChiTietDonDatHang">
@@ -39,15 +41,6 @@
     <Property Name="DonGiaNhap" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="SoLuongNhap" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="CongNo">
-    <Key>
-      <PropertyRef Name="MaCongNo" />
-    </Key>
-    <Property Name="MaCongNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaNCC" Type="int" Nullable="false" />
-    <Property Name="SoTienNo" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="NgayCongNo" Type="date" Nullable="false" />
-  </EntityType>
   <EntityType Name="DanhMuc">
     <Key>
       <PropertyRef Name="MaDanhMuc" />
@@ -63,9 +56,9 @@
     <Property Name="MaKH" Type="int" />
     <Property Name="NgayDatHang" Type="datetime" Nullable="false" />
     <Property Name="NgayGiao" Type="datetime" />
-    <Property Name="DaThanhToan" Type="bit" Nullable="false" />
+    <Property Name="DaThanhToan" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="QuaTang" Type="nvarchar" MaxLength="255" />
-    <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
+    <Property Name="TinhTrang" Type="nvarchar" MaxLength="100" />
     <Property Name="DaXoa" Type="bit" />
   </EntityType>
   <EntityType Name="GioHang">
@@ -94,8 +87,8 @@
     <Property Name="TenKhuyenMai" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="MoTa" Type="nvarchar(max)" />
     <Property Name="PhanTramGiamGia" Type="int" Nullable="false" />
-    <Property Name="NgayBatDau" Type="date" Nullable="false" />
-    <Property Name="NgayKetThuc" Type="date" Nullable="false" />
+    <Property Name="NgayBatDau" Type="datetime" Nullable="false" />
+    <Property Name="NgayKetThuc" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="LoaiSanPham">
     <Key>
@@ -153,6 +146,15 @@
     <Property Name="NgayNhap" Type="datetime" Nullable="false" />
     <Property Name="DaXoa" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="QuangCao">
+    <Key>
+      <PropertyRef Name="MaQuangCao" />
+    </Key>
+    <Property Name="MaQuangCao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenQC" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="HinhAnh" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NgayCapNhat" Type="datetime" />
+  </EntityType>
   <EntityType Name="Quyen">
     <Key>
       <PropertyRef Name="MaQuyen" />
@@ -179,12 +181,9 @@
     <Property Name="HinhAnh3" Type="nvarchar(max)" />
     <Property Name="HinhAnh4" Type="nvarchar(max)" />
     <Property Name="SoLuongTon" Type="int" Nullable="false" />
-    <Property Name="LuotXem" Type="int" />
-    <Property Name="LuotBinhChon" Type="int" />
-    <Property Name="LuotBinhLuan" Type="int" />
-    <Property Name="SoLanMua" Type="int" />
+    <Property Name="DanhGia" Type="int" Nullable="false" />
+    <Property Name="SoLanMua" Type="int" Nullable="false" />
     <Property Name="Moi" Type="bit" Nullable="false" />
-    <Property Name="BanChay" Type="bit" Nullable="false" />
     <Property Name="DaXoa" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ThanhVien">
@@ -226,20 +225,6 @@
       </Principal>
       <Dependent Role="BinhLuan">
         <PropertyRef Name="MaTV" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CongNo_NCC">
-    <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NhaCungCap">
-        <PropertyRef Name="MaNCC" />
-      </Principal>
-      <Dependent Role="CongNo">
-        <PropertyRef Name="MaNCC" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -474,7 +459,6 @@
     <EntitySet Name="ChiTietDonDatHang" EntityType="Self.ChiTietDonDatHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChiTietGioHang" EntityType="Self.ChiTietGioHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChiTietPhieuNhap" EntityType="Self.ChiTietPhieuNhap" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CongNo" EntityType="Self.CongNo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DonDatHang" EntityType="Self.DonDatHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
@@ -486,6 +470,7 @@
     <EntitySet Name="NhaCungCap" EntityType="Self.NhaCungCap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NhaSanXuat" EntityType="Self.NhaSanXuat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuangCao" EntityType="Self.QuangCao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ThanhVien" EntityType="Self.ThanhVien" Schema="dbo" store:Type="Tables" />
@@ -496,10 +481,6 @@
     <AssociationSet Name="FK_BL_TV" Association="Self.FK_BL_TV">
       <End Role="ThanhVien" EntitySet="ThanhVien" />
       <End Role="BinhLuan" EntitySet="BinhLuan" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CongNo_NCC" Association="Self.FK_CongNo_NCC">
-      <End Role="NhaCungCap" EntitySet="NhaCungCap" />
-      <End Role="CongNo" EntitySet="CongNo" />
     </AssociationSet>
     <AssociationSet Name="FK_CTDDH_DDH" Association="Self.FK_CTDDH_DDH">
       <End Role="DonDatHang" EntitySet="DonDatHang" />

@@ -1,13 +1,42 @@
 ﻿@using webbandienthoai.Models;
-@model SanPham
+@model SanPham 
 @{
-    ViewBag.Title = "ChiTietSanPham";
+    ViewBag.Title = "Sản Phẩm";
     Layout = "~/Views/Shared/_Layout_chitietsp.cshtml";
 }
 @{
     IEnumerable<SanPham> tuongtu = (IEnumerable<SanPham>)ViewBag.sptuongtu;
+    decimal? deal = Model.DonGia;
+    decimal percent = 0;
+    if (Model.MaKhuyenMai != null)
+    {
+        if (DateTime.Now >= Model.KhuyenMai.NgayBatDau && DateTime.Now <= Model.KhuyenMai.NgayKetThuc)
+        {
+            percent = Model.KhuyenMai.PhanTramGiamGia;
+        }
+    }
+    decimal? price = deal - (deal * (percent / 100));
 }
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                    <li><a href="#">Sản Phẩm</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -60,22 +89,25 @@
                     <h2 class="product-name">@Model.TenSP</h2>
                     <div>
                         <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
+                            @Html.Raw(webbandienthoai.Models.Common.html_danhgia(Model.DanhGia))
                         </div>
-                        <a class="review-link" href="#">@Model.LuotXem Lượt xem</a>
+                        <a class="review-link" href="#">Sản phẩm còn @Model.SoLuongTon </a>|
+                        <a class="review-link" href="#">Đã bán @Model.SoLanMua</a>
                     </div>
                     <div>
-                        <h3 class="product-price">@string.Format("{0:N0} \u20ab", Model.DonGia) <del class="product-old-price"></del></h3>
+                        <h3 class="product-price">
+                            @string.Format("{0:N0} \u20ab", price)
+                            @if (price != deal)
+                            {
+                                <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
+                            }
+                        </h3>
                     </div>
                     <p>@Html.Raw(Model.MoTa)</p>
                     <div class="qty-label">
-                        Số Lượng
-                        <div class="input-number">
-                            <input type="number" class="qutity" value="1">
+                        <b>Số Lượng</b> 
+                        <div class="input-number" style="width: 85px; margin: 12px 0">
+                            <input type="number" class="qutity" value="1" readonly>
                             <span class="qty-up">+</span>
                             <span class="qty-down">-</span>
                         </div>
@@ -83,9 +115,7 @@
                     <div class="add-to-cart">
                         @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
                         {
-                            <a href="#" data-id="@Model.MaSP" data-url="@Request.Url.ToString()" class="aurl">
-                                <button class="add-to-cart-btn btnthemgiohang" data-id="@Model.MaSP" ><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
-                            </a>
+                            <button class="add-to-cart-btn btnthem" onclick="themgiohang(@Model.MaSP)"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
                         }
                         else
                         {
@@ -114,7 +144,9 @@
             <div id="tab1" class="tab-pane fade in active">
                 <div class="row">
                     <div class="col-md-12">
-                        <p style="text-align:center">@Html.Raw(Model.CauHinh)</p>
+                        <div class="text-center">
+                            <p>@Html.Raw(Model.CauHinh)</p>
+                        </div>
                     </div>
                 </div>
             </div><br />
@@ -122,11 +154,15 @@
             <!-- tab2  -->
             <div id="tab2" class="tab-pane fade in">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="a">
-                            <div class="fb-comments" data-href="@ViewBag.masp" data-width="100%" data-numposts="5"></div>
-                        </div>
-                    </div>
+                    <!-- Rating -->
+                    @Html.Action("tk_BinhLuan", "BinhLuan", new { @MaSP = Model.MaSP })
+                    <!-- /Rating -->
+                    <!-- Reviews -->
+                    @Html.Action("ds_BinhLuan", "BinhLuan", new { @MaSP = Model.MaSP })
+                    <!-- /Reviews -->
+                    <!-- Review Form -->
+                    @Html.Action("Form_BinhLuan", "BinhLuan", new { @MaSP = Model.MaSP })
+                    <!-- /Review Form -->
                 </div>
             </div><br />
             <!-- /tab2  -->
@@ -136,71 +172,35 @@
     </div>
 </div>
 <!-- /product tab -->
-<!-- /SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="section-title text-center">
-                    <h3 class="title">Sản Phẩm tương tự</h3>
-                </div>
-            </div>
-            @foreach (var item in tuongtu.Take(4))
-            {
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
-                            <div class="product-img">
-                                <img src="@Url.Content("~/Content/Images/Products/"+ item.HinhAnh)" alt="">
-                                <div class="product-label">
-                                    <span class="sale">-30%</span>
-                                    <span class="new">NEW</span>
-                                </div>
-                            </div>
-                        </a>
-                        <div class="product-body">
-                            <p class="product-category">@item.NhaSanXuat.TenNSX</p>
-                            <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
-                            <h4 class="product-price">@string.Format("{0:N0} \u20ab", item.DonGia)<del class="product-old-price"></del></h4>
-                            <div class="product-rating">
-                            </div>
-                            <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">yêu thích</span></button>
-                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">so sánh</span></button>
-                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">chi tiết</span></button>
-                            </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
-                        </div>
-                    </div>
-                </div>
-            }
-            <!-- /product -->
-
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<script>
-    $(document).ready(function () {
-        $(".btnthemgiohang").click(function (e) {
-            e.preventDefault();
-            var soluong = $(".qutity").val();
-            var id = $(".aurl").attr("data-id");
-            var url = $(".aurl").attr("data-url");
-            url = "@Url.Action("ThemGioHang", "GioHang")" + "?iMaSP=" + id + "&sl=" + soluong + "&Url=" + url;
-
-            window.location.href = url;
-        })
-    })
-</script>
+@Html.Action("SanPhamTuongTu", "SanPham", new {@id=Model.MaSP})
 <script>
     function redirectToLoginPage() {
         window.location.href = '@Url.Action("DangNhap", "Login")'; // Chuyển hướng đến trang đăng nhập
+    }
+</script>
+<script>
+    function themgiohang(iMaSP) {
+        var sl = $(".qutity").val();
+        console.log(sl);
+        $.ajax({
+            url: '@Url.Action("ThemGioHang", "GioHang")',
+            type: 'POST',
+            data: {
+                iMaSP: iMaSP,
+                sl: sl
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message); // Thông báo thành công
+                    window.location.reload();
+                } else {
+                    alert(response.message); // Thông báo lỗi
+                }
+            },
+            error: function (e) {
+                console.log(e);
+                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            }
+        });
     }
 </script>

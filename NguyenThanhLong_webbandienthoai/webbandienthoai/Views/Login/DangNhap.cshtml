@@ -28,7 +28,7 @@
 
 
 <body>
-    <h1>Material Login Form</h1>
+    <h1></h1>
     <div class=" w3l-login-form">
         <h2>Đăng Nhập</h2>
         @using (Ajax.BeginForm("DangNhap", "Login", FormMethod.Post, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "message" }, new { @class = "signin-form" }))
@@ -45,9 +45,10 @@
                 <label>Mật Khẩu:</label>
                 <div class="group">
                     <i class="fas fa-unlock"></i>
-                    @Html.PasswordFor(model => model.MatKhau, new{@id = "password",@placeholder = "Mật khẩu", required = "",oninput = "checkPasswordLength()" })
+                    @Html.PasswordFor(model => model.MatKhau, new{@id = "password",@placeholder = "Mật khẩu", @required = "",oninput = "checkPasswordLength()" })
                 </div>
             </div>
+            <p style="color:red">@ViewBag.Loi</p>
             <div class="forgot">
                 <a href="#">Quên mật khẩu?</a>
                 <p><input type="checkbox">Ghi nhớ tài khoản</p>
@@ -69,4 +70,10 @@
             passwordField.setCustomValidity('');
         }
     }
+</script>
+<script>
+        var dktc = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["dktc"]))';// HttpUtility.JavascriptStringEncode để đảm báo mã hóa chuỗi an toàn khi dùng các ký tự đặc biệt
+        if (dktc) {
+            alert(dktc);
+        }
 </script>

@@ -1,0 +1,43 @@
+﻿@using webbandienthoai.Models;
+@model PhieuNhap
+@{
+    ViewBag.Title = "ChiTietPN";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    var index = 1;
+}
+
+@using (Html.BeginForm())
+{
+    var lstpn = ViewBag.lstpn as IEnumerable<ChiTietPhieuNhap>;
+    <div class="col-md-12" style="margin: 20px 0">
+        @Html.Hidden("MaPN", Model.MaPN)
+        <h3 class="col-md-6">Nhà Cung Cấp: <b>@Model.NhaCungCap.TenNCC</b></h3>
+        <h3 class="col-md-6">Ngày Nhập Hàng: <b>@Model.NgayNhap.ToString("dd/MM/yyyy")</b></h3>
+    </div>
+    <div class="clearfix"></div>
+    <div class="ThongTinPhieuNhap">
+        <table class="table table-bordered">
+            <tr>
+                <th>STT</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Đơn giá nhập</th>
+                <th>Số lượng nhập</th>
+            </tr>
+            @foreach (var item in lstpn)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@item.SanPham.TenSP</td>
+                    <td>@item.DonGiaNhap.ToString("#,##") đ</td>
+                    <td>@item.SoLuongNhap</td>
+
+                </tr>
+                index++;
+            }
+        </table>
+    </div>
+    <div class="btnquaylai">
+        @Html.ActionLink("Quay Lại", "PhieuNhapHang", "ThongKe", new { @class = "btn btn-danger" })
+        <input type="submit" value="Xóa" class="btn btn-success"/>
+    </div>
+}

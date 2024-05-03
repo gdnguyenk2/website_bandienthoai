@@ -24,7 +24,7 @@ namespace webbandienthoai.Models
         public Nullable<int> MaKH { get; set; }
         public System.DateTime NgayDatHang { get; set; }
         public Nullable<System.DateTime> NgayGiao { get; set; }
-        public bool DaThanhToan { get; set; }
+        public string DaThanhToan { get; set; }
         public string QuaTang { get; set; }
         public string TinhTrang { get; set; }
         public Nullable<bool> DaXoa { get; set; }

@@ -1,13 +1,37 @@
 ﻿@using webbandienthoai.Models
 @model List<GioHangItem>
 @{
-    ViewBag.Title = "XemGioHang"; 
+    ViewBag.Title = "XemGioHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{ 
+@{
     ThanhVien thanhvien = Session["TaiKhoans"] as ThanhVien;
 }
 <style>
+    .contact .tittle {
+        font-size: 2.5em;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+        .contact .tittle .heading-style {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+            .contact .tittle .heading-style i {
+                display: block;
+                width: 30px;
+                height: 2px;
+                background: #000;
+                margin: 0 10px;
+                position: relative;
+            }
+
     .all {
         width: 80%;
         height: auto;
@@ -29,6 +53,7 @@
     .kichthuoc {
         width: 100%;
     }
+
     .btt {
         display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
         justify-content: flex-end; /* Căn nút về phía bên phải */
@@ -39,6 +64,35 @@
             margin-right: 10px; /* Khoảng cách giữa nút "Đặt Hàng" và nút "Mua Tiếp" */
         }
 </style>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                    <li><a href="#" class="active">Giỏ Hàng</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<div class="contact">
+    <h3 class="tittle col-md-12">
+        Giỏ Hàng
+        <span class="heading-style">
+            <i></i>
+            <i></i>
+            <i></i>
+        </span>
+    </h3>
+</div>
+<div class="clearfix"></div>
 <div class="all">
     @if (Model == null || Model.Count == 0)
     {
@@ -65,18 +119,18 @@
                     <td>@item.SoLuong</td>
                     <td>@item.ThanhTien.ToString("#,##") đ</td>
                     <td>
-                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })
-                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })
+                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP }, new { style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })
+                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP }, new { style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" })
                     </td>
 
                 </tr>
             }
             <tr>
-                <td colspan="6" style="text-align:right">Tổng Tiền: @ViewBag.TongThanhTien</td>
+                <td colspan="6" style="text-align:right">Tổng Tiền: @ViewBag.TongThanhTien.ToString("#,##") đ</td>
             </tr>
 
         </table>
-        using (Html.BeginForm("DatHang", "GioHang"))
+        using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post, new { @id = "ktdathang", onsubmit = "return validateForm();" }))
         {
             if (Session["TaiKhoans"] == null)
             {
@@ -117,7 +171,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>@Html.Hidden("MaTV",1)</td>
+                            <td>@Html.Hidden("MaTV", 1)</td>
                         </tr>
                     </table>
                 </div>
@@ -132,7 +186,8 @@
                         </tr>
                         <tr>
                             <td style="text-align:right">Họ tên</td>
-                            <td>@Html.TextBox("TenKH", thanhvien.HoTen, new { @class = "kichthuoc", @readonly = "readonly" })</td>
+                            <td>@Html.TextBox("TenKH", thanhvien.HoTen, new { @class = "kichthuoc" })
+                                <p style="color:red" id="tbtenkh"></p></td>
                         </tr>
                         <tr>
                             <td style="text-align:right">Địa chỉ</td>
@@ -144,52 +199,85 @@
                         <tr>
                             <td style="text-align:right">Email</td>
                             <td>
-                                @Html.TextBox("Email", thanhvien.Email, new { @class = "kichthuoc", @readonly = "readonly" })
+                                @Html.TextBox("Email", thanhvien.Email, new { @class = "kichthuoc" })
+                                <p style="color:red" id="ktemail"></p>
+
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align:right">Điện thoại</td>
-                            <td>@Html.TextBox("SoDienThoai", thanhvien.SoDienThoai, new { @class = "kichthuoc", @readonly = "readonly" })</td>
+                            <td>@Html.TextBox("SoDienThoai", thanhvien.SoDienThoai, new { @class = "kichthuoc"})
+                                <p style="color:red" id="tbdienthoai"></p></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">Phương thức thanh toán</td>
+                            <td>
+                                <select name="DaThanhToan" class="thanhtoan" style="width:100%">
+                                    <option value="Thanh Toán Khi Nhận Hàng">Thanh Toán Khi Nhận Hàng</option>
+                                    <option value="Thanh Toán VNPAY">Thanh toán VNPAY</option>
+                                </select>
+                            </td>
                         </tr>
                     </table>
                 </div>
             }
             <div class="btt">
-                <input type="submit" value="Đặt Hàng" class="btn btn-danger dat" onclick="return validateForm();"/>
+                <input type="submit" value="Đặt Hàng" class="btn btn-danger dat" />
                 <a href="@Url.Action("Index","Home")" class="btn btn-success">Mua Tiếp</a>
             </div>
         }
     }
 </div>
-@*Kiểm tra validation thông qua jquery*@
 <script>
     function validateForm() {
         var tenKH = document.getElementById('TenKH').value;
         var diaChi = document.getElementById('DiaChi').value;
         var email = document.getElementById('Email').value;
         var soDienThoai = document.getElementById('SoDienThoai').value;
-
+        var kt = true;
         // Kiểm tra điều kiện nhập liệu ở đây
         if (tenKH == "") {
             document.getElementById('tbtenkh').innerText = "Vui lòng nhập họ tên.";
-            return false;
+            kt=false;
+        }
+        else {
+            document.getElementById("tbtenkh").innerText = "";
         }
         if (diaChi == "") {
             document.getElementById('tbdiachi').innerText = "Vui lòng nhập địa chỉ.";
-            return false;
+            kt = false;
+        }
+        else {
+            document.getElementById("tbdiachi").innerText = "";
         }
         var dinhDang = /^[A-Za-z0-9._%+-]+\@@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
         var ktMail = dinhDang.test(email);
         if (!ktMail) {
             document.getElementById("ktemail").innerText = "Email không hợp lệ";
-            return false;
+            kt = false;
         }
+        else {
+            document.getElementById("ktemail").innerText = "";
+        }
+        var phoneRegex = /^\d+$/;
         if (soDienThoai == "") {
             document.getElementById("tbdienthoai").innerText = "Vui lòng nhập số điện thoại!";
-            return false;
+            kt = false;
         }
-        return true   
+        else if (!phoneRegex.test(soDienThoai)) {
+            document.getElementById("tbdienthoai").innerText = "Số điện thoại phải là số!";
+            kt = false;
+        }
+        else if (soDienThoai.length < 10) {
+            document.getElementById("tbdienthoai").innerText = "Số điện thoại phải ít nhất 10 số";
+            kt = false;
+        }
+        else {
+            document.getElementById("tbdienthoai").innerText = "";
+        }
+        return kt;
     }
 </script>
+
 
 

@@ -17,6 +17,8 @@ namespace webbandienthoai.Models
         public int MaBinhLuan { get; set; }
         public int MaTV { get; set; }
         public int MaSP { get; set; }
+        public int DanhGia { get; set; }
+        public System.DateTime NgayBL { get; set; }
         public string NoiDungBL { get; set; }
     
         public virtual SanPham SanPham { get; set; }

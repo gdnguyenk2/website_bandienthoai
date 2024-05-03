@@ -1,0 +1,48 @@
+﻿@model webbandienthoai.Models.QuangCao
+
+@{
+    ViewBag.Title = "Xóa Quang Cao";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<h2>Quản Lý Quảng Cáo/Xóa Quảng Cáo</h2>
+
+@using (Html.BeginForm("XoaQC", "QuanLyQuangCao", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Xóa Quảng Cáo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("MaQuangCao",Model.MaQuangCao)
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenQC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenQC, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(row => row.HinhAnh, new { @class = "form-control", @disabled = "disabled" })
+                <br />
+                <img src="@Url.Content("~/Content/Images/Banners/" + Model.HinhAnh)" alt="Alternate Text" style="width:100px;height:70px;" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgayCapNhat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(row => row.NgayCapNhat, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", @disabled = "disabled" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="@Url.Action("Index", "QuanLyQuangCao")" class="btn btn-danger">Quay lại</a>
+                <input type="submit" value="Xóa" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

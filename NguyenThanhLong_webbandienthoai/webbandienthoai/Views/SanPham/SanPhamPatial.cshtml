@@ -36,15 +36,46 @@
                                     decimal? price = deal - (deal * (percent / 100));
 
                                     <div class="product">
-                                        <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
-                                            <div class="product-img">
-                                                <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="">
-                                                <div class="product-label">
-                                                    <span class="sale">@percent%</span>
-                                                    <span class="new">NEW</span>
+                                        @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
+                                        {
+                                            <a href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.MaSP })">
+                                                <div class="product-img">
+                                                    <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="">
+                                                    <div class="product-label">
+                                                        @if (percent != 0)
+                                                        {
+                                                            <span class="sale">@percent%</span>
+                                                        }
+                                                        @if (item.Moi == true)
+                                                        {
+                                                            <span class="new">NEW</span>
+                                                        }
+
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("DangNhap", "Login")">
+                                                <div class="product-img">
+                                                    <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="">
+                                                    <div class="product-label">
+                                                        @if (percent != 0)
+                                                        {
+                                                            <span class="sale">@percent%</span>
+                                                        }
+                                                        @if (item.Moi == true)
+                                                        {
+                                                            <span class="new">NEW</span>
+                                                        }
+
+
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        }
                                         <div class="product-body">
                                             <p class="product-category">@item.NhaSanXuat.TenNSX</p>
                                             <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
@@ -56,11 +87,7 @@
                                                 }
                                             </h4>
                                             <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                @Html.Raw(webbandienthoai.Models.Common.html_danhgia(item.DanhGia))
                                             </div>
                                             <div class="product-btns">
                                                 <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm Vào Yêu Thích</span></button>
@@ -71,13 +98,13 @@
                                         <div class="add-to-cart">
                                             @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
                                             {
-                                                <a href="@Url.Action("ThemGioHang", "GioHang", new { @iMaSP = item.MaSP, @sl = 1, @Url = Request.Url.ToString() })">
-                                                    <button class="add-to-cart-btn btnthem"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
-                                                </a>
+                                                
+                                                  <button class="add-to-cart-btn btnthem" onclick="themgiohang(@item.MaSP)"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                                
                                             }
                                             else
                                             {
-                                                <button class="add-to-cart-btn btnthem" onclick="redirectToLoginPage()"><i class="fa fa-shopping-cart" ></i> Thêm Vào Giỏ Hàng</button>
+                                                <button class="add-to-cart-btn btnthem" onclick="redirectToLoginPage()"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
                                             }
                                         </div>
                                     </div>
@@ -101,4 +128,26 @@
         window.location.href = '@Url.Action("DangNhap", "Login")'; // Chuyển hướng đến trang đăng nhập
     }
 </script>
-
+<script>
+    function themgiohang(iMaSP) {
+        $.ajax({
+            url: '@Url.Action("ThemGioHang", "GioHang")',
+            type: 'POST',
+            data: {
+                iMaSP: iMaSP,
+                sl: 1
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message); // Thông báo thành công
+                    window.location.reload();
+                } else {
+                    alert(response.message); // Thông báo lỗi
+                }
+            },
+            error: function() {
+                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            }
+        });
+    }
+</script>

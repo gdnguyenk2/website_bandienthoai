@@ -12,14 +12,14 @@
     <!-- meta data -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Đăn ký" />
+    <meta name="keywords" content="Đăng ký" />
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //meta data -->
     <link href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700&amp;subset=cyrillic,latin-ext,vietnamese" rel="stylesheet">
     <!-- css files -->
-    <link href="~/Content_Admin/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="@Url.Content("~/Content_Admin/css/style.css")" type="text/css" rel="stylesheet" media="all">
     <!-- //css files -->
     <link href="~/Content_Admin/css/fontawesome-all.css" rel="stylesheet" />
     <style>
@@ -67,65 +67,66 @@
                         @using (Html.BeginForm("DangKy", "Register", FormMethod.Post, new { @id = "registerForm" }))
                         {
                             @Html.AntiForgeryToken()
-                        <div class="fields-grid">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="styled-input agile-styled-input-top">
-                                @Html.TextBoxFor(model => model.TaiKhoan, new { required = "" })
-                                <label>
-                                    <i class="fa fa-user"></i> @Html.DisplayNameFor(model => model.TaiKhoan)
-                                </label>
-                                @*@Html.LabelFor(model => model.TaiKhoan, "Tài khoản")*@
-                                <span></span>
+                            <div class="fields-grid">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.Hidden("MaLoaiTV",2)
+                                <div class="styled-input agile-styled-input-top">
+                                    @Html.TextBoxFor(model => model.TaiKhoan, new { required = "" })
+                                    <label>
+                                        <i class="fa fa-user"></i> @Html.DisplayNameFor(model => model.TaiKhoan)
+                                    </label>
+                                    <p id="errorTaiKhoan" style="color: red;"></p>
+                                    @*@Html.LabelFor(model => model.TaiKhoan, "Tài khoản")*@
+                                </div>
+                                <div class="styled-input">
+                                    @Html.TextBoxFor(model => model.HoTen, new { required = "" })
+                                    <label>
+                                        <i class="fa fa fa-address-card"></i> @Html.DisplayNameFor(model => model.HoTen)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.HoTen, "Họ và tên")*@
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.TextBoxFor(model => model.Email, new { required = "", oninput = "validateEmail()" })
+                                    <label>
+                                        <i class="fa fa-envelope"></i> @Html.DisplayNameFor(model => model.Email)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.Email, "Email")*@
+                                    <p id="errorEmail" style="color: red;"></p>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.PasswordFor(model => model.MatKhau, new { @id = "password", required = "", oninput = "checkPasswordLength()" })
+                                    <label>
+                                        <i class="fa fa-lock"></i> @Html.DisplayNameFor(model => model.MatKhau)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.MatKhau, "Mật khẩu")*@
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.PasswordFor(model => model.MatKhau, new { @id = "confirmPassword", required = "", oninput = "checkPasswordMatch()" })
+                                    <label>
+                                        <i class="fa fa-lock"></i> Nhập lại mật khẩu
+                                    </label>
+                                    @*@Html.LabelFor(model => model.MatKhau, "Nhập lại mật khẩu")*@
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.TextBoxFor(model => model.SoDienThoai, new { @id = "phone", required = "", oninput = "checkPhoneNumberLength()" })
+                                    <label>
+                                        <i class="fa fa-phone"></i> @Html.DisplayNameFor(model => model.SoDienThoai)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.SoDienThoai, "Số điện thoại")*@
+                                    <span></span>
+                                </div>
+                                <div class="clear"> </div>
+                                <div>
+                                    @Html.Captcha("Làm mới", "Nhập mã", 5)
+                                </div>
+                                <div class="clear"> </div>
+                                <label class="checkbox"><input id="agreeCheckbox" style="margin-left: 0px; -webkit-appearance: auto; position: relative " type="checkbox" name="checkbox"><i></i>Tôi đồng ý với các <a href="#">Điều khoản dịch vụ</a></label>
                             </div>
-                            <div class="styled-input">
-                                @Html.TextBoxFor(model => model.HoTen, new { required = "" })
-                                <label>
-                                    <i class="fa fa fa-address-card"></i> @Html.DisplayNameFor(model => model.HoTen)
-                                </label>
-                                @*@Html.LabelFor(model => model.HoTen, "Họ và tên")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.TextBoxFor(model => model.Email, new { @id = "email", required = "", oninput = "validateEmail()" })
-                                <label>
-                                    <i class="fa fa-envelope"></i> @Html.DisplayNameFor(model => model.Email)
-                                </label>
-                                @*@Html.LabelFor(model => model.Email, "Email")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.PasswordFor(model => model.MatKhau, new { @id = "password", required = "", oninput = "checkPasswordLength();" })
-                                <label>
-                                    <i class="fa fa-lock"></i> @Html.DisplayNameFor(model => model.MatKhau)
-                                </label>
-                                @*@Html.LabelFor(model => model.MatKhau, "Mật khẩu")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.PasswordFor(model => model.MatKhau, new { @id = "confirmPassword", required = "", oninput = "checkPasswordMatch()" })
-                                <label>
-                                    <i class="fa fa-lock"></i> Nhập lại mật khẩu
-                                </label>
-                                @*@Html.LabelFor(model => model.MatKhau, "Nhập lại mật khẩu")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.TextBoxFor(model => model.SoDienThoai, new { @id = "phone", required = "", oninput = "checkPhoneNumberLength()" })
-                                <label>
-                                    <i class="fa fa-phone"></i> @Html.DisplayNameFor(model => model.SoDienThoai)
-                                </label>
-                                @*@Html.LabelFor(model => model.SoDienThoai, "Số điện thoại")*@
-                                <span></span>
-                            </div>
-                            <div class="clear"> </div>
-                            <div>
-                                @Html.Captcha("Làm mới", "Nhập mã", 5)
-                            </div>
-                            <div class="clear"> </div>
-                            <label class="checkbox"><input id="agreeCheckbox" style="margin-left: 0px; -webkit-appearance: auto; position: relative " type="checkbox" name="checkbox"><i></i>Tôi đồng ý với các <a href="#">Điều khoản dịch vụ</a></label>
-                        </div>
                             <div style="display: flex; justify-content: center">
-                                <input class=".register-button" type="submit" value="Đăng ký">
+                                <input class="register-button" type="submit" value="Đăng ký">
                             </div>
                         }
                     </div>
@@ -154,11 +155,16 @@
 <script>
     function checkPhoneNumberLength() {
         var phoneField = document.getElementById('phone');
-        var phoneNumber = phoneField.value.replace(/\D/g, ''); // Remove non-digit characters
+        var phoneNumber = phoneField.value;
+        var phoneRegex = /^\d+$/;
 
-        if (phoneNumber.length < 10) {
+        if (!phoneRegex.test(phoneNumber)) {
+            phoneField.setCustomValidity('Số điện thoại phải là số');
+        }
+        else if (phoneNumber.length < 10) {
             phoneField.setCustomValidity('Số điện thoại phải chứa ít nhất 10 chữ số.');
-        } else {
+        }
+        else {
             phoneField.setCustomValidity('');
         }
     }
@@ -166,7 +172,7 @@
 
 <script>
     function validateEmail() {
-        var emailField = document.getElementById('email');
+        var emailField = document.getElementById('Email');
         var email = emailField.value;
         var emailRegex = /^[A-Za-z0-9._%+-]+\@@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
 
@@ -221,3 +227,49 @@
     // Gọi hàm validateForm() khi biểu mẫu được gửi đi
     document.querySelector('form').addEventListener('submit', validateForm);
 </script>
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#TaiKhoan").blur(function () {
+            var laygt = $(this).val(); // Lấy giá trị từ textbox
+            if (laygt) {
+                $.ajax({
+                    url: "/Register/KTTaiKhoan", // Thay đổi đường dẫn và tên controller của bạn
+                    data: { username: laygt },
+                    type: "GET",
+                    success: function (result) {
+                        if (result) {
+                            $("#errorTaiKhoan").text('Tên tài khoản đã tồn tại');
+                        }
+                        else {
+                            $("#errorTaiKhoan").text('');
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#Email").blur(function () {
+            var laygt = $(this).val(); // Lấy giá trị từ textbox
+            if (laygt) {
+                $.ajax({
+                    url: "/Register/KTEmail", // Thay đổi đường dẫn và tên controller của bạn
+                    data: { email: laygt },
+                    type: "GET",
+                    success: function (result) {
+                        if (result) {
+                            $("#errorEmail").text('Email đã tồn tại');
+                        }
+                        else {
+                            $("#errorEmail").text('');
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
