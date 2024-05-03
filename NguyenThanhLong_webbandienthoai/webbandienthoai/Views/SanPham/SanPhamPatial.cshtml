@@ -40,8 +40,14 @@
                                             <div class="product-img">
                                                 <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="">
                                                 <div class="product-label">
-                                                    <span class="sale">@percent%</span>
-                                                    <span class="new">NEW</span>
+                                                    @if (percent != 0)
+                                                    {
+                                                        <span class="sale">@percent%</span>
+                                                    }
+                                                    @if (item.Moi == true)
+                                                    {
+                                                        <span class="new">NEW</span>
+                                                    }
                                                 </div>
                                             </div>
                                         </a>

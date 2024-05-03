@@ -27,7 +27,9 @@
         font-size: 16px;
         padding: 5px 10px;
     }
-
+    .Table {
+        width: 100%;
+    }
     .Header {
         background-color: #e6dada;
     }
@@ -38,12 +40,15 @@
     }
 
     .nav li {
-        width: 49.88%;
+        width: 33.2%;
         text-align: center;
     }
 </style>
+<h2 style="margin:10px 0">Quản Lý Đơn Hàng</h2>
+<div class="clear"></div>
 <ul class="nav nav-pills" style="background-color:aqua; width:100%">
-    <li role="presentation"><a href="@Url.Action("ChuaGiao","QuanLyDonHang")">Chưa Giao Hàng</a></li>
+    <li role="presentation"><a href="@Url.Action("PheDuyet","QuanLyDonHang")">Duyệt Đơn Hàng</a></li>
+    <li role="presentation"><a href="@Url.Action("ChuaGiao","QuanLyDonHang")">Đang Giao Hàng</a></li>
     <li role="presentation" class="active"><a href="@Url.Action("DaGiaoDaThanhToan","QuanLyDonHang")">Đã Giao Và Thanh Toán</a></li>
 </ul>
 <br />

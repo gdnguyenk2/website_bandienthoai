@@ -1,7 +1,7 @@
 ﻿@using webbandienthoai.Models;
 @model SanPham
 @{
-    ViewBag.Title = "NhapHangDon";
+    ViewBag.Title = "Đơn hàng sắp hết";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
@@ -17,7 +17,7 @@
     });
 </script>
 <div class="col-md-12">
-    <h1>Sản Phẩm: <b>@Model.TenSP</b></h1>
+    <h1>Sản Phẩm:  <b>@Model.TenSP</b></h1>
 </div>
 <br />
 <br />
@@ -32,7 +32,9 @@
         <h2>Số Lượng Tồn: @Model.SoLuongTon</h2>
     </div>
 </div>
-<br /><br /><br />
+<br />
+<br />
+<br />
 <div class="row">
     <h3>Thông tin nhập hàng</h3>
 </div>
@@ -40,7 +42,7 @@
 @using (Html.BeginForm("NhapHangDon", "NhapHang"))
 {
     <div class="row">
-        @Html.Hidden("MaSP",Model.MaSP)
+        @Html.Hidden("MaSP", Model.MaSP)
         <div class="col-md-3">
             @{ var lstNCC = (SelectList)ViewBag.MaNCC;}
             Nhà cung cấp:@Html.DropDownList("MaNCC", lstNCC, new { @class = "MaNCC" })
@@ -49,7 +51,7 @@
             Số lượng nhập:@Html.TextBox("SoLuongNhap", 0, new { @class = "txtSoLuong" })
         </div>
         <div class="col-md-3">
-            Đơn giá nhập:@Html.TextBox("DonGiaNhap", 0, new {@class="txtDonGia"})
+            Đơn giá nhập:@Html.TextBox("DonGiaNhap", 0, new { @class = "txtDonGia" })
         </div>
         <div class="col-md-3">
             Ngày nhập:@Html.TextBox("NgayNhap", "", new { @class = "datepicker" })
@@ -57,7 +59,7 @@
     </div>
     <br />
     <div class="col-md-12">
-        <input type="submit" id="btnNhapHang" class="btn btn-primary" value="Nhập Hàng"/>
+        <input type="submit" id="btnNhapHang" class="btn btn-primary" value="Nhập Hàng" />
     </div>
 }
 <script>
@@ -73,22 +75,22 @@
 
     function kiemtranhapdongia() {
         var bl = true;
-            var giatri = $(".txtDonGia").val();
-            if (isNaN(giatri) == true || parseInt(giatri) < 0) {
-                alert("Đơn giá nhập không hợp lệ");
-                bl = false;
-                return bl;
-            }
+        var giatri = $(".txtDonGia").val();
+        if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+            alert("Đơn giá nhập không hợp lệ");
+            bl = false;
+            return bl;
+        }
         return bl;
     }
     function kiemtranhapsoluong() {
         var bl = true;
-            var giatri = $(".txtSoLuong").val();
-            if (isNaN(giatri) == true || parseInt(giatri) < 0) {
-                alert("Số lượng nhập không hợp lệ");
-                bl = false;
-                return bl;
-            }
+        var giatri = $(".txtSoLuong").val();
+        if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+            alert("Số lượng nhập không hợp lệ");
+            bl = false;
+            return bl;
+        }
         return bl;
     }
 </script>

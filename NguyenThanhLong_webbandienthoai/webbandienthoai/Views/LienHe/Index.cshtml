@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    /* Phần tiêu đề "Liên hệ chúng tôi" */
+    .contact .tittle {
+        font-size: 2.5em;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+        .contact .tittle .heading-style {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+            .contact .tittle .heading-style i {
+                display: block;
+                width: 30px;
+                height: 2px;
+                background: #000;
+                margin: 0 10px;
+                position: relative;
+            }
+
+    /* Phần form liên hệ */
+    .contact {
+        font-size: 16px;
+    }
+
+    .contact .contact-form {
+        margin-top: 50px;
+        background: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+        .contact .contact-form input[type="text"],
+        .contact .contact-form input[type="email"],
+        .contact .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .contact .contact-form textarea {
+            width: 100%;
+            height: 190px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .contact .contact-form input[type="submit"] {
+            background: #ff6a00;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .contact .contact-form input[type="submit"]:hover {
+                background: #b53014;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+    .contact .contact-right {
+        margin-top: 50px;
+    }
+
+        .contact .contact-right .contact-text {
+            padding-left: 0;
+        }
+
+            .contact .contact-right .contact-text p {
+                margin-bottom: 15px;
+            }
+
+                .contact .contact-right .contact-text p i {
+                    margin-right: 10px;
+                    color: red;
+                }
+
+        .contact .contact-right img {
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+</style>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                    <li><a href="#" class="active">Liên Hệ</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<div class="contact">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle">
+            Liên hệ chúng tôi
+            <span class="heading-style">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </h3>
+        <!-- //tittle heading -->
+        <!-- contact -->
+        <div class="contact agileits">
+            <div class="contact-agileinfo">
+                <div class="contact-form wthree">
+                    <form action="#" method="post">
+                        <div class="">
+                            <input type="text" name="name" placeholder="Tên" required="">
+                        </div>
+                        <div class="">
+                            <input class="text" type="text" name="subject" placeholder="Chủ đề" required="">
+                        </div>
+                        <div class="">
+                            <input class="email" type="email" name="email" placeholder="Email" required="">
+                        </div>
+                        <div class="">
+                            <textarea placeholder="Thông tin" name="message" required=""></textarea>
+                        </div>
+                        <input type="submit" value="Gửi">
+                    </form>
+                </div>
+                <div class="contact-right wthree">
+                    <div class="col-xs-7 contact-text w3-agileits">
+                        <h3>Liên lạc:</h3>
+                        <p>
+                            <i class="fa fa-map-marker"></i>Xã An Tân - Huyện Thái Thụy - Tỉnh Thái Bình
+                        </p>
+                        <p>
+                            <i class="fa fa-phone"></i> Số điện thoại : 0396671002
+                        </p>
+                        <p>
+                            <i class="fa fa-fax"></i> FAX : +84 (8) 3979 3979
+                        </p>
+                        <p>
+                            <i class="fa fa-envelope-o"></i> Email :
+                            <a href="dragonphone17@gmail.com">dragonphone17@gmail.com</a>
+                        </p>
+                    </div>
+                    <div class="col-xs-5 contact-agile">
+                        <img src="@Url.Content("~/Content/Images/Downloads/contact2.jpg")" alt="">
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!-- //contact -->
+    </div>
+</div>
+

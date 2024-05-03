@@ -1,0 +1,58 @@
+﻿@using webbandienthoai.Models
+@model DonDatHang
+@{
+    ViewBag.Title = "Hoàn thành đơn hàng";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<h2>Thông tin đơn hàng<font color="red">@Model.KhachHang.TenKH</font></h2>
+<br />
+<br />
+@using (Html.BeginForm())
+{
+    <div class="table ChiTietDonHang">
+        @{ IEnumerable<ChiTietDonDatHang> lstChiTietDH = ViewBag.ctdh as IEnumerable<ChiTietDonDatHang>;}
+        <table class="table" id="table">
+            <tr>
+                <td colspan="4">
+                    <table style="width:100%">
+                        <tr>
+                            <td>Mã đơn hàng:<b style="color:red">@Model.MaDDH @Html.Hidden("MaDDH", Model.MaDDH)</b></td>
+                            <td>Mã khách hàng:<b style="color:red">@Model.MaKH</b></td>
+                            <td>Tên khách hàng:<b style="color:red">@Model.KhachHang.TenKH</b></td>
+                            <td>Ngày Đặt:@Model.NgayDatHang.ToString("dd/MM/yyyy")</td>
+                            <td>Đã Thanh toán:@ViewBag.DaThanhToan</td>
+                            <td>Tình Trạng giao:@ViewBag.TinhTrang</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            @*Thông tin chi tiết đơn hàng*@
+            <tr>
+                <td><b>Sản phẩm</b></td>
+                <td><b>Hình ảnh</b></td>
+                <td><b>Số lượng đặt</b></td>
+                <td><b>Đơn giá đặt</b></td>
+            </tr>
+            @foreach (var item in lstChiTietDH)
+            {
+                <tr>
+                    <td>@item.SanPham.TenSP</td>
+                    <td><img src="@Url.Content("~/Content/Images/Products/" + item.SanPham.HinhAnh)" style="width:120px;height:100px" /></td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.DonGia</td>
+
+                </tr>
+            }
+            <tr>
+                <td align="right" colspan="4">Tổng số lượng: @Model.ChiTietDonDatHangs.Sum(n => n.SoLuong)</td>
+            </tr>
+            <tr>
+                <td align="right" colspan="4">Tổng tiền: @Model.ChiTietDonDatHangs.Sum(n => n.SoLuong * n.SanPham.DonGia).Value.ToString("#,##")</td>
+            </tr>
+        </table>
+        <br /><br />
+        @Html.ActionLink("Quay Lại", "ChuaGiao", "QuanLyDonHang", new { @class = "btn btn-success" })
+        <input type="submit" value="Hoàn Thành Đơn" id="btnInDonHang" class="btn btn-primary" />
+    </div>
+}

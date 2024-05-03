@@ -28,7 +28,7 @@
 
 
 <body>
-    <h1>Material Login Form</h1>
+    <h1></h1>
     <div class=" w3l-login-form">
         <h2>Đăng Nhập</h2>
         @using (Ajax.BeginForm("DangNhap", "Login", FormMethod.Post, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "message" }, new { @class = "signin-form" }))
@@ -45,7 +45,7 @@
                 <label>Mật Khẩu:</label>
                 <div class="group">
                     <i class="fas fa-unlock"></i>
-                    @Html.PasswordFor(model => model.MatKhau, new{@id = "password",@placeholder = "Mật khẩu", required = "",oninput = "checkPasswordLength()" })
+                    @Html.PasswordFor(model => model.MatKhau, new{@id = "password",@placeholder = "Mật khẩu", @required = "",oninput = "checkPasswordLength()" })
                 </div>
             </div>
             <div class="forgot">

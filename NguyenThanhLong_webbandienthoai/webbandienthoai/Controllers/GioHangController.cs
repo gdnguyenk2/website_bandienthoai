@@ -250,7 +250,7 @@ namespace webbandienthoai.Controllers
         [HttpPost]
         public ActionResult DatHang(KhachHang kh)
         {
-            //Kiểm tra session giỏ hàng tồn tại chưa
+            
             if (LayGioHang() == null)
             {
                 return RedirectToAction("Index", "Home");
@@ -261,14 +261,14 @@ namespace webbandienthoai.Controllers
             khang.DiaChi = kh.DiaChi;
             khang.Email=tv.Email;
             khang.SoDienThoai = tv.SoDienThoai;
-            khang.MaTV = tv.MaLoaiTV;
+            khang.MaTV = tv.MaTV;
             db.KhachHangs.Add(khang);
             db.SaveChanges();
             //Thêm đơn hàng
             DonDatHang ddh = new DonDatHang();
             ddh.MaKH = khang.MaKH;
             ddh.NgayDatHang=DateTime.Now;
-            ddh.TinhTrang = "Chưa giao hàng";
+            ddh.TinhTrang = "Chưa phê duyệt";
             ddh.DaThanhToan = false;
             ddh.QuaTang = "không";
             ddh.DaXoa = false;

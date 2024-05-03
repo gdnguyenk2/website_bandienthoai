@@ -1,13 +1,32 @@
 ﻿@using webbandienthoai.Models;
 @model SanPham
 @{
-    ViewBag.Title = "ChiTietSanPham";
+    ViewBag.Title = "Sản Phẩm";
     Layout = "~/Views/Shared/_Layout_chitietsp.cshtml";
 }
 @{
     IEnumerable<SanPham> tuongtu = (IEnumerable<SanPham>)ViewBag.sptuongtu;
 }
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                    <li><a href="#">Sản Phẩm</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -84,7 +103,7 @@
                         @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
                         {
                             <a href="#" data-id="@Model.MaSP" data-url="@Request.Url.ToString()" class="aurl">
-                                <button class="add-to-cart-btn btnthemgiohang" data-id="@Model.MaSP" ><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
+                                <button class="add-to-cart-btn btnthemgiohang" data-id="@Model.MaSP"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
                             </a>
                         }
                         else

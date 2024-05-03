@@ -1,13 +1,37 @@
 ﻿@using webbandienthoai.Models
 @model List<GioHangItem>
 @{
-    ViewBag.Title = "XemGioHang"; 
+    ViewBag.Title = "XemGioHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{ 
+@{
     ThanhVien thanhvien = Session["TaiKhoans"] as ThanhVien;
 }
 <style>
+    .contact .tittle {
+        font-size: 2.5em;
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+        .contact .tittle .heading-style {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+            .contact .tittle .heading-style i {
+                display: block;
+                width: 30px;
+                height: 2px;
+                background: #000;
+                margin: 0 10px;
+                position: relative;
+            }
+
     .all {
         width: 80%;
         height: auto;
@@ -29,6 +53,7 @@
     .kichthuoc {
         width: 100%;
     }
+
     .btt {
         display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
         justify-content: flex-end; /* Căn nút về phía bên phải */
@@ -39,6 +64,35 @@
             margin-right: 10px; /* Khoảng cách giữa nút "Đặt Hàng" và nút "Mua Tiếp" */
         }
 </style>
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                    <li><a href="#" class="active">Giỏ Hàng</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<div class="contact">
+    <h3 class="tittle col-md-12">
+        Giỏ Hàng
+        <span class="heading-style">
+            <i></i>
+            <i></i>
+            <i></i>
+        </span>
+    </h3>
+</div>
+<div class="clearfix"></div>
 <div class="all">
     @if (Model == null || Model.Count == 0)
     {
@@ -117,7 +171,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>@Html.Hidden("MaTV",1)</td>
+                            <td>@Html.Hidden("MaTV", 1)</td>
                         </tr>
                     </table>
                 </div>
@@ -155,7 +209,7 @@
                 </div>
             }
             <div class="btt">
-                <input type="submit" value="Đặt Hàng" class="btn btn-danger dat" onclick="return validateForm();"/>
+                <input type="submit" value="Đặt Hàng" class="btn btn-danger dat" onclick="return validateForm();" />
                 <a href="@Url.Action("Index","Home")" class="btn btn-success">Mua Tiếp</a>
             </div>
         }
@@ -188,7 +242,7 @@
             document.getElementById("tbdienthoai").innerText = "Vui lòng nhập số điện thoại!";
             return false;
         }
-        return true   
+        return true
     }
 </script>
 

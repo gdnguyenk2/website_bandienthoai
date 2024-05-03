@@ -4,10 +4,12 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
+@using webbandienthoai.Models;
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Metro Panel Flat Bootstarp Resposive Website Template| Home :: w3layouts</title>
+    <title>DragonPhone</title>
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content_Admin/LayoutAdmin/css/bootstrap.css" rel="stylesheet" type='text/css' />
     <!-- Custom Theme files -->
     <link href="~/Content_Admin/LayoutAdmin/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -168,60 +170,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <a href="#"><img src="~/Content_Admin/LayoutAdmin/images/logo.png" alt="" /></a>
             </div>
             <div class="navigation">
-                <h3>Featured</h3>
+                <h3>Chức Năng</h3>
                 <ul>
-                    <li><a href="#"><i class="chat"></i></a></li>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-bar-chart" aria-hidden="true"></i></a></li>
+                    <li><a href="@Url.Action("Index","ThongKe")">Thống Kê</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-cubes"></i></a></li>
                     <li><a href="@Url.Action("Index","QuanLySanPham")">Quản lý sản phẩm</a></li>
                 </ul>
                 <ul>
-                    <li><a href="#"><i class="art"></i></a></li>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-calendar-minus-o"></i></a></li>
+                    <li><a href="@Url.Action("Index","KhuyenMai")">Quản lý khuyến mãi</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-pencil-square-o"></i></a></li>
                     <li><a href="@Url.Action("NhapHang","NhapHang")">Nhập hàng</a></li>
                 </ul>
                 <ul>
-                    <li><a href="#"><i class="user"></i></a></li>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-calendar-times-o"></i></a></li>
                     <li><a href="@Url.Action("DSSapHetHang","NhapHang")">Đơn hàng sắp hết</a></li>
                 </ul>
                 <ul>
-                    <li><a href="#"><i class="fat"></i></a></li>
-                    <li><a href="@Url.Action("ChuaGiao","QuanLyDonHang")">Quản lý đơn hàng</a></li>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-database"></i></a></li>
+                    <li><a href="@Url.Action("PheDuyet","QuanLyDonHang")">Quản lý đơn hàng</a></li>
                 </ul>
                 <ul>
-                    <li><a href="#"><i class="speed"></i></a></li>
-                    <li><a href="#">Speed</a></li>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-users"></i></a></li>
+                    <li><a href="@Url.Action("Index","PhanQuyen")">Phân Quyền</a></li>
                 </ul>
                 <ul>
-                    <li><a href="#"><i class="setting"></i></a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-cogs"></i></a></li>
+                    <li><a href="#">Cài Đặt</a></li>
                 </ul>
             </div>
             <div class="navigation">
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="#"><i class="dash"></i></a></li>
-                    <li><a href="#">Dashboard</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#"><i class="mail"></i></a></li>
-                    <li><a href="#">Emails</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#"><i class="cal"></i></a></li>
-                    <li><a href="#">Calendar</a></li>
-                </ul>
-                <ul>
-                    <li><a href="#"><i class="page"></i></a></li>
-                    <li><a href="#">Pages</a></li>
-                </ul>
-            </div>
-            <div class="navigation">
-                <h3>All Others</h3>
+                <h3>Khác</h3>
                 <ul>
                     <li><a href="#"><i class="rev"></i></a></li>
-                    <li><a href="#">Revenue</a></li>
+                    <li><a href="#">Sắp Xếp</a></li>
                 </ul>
                 <ul>
                     <li><a href="#"><i class="pic"></i></a></li>
-                    <li><a href="#">Pictures</a></li>
+                    <li><a href="#">Hình Ảnh</a></li>
                 </ul>
                 <ul>
                     <li><a href="#"><i class="faq"></i></a></li>
@@ -236,104 +227,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="search">
                 </div>
                 <div class="member">
-                    <p><a href="#"><i class="men"></i></a><a href="#">Username</a></p>
-                    <div id="dd" class="wrapper-dropdown-2" tabindex="1">
-                        <span><img src="~/Content_Admin/LayoutAdmin/images/settings.png" style="width: 45px; height: 45px"/></span>
-                        <ul class="dropdown">
+                    @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
+                    {
+                        ThanhVien tv = (ThanhVien)Session["TaiKhoans"];
+                        <p><a href="#"><i class="men"></i></a><a href="#">@tv.HoTen</a></p>
+                        <div id="dd" class="wrapper-dropdown-2" tabindex="1">
+                            <span><img src="~/Content_Admin/LayoutAdmin/images/settings.png" style="width: 45px; height: 45px" /></span>
+                            <ul class="dropdown">
+                                <li><a href="#">Trợ Giúp</a></li>
+                                <li><a href="#">Cài Đặt</a></li>
+                                <li><a href="@Url.Action("DangXuat", "PhanQuyen")">Đăng Xuất</a></li>
+                            </ul>
+                        </div>
+                    }
+                        <!-----end-wrapper-dropdown-2---->
+                        <!-----start-script---->
+                        <script type="text/javascript">
+                            function DropDown(el) {
+                                this.dd = el;
+                                this.initEvents();
+                            }
+                            DropDown.prototype = {
+                                initEvents: function () {
+                                    var obj = this;
 
-                            <li><a href="#">View Profile </a></li>
-                            <li><a href="#">Lists</a></li>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">Activity log</a></li>
-                            <li><a href="#">Report a problem</a></li>
-                            <li><a href="#">Log out</a></li>
-                        </ul>
+                                    obj.dd.on('click', function (event) {
+                                        $(this).toggleClass('active');
+                                        event.stopPropagation();
+                                    });
+                                }
+                            }
+                            $(function () {
+
+                                var dd = new DropDown($('#dd'));
+
+                                $(document).click(function () {
+                                    // all dropdowns
+                                    $('.wrapper-dropdown-2').removeClass('active');
+                                });
+
+                            });
+                        </script>
+                        <div class="clearfix"></div>
                     </div>
-                    <!-----end-wrapper-dropdown-2---->
-                    <!-----start-script---->
-                    <script type="text/javascript">
-							function DropDown(el) {
-								this.dd = el;
-								this.initEvents();
-							}
-							DropDown.prototype = {
-								initEvents : function() {
-									var obj = this;
-
-									obj.dd.on('click', function(event){
-										$(this).toggleClass('active');
-										event.stopPropagation();
-									});
-								}
-							}
-							$(function() {
-
-								var dd = new DropDown( $('#dd') );
-
-								$(document).click(function() {
-									// all dropdowns
-									$('.wrapper-dropdown-2').removeClass('active');
-								});
-
-							});
-                    </script>
-                    <div class="clearfix"></div>
-                </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="clearfix"></div>
-            <p class="home"><a href="#">Home</a> > <strong> Dashboard</strong></p>
-            <div class="list_of_members">
-                <div class="sales">
-                    <div class="icon">
-                        <i class="dollar"></i>
-                    </div>
-                    <div class="icon-text">
-                        <h3>15896</h3>
-                        <p>Sales</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="new-users">
-                    <div class="icon">
-                        <i class="user1"></i>
-                    </div>
-                    <div class="icon-text">
-                        <h3>5356</h3>
-                        <p>New Users</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="orders">
-                    <div class="icon">
-                        <i class="order"></i>
-                    </div>
-                    <div class="icon-text">
-                        <h3>26856</h3>
-                        <p>New Orders</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="visitors">
-                    <div class="icon">
-                        <i class="visit"></i>
-                    </div>
-                    <div class="icon-text">
-                        <h3>85k</h3>
-                        <p>Visits</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
+            <div class="clearfix"  style="margin-bottom:20px"></div>
             @RenderBody()
         </div>
         <div class="clearfix"></div>
     </div>
     <div class="footer">
-        <div class="copyright text-center">
-            <p>&copy; 2015 All rights reserved | Template by  <a href="http://w3layouts.com">  W3layouts</a></p>
-        </div>
     </div>
 </body>
 </html>

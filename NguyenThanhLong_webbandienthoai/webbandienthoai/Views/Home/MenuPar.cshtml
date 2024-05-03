@@ -41,7 +41,7 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="@Url.Action("Index","Home")">Home</a></li>
+                <li class="active"><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
                 @foreach (var groupitem in Model.GroupBy(n => n.LoaiSanPham.DanhMuc))
                 {
                     if (groupitem.Key != null)
@@ -62,9 +62,9 @@
                         </li>
                     }
                 }
-                <li><a href="#">Tin Tức</a></li>
-                <li><a href="#">Giới Thiệu</a></li>
-                <li><a href="#">Liên Hệ</a></li>
+                <li><a href="@Url.Action("Index","GioiThieu")">Giới Thiệu</a></li>
+                <li><a href="@Url.Action("Index","CauHoi")">Câu Hỏi</a></li>
+                <li><a href="@Url.Action("Index","LienHe")">Liên Hệ</a></li>
             </ul>
             <!-- /NAV -->
         </div>

@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace webbandienthoai.Controllers
 {
-    public class AdminController : Controller
+    public class LienHeController : Controller
     {
-        // GET: Admin
+        // GET: LienHe
         public ActionResult Index()
         {
             return View();

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using webbandienthoai.Models;
 namespace webbandienthoai.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class NhapHangController : Controller
     {
         WebBanDienThoaiEntities db = new WebBanDienThoaiEntities();

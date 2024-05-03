@@ -358,7 +358,7 @@ textarea.input {
 \*----------------------------*/
 
 #breadcrumb {
-  padding: 30px 0px;
+  padding: 20px 0px;
   background: #FBFBFC;
   border-bottom: 1px solid #E4E7ED;
   margin-bottom: 30px;
@@ -378,7 +378,7 @@ textarea.input {
 
 #breadcrumb .breadcrumb-tree li {
   display: inline-block;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
 }
@@ -390,12 +390,12 @@ textarea.input {
 #breadcrumb .breadcrumb-tree li+li:before {
   content: '/';
   display: inline-block;
-  color: #8D99AE;
+  color: #333;
   margin-right: 10px;
 }
 
 #breadcrumb .breadcrumb-tree li a {
-  color: #8D99AE;
+  color: #333;
 }
 
 #breadcrumb .breadcrumb-tree li a:hover {

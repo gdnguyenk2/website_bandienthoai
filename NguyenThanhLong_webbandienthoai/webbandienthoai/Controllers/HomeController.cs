@@ -14,6 +14,10 @@ namespace webbandienthoai.Controllers
         {
             return View();
         }
+        public ActionResult Slider()
+        {
+            return PartialView();
+        }
         public ActionResult MenuPar()
         {
             var lstsp = db.SanPhams.ToList();
@@ -34,6 +38,15 @@ namespace webbandienthoai.Controllers
             }
 
             return PartialView();
+        }
+        public ActionResult Quyen()
+        {
+            return View();
+        }
+        public ActionResult footer()
+        {
+            var lstsp = db.SanPhams.ToList();
+            return PartialView(lstsp);
         }
     }
 }

@@ -77,11 +77,10 @@ namespace webbandienthoai.Controllers
             }
             //thực hiện phân trang sản phẩm
             //Tạo biến số sản phẩm trên trang
-            int PageSize = 6;
+            int PageSize = 9;
             //Tạo biến thứ 2 : số trang hiện tại
             int PageNumber = (page ?? 1);
             ViewBag.MaNSX = MaNSX;
-
             return View(lstSP.OrderBy(n=>n.MaSP).ToPagedList(PageNumber,PageSize));
         }
     }

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using webbandienthoai.Models;
 namespace webbandienthoai.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class QuanLySanPhamController : Controller
     {
         WebBanDienThoaiEntities db = new WebBanDienThoaiEntities();

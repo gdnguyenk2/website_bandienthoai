@@ -1,7 +1,7 @@
 ﻿@using webbandienthoai.Models;
 @model IEnumerable<SanPham>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản Lý Sản Phẩm";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     //khởi tạo control webgrid
     WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
@@ -35,6 +35,8 @@
         height: 120px;
     }
 </style>
+<h2 style="margin:10px 0">Quản Lý Sản Phẩm</h2>
+
 @Html.ActionLink("Thêm Sản Phẩm", "TaoMoi",null, new {@class="btn btn-success"})
 <br /><br />
 @grid.GetHtml(

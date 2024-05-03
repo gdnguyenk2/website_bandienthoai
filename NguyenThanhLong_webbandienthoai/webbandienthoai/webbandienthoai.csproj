@@ -138,16 +138,24 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaoHanhController.cs" />
+    <Compile Include="Controllers\CauHoiController.cs" />
+    <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
+    <Compile Include="Controllers\GioiThieuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhuyenMaiController.cs" />
+    <Compile Include="Controllers\LienHeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NhapHangController.cs" />
+    <Compile Include="Controllers\PhanQuyenController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Controllers\TimKiemController.cs" />
+    <Compile Include="Controllers\TroGiupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -169,6 +177,8 @@
     <Compile Include="Models\DanhMuc.cs">
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\datamodel\Class1.cs" />
+    <Compile Include="Models\datamodel\KhuyenMai.cs" />
     <Compile Include="Models\datamodel\SanPham.cs" />
     <Compile Include="Models\datamodel\ThanhVien.cs" />
     <Compile Include="Models\DonDatHang.cs">
@@ -263,6 +273,9 @@
     <Content Include="Content\Images\Banners\bannertest.jpg" />
     <Content Include="Content\Images\Banners\bg1.jpg" />
     <Content Include="Content\Images\Banners\iphone14-demo.jpg" />
+    <Content Include="Content\Images\Banners\quangcao2.png" />
+    <Content Include="Content\Images\Banners\quangcao3.png" />
+    <Content Include="Content\Images\Banners\quangcao4.jpg" />
     <Content Include="Content\Images\Downloads\appstore.png" />
     <Content Include="Content\Images\Downloads\contact2.jpg" />
     <Content Include="Content\Images\Downloads\googleplay.png" />
@@ -281,8 +294,7 @@
     <Content Include="Content\Images\Icons\star1.png" />
     <Content Include="Content\Images\Icons\star22.png" />
     <Content Include="Content\Images\Login\bg-login.jpg" />
-    <Content Include="Content\Images\Logo\icon-logo.png" />
-    <Content Include="Content\Images\Logo\logo.jpg" />
+    <Content Include="Content\Images\Logo\logo.png" />
     <Content Include="Content\Images\Members\1-10.jpg" />
     <Content Include="Content\Images\Members\376710115_1375710333302262_9037517465812607904_n.jpg" />
     <Content Include="Content\Images\Members\896056ec3e9dbe88f0a1fdf9f0fdfc17.jpg" />
@@ -639,7 +651,6 @@
     <Content Include="Views\GioHang\SuaGioHang.cshtml" />
     <Content Include="Views\TimKiem\KQTimKiem.cshtml" />
     <Content Include="Views\Shared\_Layout_Admin.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\QuanLySanPham\Index.cshtml" />
     <Content Include="Views\QuanLySanPham\TaoMoi.cshtml" />
     <Content Include="Views\QuanLySanPham\SuaSP.cshtml" />
@@ -651,6 +662,24 @@
     <Content Include="Views\QuanLyDonHang\DaGiaoDaThanhToan.cshtml" />
     <Content Include="Views\QuanLyDonHang\DuyetDonHang.cshtml" />
     <Content Include="Views\QuanLyDonHang\InDonHang.cshtml" />
+    <Content Include="Views\ThongKe\Index.cshtml" />
+    <Content Include="Views\Home\Quyen.cshtml" />
+    <Content Include="Views\PhanQuyen\Index.cshtml" />
+    <Content Include="Views\PhanQuyen\CapQuyen.cshtml" />
+    <Content Include="Views\Home\Slider.cshtml" />
+    <Content Include="Views\KhuyenMai\Index.cshtml" />
+    <Content Include="Views\KhuyenMai\ThemKM.cshtml" />
+    <Content Include="Views\KhuyenMai\Sua.cshtml" />
+    <Content Include="Views\KhuyenMai\Xoa.cshtml" />
+    <Content Include="Views\TroGiup\Index.cshtml" />
+    <Content Include="Views\Home\footer.cshtml" />
+    <Content Include="Views\LienHe\Index.cshtml" />
+    <Content Include="Views\BaoHanh\Index.cshtml" />
+    <Content Include="Views\GioiThieu\Index.cshtml" />
+    <Content Include="Views\CauHoi\Index.cshtml" />
+    <Content Include="Views\QuanLyDonHang\PheDuyet.cshtml" />
+    <Content Include="Views\QuanLyDonHang\HoanThanhDon.cshtml" />
+    <Content Include="Views\DonHang\XemDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

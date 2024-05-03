@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="list_of_members">
+    <div class="visitors" style="margin-right:2%">
+        <div class="icon">
+            <i class="visit"></i>
+        </div>
+        <div class="icon-text">
+            <h3>@ViewBag.SoNguoiTrucTuyen</h3>
+            <p>Trực tuyến</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="new-users">
+        <div class="icon">
+            <i class="user1"></i>
+        </div>
+        <div class="icon-text">
+            <h3>@ViewBag.TongThanhVien</h3>
+            <p>Người Dùng</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="orders">
+        <div class="icon">
+            <i class="order"></i>
+        </div>
+        <div class="icon-text">
+            <h3>@ViewBag.TongDonDatHang</h3>
+            <p>Đơn Hàng</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="visitors">
+        <div class="icon">
+            <i class="visit"></i>
+        </div>
+        <div class="icon-text">
+            <h3>@ViewBag.SoNguoiTruyCap</h3>
+            <p>Truy Cập</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="list_of_members">
+    <div class="sales">
+        <div class="icon">
+            <i class="dollar"></i>
+        </div>
+        <div class="icon-text">
+            @{ decimal TongDoanhThu = decimal.Parse(ViewBag.TongDoanhThu.ToString());
+                TongDoanhThu = TongDoanhThu / 1000;}
+            <h3>@TongDoanhThu.ToString("#,##") K</h3>
+            <p>Doanh Thu</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+

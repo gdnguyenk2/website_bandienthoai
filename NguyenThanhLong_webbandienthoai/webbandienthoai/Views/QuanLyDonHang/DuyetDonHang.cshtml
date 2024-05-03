@@ -1,7 +1,7 @@
 ﻿@using webbandienthoai.Models
 @model DonDatHang
 @{
-    ViewBag.Title = "DuyetDonHang";
+    ViewBag.Title = "Duyệt đơn hàng";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
@@ -52,7 +52,7 @@
             </tr>
         </table>
         <br /><br />
-        @Html.ActionLink("Quay Lại", "ChuaGiao", "QuanLyDonHang", new { @class = "btn btn-success" })
-        <input type="submit" value="Lưu đơn hàng" id="btnInDonHang" class="btn btn-primary" />
+        @Html.ActionLink("Quay Lại", "PheDuyet", "QuanLyDonHang", new { @class = "btn btn-success" })
+        <input type="submit" value="Phê Duyệt" id="btnInDonHang" class="btn btn-primary" />
     </div>
 }
