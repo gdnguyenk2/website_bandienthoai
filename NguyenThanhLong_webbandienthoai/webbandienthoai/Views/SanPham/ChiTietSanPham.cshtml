@@ -92,8 +92,8 @@
                     </div>
                     <p>@Html.Raw(Model.MoTa)</p>
                     <div class="qty-label">
-                        Số Lượng
-                        <div class="input-number">
+                        <b>Số Lượng</b> 
+                        <div class="input-number" style="width: 85px; margin: 12px 0">
                             <input type="number" class="qutity" value="1">
                             <span class="qty-up">+</span>
                             <span class="qty-down">-</span>
@@ -133,7 +133,9 @@
             <div id="tab1" class="tab-pane fade in active">
                 <div class="row">
                     <div class="col-md-12">
-                        <p style="text-align:center">@Html.Raw(Model.CauHinh)</p>
+                        <div class="text-center">
+                            <p>@Html.Raw(Model.CauHinh)</p>
+                        </div>
                     </div>
                 </div>
             </div><br />

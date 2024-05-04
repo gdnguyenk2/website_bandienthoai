@@ -26,6 +26,7 @@
         font-size: 16px;
         padding: 5px 10px;
     }
+
     .Header {
         background-color: #e6dada;
     }
@@ -55,7 +56,8 @@
     </div>
 </div>
 <div class="clearfix"></div>
-<br /><br />
+<br />
+<br />
 @grid.GetHtml(
     tableStyle: "Table",
     headerStyle: "Header",
@@ -66,12 +68,12 @@
     grid.Column("MaSP", "Mã Sản Phẩm"),
     grid.Column("TenSP", "Tên Sản Phẩm"),
     grid.Column("MoTa", "Mô Tả", format: p => @Html.Raw(p.MoTa)),
-    grid.Column("HinhAnh", "Hình Ảnh", format: p => @Html.Raw("<img src=\"../Content/Images/Products/" +p.HinhAnh + "\">")),
+    grid.Column("HinhAnh", "Hình Ảnh", format: p => @Html.Raw("<img src=\"../Content/Images/Products/" + p.HinhAnh + "\">")),
     grid.Column("DonGia", "Đơn Giá", format: p => Html.Raw(p.DonGia.ToString("#,##") + " đ")),
     grid.Column("SoLuongTon", "Số Lượng Tồn"),
     grid.Column("Moi", "Mới"),
     grid.Column("BanChay", "Bán Chạy"),
-    grid.Column(format: p => Html.ActionLink("Sửa", "SuaSP", new { id = p.MaSP },new {style= "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })),
+    grid.Column(format: p => Html.ActionLink("Sửa", "SuaSP", new { id = p.MaSP }, new { style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })),
     grid.Column(format: p => Html.ActionLink("Xóa", "XoaSP", new { id = p.MaSP }, new { style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" }))
     )
 )

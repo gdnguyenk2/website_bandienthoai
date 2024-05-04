@@ -1,0 +1,37 @@
+﻿@using webbandienthoai.Models;
+@model IEnumerable<SanPham>
+<div class="aside">
+    <h3 class="aside-title">Bán Chạy</h3>
+    @foreach (var item in Model.Take(3))
+    {
+        decimal? deal = item.DonGia;
+        decimal percent = 0;
+        if (item.MaKhuyenMai != null)
+        {
+            if (DateTime.Now >= item.KhuyenMai.NgayBatDau && DateTime.Now <= item.KhuyenMai.NgayKetThuc)
+            {
+                percent = item.KhuyenMai.PhanTramGiamGia;
+            }
+        }
+        decimal? price = deal - (deal * (percent / 100));
+        <div class="product-widget">
+            <div class="product-img">
+                <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
+                    <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="" style="width:60px;height:60px">
+                </a>
+            </div>
+            <div class="product-body">
+                <p class="product-category">@item.NhaSanXuat.TenNSX</p>
+                <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
+                <h4 class="product-price">
+                    @string.Format("{0:N0} \u20ab", price)
+                    @if (price != deal)
+                    {
+                        <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
+                    }
+                </h4>
+            </div>
+        </div>
+    }
+
+</div>

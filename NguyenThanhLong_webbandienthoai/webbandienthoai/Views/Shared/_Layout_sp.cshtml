@@ -39,8 +39,53 @@
     <!--NAVIGATION-->
     @Html.Action("MenuPar", "Home")
     <!-- /NAVIGATION -->
-    @RenderBody()
-
+    <!-- BREADCRUMB -->
+    <div id="breadcrumb" class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb-tree">
+                        <li><a href="@Url.Action("Index","Home")">Trang Chủ</a></li>
+                        <li><a href="#">Sản Phẩm</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /BREADCRUMB -->
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- ASIDE -->
+                <div id="aside" class="col-md-3">
+                    @Html.Action("htHangSX", "SanPham")
+                    <!-- aside Widget -->
+                    <div class="aside">
+                    </div>
+                    <!-- /aside Widget -->
+                    <!-- aside Widget -->
+                    <div class="aside">
+                    </div>
+                    <!-- /aside Widget -->
+                    <!-- aside Widget -->
+                    @Html.Action("BanChayPhu","SanPham")
+                    <!-- /aside Widget -->
+                </div>
+                <!-- /ASIDE -->
+                @RenderBody()
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
     <!-- NEWSLETTER -->
     <div id="newsletter" class="section">
         <!-- container -->

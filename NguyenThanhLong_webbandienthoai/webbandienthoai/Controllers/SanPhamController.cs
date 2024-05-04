@@ -23,16 +23,14 @@ namespace webbandienthoai.Controllers
             //sp moi
             var lstMoi = db.SanPhams.Where(m => m.Moi == true && m.DaXoa == false).ToList();
             ViewBag.Moi = lstMoi;
-            //sp bán chạy
             return PartialView(lstMoi);
         }
         [ChildActionOnly]
         public ActionResult SanPhamPatial2()
         {
-            //sp moi
+            //sp bán chạy
             var lstBanChay = db.SanPhams.Where(m => m.BanChay == true && m.DaXoa == false).ToList();
             ViewBag.BanChay = lstBanChay;
-            //sp bán chạy
             return PartialView(lstBanChay);
         }
 
@@ -56,10 +54,6 @@ namespace webbandienthoai.Controllers
             ViewBag.masp = id;
             return View(product);
         }
-        public ActionResult SanPhamAll()
-        {
-            return View();
-        }
         public ActionResult hienThiLoaiSP(int? MaNSX, int? page)
         {
             if(MaNSX == null)
@@ -82,6 +76,17 @@ namespace webbandienthoai.Controllers
             int PageNumber = (page ?? 1);
             ViewBag.MaNSX = MaNSX;
             return View(lstSP.OrderBy(n=>n.MaSP).ToPagedList(PageNumber,PageSize));
+        }
+        public ActionResult htHangSX(int? MaNSX)
+        {
+            var lstsp = db.SanPhams.ToList();
+            return PartialView(lstsp);
+        }
+        public ActionResult BanChayPhu()
+        {
+            var lstBanChay = db.SanPhams.Where(m => m.BanChay == true && m.DaXoa == false).ToList();
+            ViewBag.BanChay = lstBanChay;
+            return PartialView(lstBanChay);
         }
     }
 }

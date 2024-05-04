@@ -680,6 +680,9 @@
     <Content Include="Views\QuanLyDonHang\PheDuyet.cshtml" />
     <Content Include="Views\QuanLyDonHang\HoanThanhDon.cshtml" />
     <Content Include="Views\DonHang\XemDonHang.cshtml" />
+    <Content Include="Views\SanPham\htHangSX.cshtml" />
+    <Content Include="Views\SanPham\BanChayPhu.cshtml" />
+    <Content Include="Views\QuanLySanPham\TimTenSP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

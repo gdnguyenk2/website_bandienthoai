@@ -16,6 +16,13 @@ namespace webbandienthoai.Controllers
         {
             return View(db.SanPhams.Where(n=>n.DaXoa==false).OrderByDescending(n=>n.MaSP));
         }
+        [HttpGet]
+        public ActionResult TimTenSP(string Search)
+        {
+            var lstSanPham = db.SanPhams.Where(n => n.TenSP.Contains(Search));
+            ViewBag.Search = Search;
+            return View(lstSanPham.OrderByDescending(n => n.MaSP));
+        }
         public ActionResult TaoMoi()
         {
             ViewBag.MaNCC = new SelectList(db.NhaCungCaps.OrderBy(n=>n.TenNCC),"MaNCC","TenNCC");
