@@ -39,6 +39,11 @@ namespace webbandienthoai.Controllers
 
             return View();
         }
+        public JsonResult KTTaiKhoan(string username)
+        {
+            bool kttaikhoan = db.ThanhViens.Any(row => row.TaiKhoan == username);
+            return Json(kttaikhoan, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

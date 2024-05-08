@@ -27,10 +27,12 @@ namespace webbandienthoai.Models
     
         public virtual DbSet<BinhLuan> BinhLuans { get; set; }
         public virtual DbSet<ChiTietDonDatHang> ChiTietDonDatHangs { get; set; }
+        public virtual DbSet<ChiTietGioHang> ChiTietGioHangs { get; set; }
         public virtual DbSet<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
         public virtual DbSet<CongNo> CongNoes { get; set; }
         public virtual DbSet<DanhMuc> DanhMucs { get; set; }
         public virtual DbSet<DonDatHang> DonDatHangs { get; set; }
+        public virtual DbSet<GioHang> GioHangs { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<KhuyenMai> KhuyenMais { get; set; }
         public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
@@ -39,10 +41,9 @@ namespace webbandienthoai.Models
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<NhaSanXuat> NhaSanXuats { get; set; }
         public virtual DbSet<PhieuNhap> PhieuNhaps { get; set; }
+        public virtual DbSet<QuangCao> QuangCaos { get; set; }
         public virtual DbSet<Quyen> Quyens { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
         public virtual DbSet<ThanhVien> ThanhViens { get; set; }
-        public virtual DbSet<ChiTietGioHang> ChiTietGioHangs { get; set; }
-        public virtual DbSet<GioHang> GioHangs { get; set; }
     }
 }

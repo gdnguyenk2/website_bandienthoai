@@ -19,8 +19,8 @@ namespace webbandienthoai.Models
         {
             this.BinhLuans = new HashSet<BinhLuan>();
             this.ChiTietDonDatHangs = new HashSet<ChiTietDonDatHang>();
-            this.ChiTietPhieuNhaps = new HashSet<ChiTietPhieuNhap>();
             this.ChiTietGioHangs = new HashSet<ChiTietGioHang>();
+            this.ChiTietPhieuNhaps = new HashSet<ChiTietPhieuNhap>();
         }
     
         public int MaSP { get; set; }
@@ -43,7 +43,6 @@ namespace webbandienthoai.Models
         public Nullable<int> LuotBinhLuan { get; set; }
         public Nullable<int> SoLanMua { get; set; }
         public bool Moi { get; set; }
-        public bool BanChay { get; set; }
         public bool DaXoa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -51,12 +50,12 @@ namespace webbandienthoai.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietDonDatHang> ChiTietDonDatHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietGioHang> ChiTietGioHangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
         public virtual KhuyenMai KhuyenMai { get; set; }
         public virtual LoaiSanPham LoaiSanPham { get; set; }
         public virtual NhaCungCap NhaCungCap { get; set; }
         public virtual NhaSanXuat NhaSanXuat { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChiTietGioHang> ChiTietGioHangs { get; set; }
     }
 }

@@ -119,8 +119,8 @@
                     <td>@item.SoLuong</td>
                     <td>@item.ThanhTien.ToString("#,##") đ</td>
                     <td>
-                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })
-                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })
+                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP },new{ style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })
+                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP }, new{style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" })
                     </td>
 
                 </tr>
@@ -186,7 +186,7 @@
                         </tr>
                         <tr>
                             <td style="text-align:right">Họ tên</td>
-                            <td>@Html.TextBox("TenKH", thanhvien.HoTen, new { @class = "kichthuoc", @readonly = "readonly" })</td>
+                            <td>@Html.TextBox("TenKH", thanhvien.HoTen, new { @class = "kichthuoc" })</td>
                         </tr>
                         <tr>
                             <td style="text-align:right">Địa chỉ</td>
@@ -198,12 +198,16 @@
                         <tr>
                             <td style="text-align:right">Email</td>
                             <td>
-                                @Html.TextBox("Email", thanhvien.Email, new { @class = "kichthuoc", @readonly = "readonly" })
+                                @Html.TextBox("Email", thanhvien.Email, new { @class = "kichthuoc" })
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align:right">Điện thoại</td>
-                            <td>@Html.TextBox("SoDienThoai", thanhvien.SoDienThoai, new { @class = "kichthuoc", @readonly = "readonly" })</td>
+                            <td>@Html.TextBox("SoDienThoai", thanhvien.SoDienThoai, new { @class = "kichthuoc" })</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right">Phương thức thanh toán</td>
+                            <td><input type="text" value="Thanh Toán Khi Nhận Hàng" readonly style="width:100%"/></td>
                         </tr>
                     </table>
                 </div>
@@ -215,7 +219,6 @@
         }
     }
 </div>
-@*Kiểm tra validation thông qua jquery*@
 <script>
     function validateForm() {
         var tenKH = document.getElementById('TenKH').value;

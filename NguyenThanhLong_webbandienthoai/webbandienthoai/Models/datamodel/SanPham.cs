@@ -59,8 +59,6 @@ namespace webbandienthoai.Models
             public Nullable<int> SoLanMua { get; set; }
             [DisplayName("Mới")]
             public bool Moi { get; set; }
-            [DisplayName("Bán Chạy")]
-            public bool BanChay { get; set; }
             [DisplayName("Đã Xóa")]
             public bool DaXoa { get; set; }
         }

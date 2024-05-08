@@ -1,0 +1,69 @@
+﻿@model webbandienthoai.Models.QuangCao
+
+@{
+    ViewBag.Title = "Thêm Quảng Cáo";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>
+@*Text mota*@
+<script src="~/Content_Admin/js/tinymce/tinymce.min.js"></script>
+<!--
+  Note: This tab only shows the initial HTML and is not updated as you type or
+  when you click submit.
+-->
+<script>
+    tinymce.init({
+        selector: 'textarea#default-editor'
+    });
+</script>
+<h2>Quản Lý Quảng Cáo/Thêm Quảng Cáo</h2>
+
+@using (Html.BeginForm("ThemQuangCao", "QuanLyQuangCao", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Thêm Quảng Cáo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenQC, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenQC, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenQC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="HinhAnh" />
+                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+                <span style="color:red">@ViewBag.upload</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgayCapNhat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NgayCapNhat, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                @Html.ValidationMessageFor(model => model.NgayCapNhat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="@Url.Action("Index", "QuanLyQuangCao")" class="btn btn-danger">Quay lại</a>
+                <input type="submit" value="Thêm Mới" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

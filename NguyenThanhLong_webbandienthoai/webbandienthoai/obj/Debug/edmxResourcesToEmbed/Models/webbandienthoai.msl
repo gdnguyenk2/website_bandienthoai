@@ -23,6 +23,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ChiTietGioHangs">
+      <EntityTypeMapping TypeName="WebBanDienThoaiModel.ChiTietGioHang">
+        <MappingFragment StoreEntitySet="ChiTietGioHang">
+          <ScalarProperty Name="MaChiTietGH" ColumnName="MaChiTietGH" />
+          <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
+          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ChiTietPhieuNhaps">
       <EntityTypeMapping TypeName="WebBanDienThoaiModel.ChiTietPhieuNhap">
         <MappingFragment StoreEntitySet="ChiTietPhieuNhap">
@@ -63,6 +73,14 @@
           <ScalarProperty Name="QuaTang" ColumnName="QuaTang" />
           <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
           <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GioHangs">
+      <EntityTypeMapping TypeName="WebBanDienThoaiModel.GioHang">
+        <MappingFragment StoreEntitySet="GioHang">
+          <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
+          <ScalarProperty Name="MaTV" ColumnName="MaTV" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -151,6 +169,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="QuangCaos">
+      <EntityTypeMapping TypeName="WebBanDienThoaiModel.QuangCao">
+        <MappingFragment StoreEntitySet="QuangCao">
+          <ScalarProperty Name="MaQuangCao" ColumnName="MaQuangCao" />
+          <ScalarProperty Name="TenQC" ColumnName="TenQC" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="NgayCapNhat" ColumnName="NgayCapNhat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Quyens">
       <EntityTypeMapping TypeName="WebBanDienThoaiModel.Quyen">
         <MappingFragment StoreEntitySet="Quyen">
@@ -182,7 +210,6 @@
           <ScalarProperty Name="LuotBinhLuan" ColumnName="LuotBinhLuan" />
           <ScalarProperty Name="SoLanMua" ColumnName="SoLanMua" />
           <ScalarProperty Name="Moi" ColumnName="Moi" />
-          <ScalarProperty Name="BanChay" ColumnName="BanChay" />
           <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -203,24 +230,6 @@
           <ScalarProperty Name="HinhDaiDien" ColumnName="HinhDaiDien" />
           <ScalarProperty Name="MaToken" ColumnName="MaToken" />
           <ScalarProperty Name="ThoiGianMaToken" ColumnName="ThoiGianMaToken" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ChiTietGioHangs">
-      <EntityTypeMapping TypeName="WebBanDienThoaiModel.ChiTietGioHang">
-        <MappingFragment StoreEntitySet="ChiTietGioHang">
-          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="MaSP" ColumnName="MaSP" />
-          <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
-          <ScalarProperty Name="MaChiTietGH" ColumnName="MaChiTietGH" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="GioHangs">
-      <EntityTypeMapping TypeName="WebBanDienThoaiModel.GioHang">
-        <MappingFragment StoreEntitySet="GioHang">
-          <ScalarProperty Name="MaTV" ColumnName="MaTV" />
-          <ScalarProperty Name="MaGioHang" ColumnName="MaGioHang" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

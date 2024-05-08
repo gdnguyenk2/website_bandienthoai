@@ -57,8 +57,8 @@ else
                         </td>
                         <td>@item.ThanhTien.ToString("#,##") đ</td>
                         <td>
-                            <input type="submit" value="Cập nhật" onclick="return btnCapNhat()" id="capnhat" />
-                            @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP })
+                            <input type="submit" value="Cập nhật" onclick="return btnCapNhat()" id="capnhat" class="btn btn-primary"/>
+                            @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP }, new { style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" })
                         </td>
                     </tr>
                 }
@@ -72,7 +72,7 @@ else
                     <td>@item.DonGia.ToString("#,##") đ</td>
                     <td>@item.SoLuong</td>
                     <td>@item.ThanhTien.ToString("#,##") đ</td>
-                    <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })</td>
+                    <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP }, new { style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })</td>
                 </tr>
             }
         }

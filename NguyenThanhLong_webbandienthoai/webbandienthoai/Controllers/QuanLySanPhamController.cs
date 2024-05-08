@@ -39,93 +39,106 @@ namespace webbandienthoai.Controllers
             ViewBag.MaNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNSX), "MaNSX", "TenNSX");
             ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.MaLoaiSP), "MaLoaiSP", "TenLoaiSP");
             ViewBag.MaKhuyenMai = new SelectList(db.KhuyenMais.OrderBy(n => n.MaKhuyenMai), "MaKhuyenMai", "TenKhuyenMai");
-            //Kiểm tra hình có tồn tại trong csdl ko
-            if (HinhAnh != null && HinhAnh2 != null && HinhAnh3 != null && HinhAnh4 != null)
+            if (ModelState.IsValid)
             {
-                if (HinhAnh.ContentLength > 0)
+                //Kiểm tra hình có tồn tại trong csdl ko
+                if (HinhAnh != null && HinhAnh2 != null && HinhAnh3 != null && HinhAnh4 != null)
                 {
-                    //Lấy tên hình ảnh
-                    var fileName = Path.GetFileName(HinhAnh.FileName);
-                    //Lấy hình ảnh chuyển vào thư mục hình ảnh
-                    var path = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName);
-                    //Nếu thư mục có hình ảnh rồi thì thông báo
-                    if (System.IO.File.Exists(path))
+                    if (HinhAnh.ContentLength > 0)
                     {
-                        ViewBag.upload = "Hình đã tồn tại";
-                        return View(sp);
+                        //Lấy tên hình ảnh
+                        var fileName = Path.GetFileName(HinhAnh.FileName);
+                        //Lấy hình ảnh chuyển vào thư mục hình ảnh
+                        var path = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName);
+                        //Nếu thư mục có hình ảnh rồi thì thông báo
+                        if (System.IO.File.Exists(path))
+                        {
+                            ViewBag.upload = "Hình đã tồn tại";
+                            return View(sp);
+                        }
+                        else
+                        {
+                            //Lấy hình ảnh đưa vào thư mục
+                            HinhAnh.SaveAs(path);
+                            sp.HinhAnh = fileName;
+                        }
                     }
-                    else
+                    if (HinhAnh2.ContentLength > 0)
                     {
-                        //Lấy hình ảnh đưa vào thư mục
-                        HinhAnh.SaveAs(path);
-                        sp.HinhAnh = fileName;
+                        //Lấy tên hình ảnh
+                        var fileName2 = Path.GetFileName(HinhAnh2.FileName);
+                        //Lấy hình ảnh chuyển vào thư mục hình ảnh
+                        var path2 = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName2);
+                        //Nếu thư mục có hình ảnh rồi thì thông báo
+                        if (System.IO.File.Exists(path2))
+                        {
+                            ViewBag.upload2 = "Hình đã tồn tại";
+                            return View(sp);
+                        }
+                        else
+                        {
+                            //Lấy hình ảnh đưa vào thư mục
+                            HinhAnh2.SaveAs(path2);
+                            sp.HinhAnh2 = fileName2;
+                        }
+                    }
+                    if (HinhAnh3.ContentLength > 0)
+                    {
+                        //Lấy tên hình ảnh
+                        var fileName3 = Path.GetFileName(HinhAnh3.FileName);
+                        //Lấy hình ảnh chuyển vào thư mục hình ảnh
+                        var path3 = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName3);
+                        //Nếu thư mục có hình ảnh rồi thì thông báo
+                        if (System.IO.File.Exists(path3))
+                        {
+                            ViewBag.upload3 = "Hình đã tồn tại";
+                            return View(sp);
+                        }
+                        else
+                        {
+                            //Lấy hình ảnh đưa vào thư mục
+                            HinhAnh3.SaveAs(path3);
+                            sp.HinhAnh3 = fileName3;
+                        }
+                    }
+                    if (HinhAnh4.ContentLength > 0)
+                    {
+                        //Lấy tên hình ảnh
+                        var fileName4 = Path.GetFileName(HinhAnh4.FileName);
+                        //Lấy hình ảnh chuyển vào thư mục hình ảnh
+                        var path4 = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName4);
+                        //Nếu thư mục có hình ảnh rồi thì thông báo
+                        if (System.IO.File.Exists(path4))
+                        {
+                            ViewBag.upload4 = "Hình đã tồn tại";
+                            return View(sp);
+                        }
+                        else
+                        {
+                            //Lấy hình ảnh đưa vào thư mục
+                            HinhAnh4.SaveAs(path4);
+                            sp.HinhAnh4 = fileName4;
+                        }
                     }
                 }
-                if (HinhAnh2.ContentLength > 0)
+                else
                 {
-                    //Lấy tên hình ảnh
-                    var fileName2 = Path.GetFileName(HinhAnh2.FileName);
-                    //Lấy hình ảnh chuyển vào thư mục hình ảnh
-                    var path2 = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName2);
-                    //Nếu thư mục có hình ảnh rồi thì thông báo
-                    if (System.IO.File.Exists(path2))
-                    {
-                        ViewBag.upload2 = "Hình đã tồn tại";
-                        return View(sp);
-                    }
-                    else
-                    {
-                        //Lấy hình ảnh đưa vào thư mục
-                        HinhAnh2.SaveAs(path2);
-                        sp.HinhAnh2 = fileName2;
-                    }
+                    return View(sp);
                 }
-                if (HinhAnh3.ContentLength > 0)
-                {
-                    //Lấy tên hình ảnh
-                    var fileName3 = Path.GetFileName(HinhAnh3.FileName);
-                    //Lấy hình ảnh chuyển vào thư mục hình ảnh
-                    var path3 = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName3);
-                    //Nếu thư mục có hình ảnh rồi thì thông báo
-                    if (System.IO.File.Exists(path3))
-                    {
-                        ViewBag.upload3 = "Hình đã tồn tại";
-                        return View(sp);
-                    }
-                    else
-                    {
-                        //Lấy hình ảnh đưa vào thư mục
-                        HinhAnh3.SaveAs(path3);
-                        sp.HinhAnh3 = fileName3;
-                    }
-                }
-                if (HinhAnh4.ContentLength > 0)
-                {
-                    //Lấy tên hình ảnh
-                    var fileName4 = Path.GetFileName(HinhAnh4.FileName);
-                    //Lấy hình ảnh chuyển vào thư mục hình ảnh
-                    var path4 = Path.Combine(Server.MapPath("~/Content/Images/Products"), fileName4);
-                    //Nếu thư mục có hình ảnh rồi thì thông báo
-                    if (System.IO.File.Exists(path4))
-                    {
-                        ViewBag.upload4 = "Hình đã tồn tại";
-                        return View(sp);
-                    }
-                    else
-                    {
-                        //Lấy hình ảnh đưa vào thư mục
-                        HinhAnh4.SaveAs(path4);
-                        sp.HinhAnh4 = fileName4;
-                    }
-                }
+                sp.SoLuongTon = 0;
+                sp.SoLanMua = 0;
+                sp.LuotXem = 0;
+                sp.LuotBinhChon = 0;
+                sp.LuotBinhLuan = 0;
+                db.SanPhams.Add(sp);
+                db.SaveChanges();
+                return RedirectToAction("Index", "QuanLySanPham");
             }
             else
             {
                 return View(sp);
             }
-            db.SanPhams.Add(sp);
-            db.SaveChanges();
-            return RedirectToAction("Index","QuanLySanPham");
+            
         }
         public ActionResult SuaSP(int? id)
         {
@@ -165,7 +178,6 @@ namespace webbandienthoai.Controllers
             product.MoTa = sp.MoTa;
             product.CauHinh = sp.CauHinh;
             product.MoTa = sp.MoTa;
-            product.BanChay = sp.BanChay;
             product.DaXoa = sp.DaXoa;
             if (HinhAnh != null && HinhAnh2 != null && HinhAnh3 != null && HinhAnh4 != null)
             {

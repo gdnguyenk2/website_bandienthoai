@@ -65,8 +65,8 @@ namespace webbandienthoai.Controllers
                     return Content(script);
                 }
             }
-
-            return Content("Tài khoản hoặc mật khẩu không đúng.");
+            ViewBag.Loi = "Tài khoản hoặc mật khẩu không đúng!";
+            return View();
         }
         //Phân quyền
         public void GrantPermissions(string tk, string quyen)

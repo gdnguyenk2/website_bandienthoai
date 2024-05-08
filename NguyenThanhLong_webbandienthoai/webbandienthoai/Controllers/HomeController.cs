@@ -16,7 +16,8 @@ namespace webbandienthoai.Controllers
         }
         public ActionResult Slider()
         {
-            return PartialView();
+            var listQuangCao = db.QuangCaos;
+            return PartialView(listQuangCao);
         }
         public ActionResult MenuPar()
         {

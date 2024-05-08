@@ -22,8 +22,15 @@ namespace webbandienthoai.Controllers
         }
         protected decimal ThongKeDoanhThu()
         {
-            decimal TongDoanhThu = db.ChiTietDonDatHangs.Sum(n=>n.SoLuong * n.DonGia);
-            return TongDoanhThu;
+
+            var listRevenue = db.DonDatHangs.Where(row => row.TinhTrang == "Đã giao hàng" && row.DaThanhToan == true);
+
+            decimal total = decimal.Zero;
+            foreach (var item in listRevenue)
+            {
+                total += decimal.Parse(item.ChiTietDonDatHangs.Sum(row => row.SoLuong * row.DonGia).ToString());
+            }
+            return total;
         }
         protected int DonDatHang()
         {

@@ -150,6 +150,7 @@
     <Compile Include="Controllers\NhapHangController.cs" />
     <Compile Include="Controllers\PhanQuyenController.cs" />
     <Compile Include="Controllers\QuanLyDonHangController.cs" />
+    <Compile Include="Controllers\QuanLyQuangCaoController.cs" />
     <Compile Include="Controllers\QuanLySanPhamController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
@@ -177,8 +178,8 @@
     <Compile Include="Models\DanhMuc.cs">
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\datamodel\Class1.cs" />
     <Compile Include="Models\datamodel\KhuyenMai.cs" />
+    <Compile Include="Models\datamodel\QuangCao.cs" />
     <Compile Include="Models\datamodel\SanPham.cs" />
     <Compile Include="Models\datamodel\ThanhVien.cs" />
     <Compile Include="Models\DonDatHang.cs">
@@ -210,6 +211,9 @@
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhieuNhap.cs">
+      <DependentUpon>webbandienthoai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuangCao.cs">
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Quyen.cs">
@@ -273,6 +277,7 @@
     <Content Include="Content\Images\Banners\bannertest.jpg" />
     <Content Include="Content\Images\Banners\bg1.jpg" />
     <Content Include="Content\Images\Banners\iphone14-demo.jpg" />
+    <Content Include="Content\Images\Banners\quangcao1.jpg" />
     <Content Include="Content\Images\Banners\quangcao2.png" />
     <Content Include="Content\Images\Banners\quangcao3.png" />
     <Content Include="Content\Images\Banners\quangcao4.jpg" />
@@ -683,6 +688,9 @@
     <Content Include="Views\SanPham\htHangSX.cshtml" />
     <Content Include="Views\SanPham\BanChayPhu.cshtml" />
     <Content Include="Views\QuanLySanPham\TimTenSP.cshtml" />
+    <Content Include="Views\QuanLyQuangCao\Index.cshtml" />
+    <Content Include="Views\QuanLyQuangCao\ThemQuangCao.cshtml" />
+    <Content Include="Views\QuanLyQuangCao\XoaQC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

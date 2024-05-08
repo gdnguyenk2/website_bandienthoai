@@ -90,15 +90,20 @@ namespace webbandienthoai.Controllers
         [HttpPost]
         public ActionResult HoanThanhDon(int MaDDH)
         {
+            //Lấy danh sách chi tiết đơn hàng đẻ hiển thị cho người dùng thấy
+            var ctdh = db.ChiTietDonDatHangs.Where(n => n.MaDDH == MaDDH);
+            ViewBag.ctdh = ctdh;
+            foreach(var item in ctdh)
+            {
+                SanPham sp = db.SanPhams.SingleOrDefault(n=>n.MaSP==item.MaSP);
+                sp.SoLanMua += item.SoLuong;
+            } 
+            
             DonDatHang ddhup = db.DonDatHangs.Single(n => n.MaDDH == MaDDH);
             ddhup.DaThanhToan = true;
             ddhup.TinhTrang = "Đã giao hàng";
             ddhup.NgayGiao = DateTime.Now;
             db.SaveChanges();
-
-            //Lấy danh sách chi tiết đơn hàng đẻ hiển thị cho người dùng thấy
-            var ctdh = db.ChiTietDonDatHangs.Where(n => n.MaDDH == MaDDH);
-            ViewBag.ctdh = ctdh;
 
 
             return RedirectToAction("DaGiaoDaThanhToan", "QuanLyDonHang");

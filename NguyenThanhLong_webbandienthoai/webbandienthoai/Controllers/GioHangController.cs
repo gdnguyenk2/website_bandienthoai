@@ -34,11 +34,20 @@ namespace webbandienthoai.Controllers
 
                 foreach (ChiTietGioHang cartDetail in listCartDetail)
                 {
-                    GioHangItem cartItem = new GioHangItem(cartDetail.MaSP,cartDetail.SoLuong);
-
+                    
+                    SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == cartDetail.MaSP);
+                    if (cartDetail.SoLuong > sp.SoLuongTon)
+                    {
+                        cartDetail.SoLuong = sp.SoLuongTon;
+                    }
+                    else if (cartDetail.SoLuong==0)
+                    {
+                        db.ChiTietGioHangs.Remove(cartDetail);
+                        continue;
+                    }
+                    GioHangItem cartItem = new GioHangItem(cartDetail.MaSP, cartDetail.SoLuong);
                     listCart.Add(cartItem);
                 }
-
                 return listCart;
             }
             else
@@ -285,6 +294,12 @@ namespace webbandienthoai.Controllers
                 ctdh.SoLuong = item.SoLuong;
                 ctdh.DonGia= item.DonGia;
                 db.ChiTietDonDatHangs.Add(ctdh);
+
+                SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == item.MaSP);
+                if (sp != null) // Kiểm tra xem sản phẩm có tồn tại không
+                {
+                    sp.SoLuongTon -= item.SoLuong; // Giảm số lượng tồn đi
+                }
             }
             //gửi mail cho khách hàng đặt hàng thành công
             string strSanPham = "";

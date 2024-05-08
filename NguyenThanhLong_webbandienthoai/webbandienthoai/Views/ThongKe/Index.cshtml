@@ -53,9 +53,8 @@
             <i class="dollar"></i>
         </div>
         <div class="icon-text">
-            @{ decimal TongDoanhThu = decimal.Parse(ViewBag.TongDoanhThu.ToString());
-                TongDoanhThu = TongDoanhThu / 1000;}
-            <h3>@TongDoanhThu.ToString("#,##") K</h3>
+            @{ decimal TongDoanhThu = decimal.Parse(ViewBag.TongDoanhThu.ToString());}
+            <h3>@TongDoanhThu.ToString("#,##") đ</h3>
             <p>Doanh Thu</p>
         </div>
         <div class="clearfix"></div>

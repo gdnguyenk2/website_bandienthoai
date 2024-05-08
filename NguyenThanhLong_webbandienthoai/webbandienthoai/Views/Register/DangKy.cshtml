@@ -67,63 +67,63 @@
                         @using (Html.BeginForm("DangKy", "Register", FormMethod.Post, new { @id = "registerForm" }))
                         {
                             @Html.AntiForgeryToken()
-                        <div class="fields-grid">
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="styled-input agile-styled-input-top">
-                                @Html.TextBoxFor(model => model.TaiKhoan, new { required = "" })
-                                <label>
-                                    <i class="fa fa-user"></i> @Html.DisplayNameFor(model => model.TaiKhoan)
-                                </label>
-                                @*@Html.LabelFor(model => model.TaiKhoan, "Tài khoản")*@
-                                <span></span>
+                            <div class="fields-grid">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="styled-input agile-styled-input-top">
+                                    @Html.TextBoxFor(model => model.TaiKhoan, new { required = "" })
+                                    <label>
+                                        <i class="fa fa-user"></i> @Html.DisplayNameFor(model => model.TaiKhoan)
+                                    </label>
+                                    <p id="errorTaiKhoan" style="color: red;"></p>
+                                    @*@Html.LabelFor(model => model.TaiKhoan, "Tài khoản")*@
+                                </div>
+                                <div class="styled-input">
+                                    @Html.TextBoxFor(model => model.HoTen, new { required = "" })
+                                    <label>
+                                        <i class="fa fa fa-address-card"></i> @Html.DisplayNameFor(model => model.HoTen)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.HoTen, "Họ và tên")*@
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.TextBoxFor(model => model.Email, new { @id = "email", required = "", oninput = "validateEmail()" })
+                                    <label>
+                                        <i class="fa fa-envelope"></i> @Html.DisplayNameFor(model => model.Email)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.Email, "Email")*@
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.PasswordFor(model => model.MatKhau, new { @id = "password", required = "", oninput = "checkPasswordLength();" })
+                                    <label>
+                                        <i class="fa fa-lock"></i> @Html.DisplayNameFor(model => model.MatKhau)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.MatKhau, "Mật khẩu")*@
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.PasswordFor(model => model.MatKhau, new { @id = "confirmPassword", required = "", oninput = "checkPasswordMatch()" })
+                                    <label>
+                                        <i class="fa fa-lock"></i> Nhập lại mật khẩu
+                                    </label>
+                                    @*@Html.LabelFor(model => model.MatKhau, "Nhập lại mật khẩu")*@
+                                    <span></span>
+                                </div>
+                                <div class="styled-input">
+                                    @Html.TextBoxFor(model => model.SoDienThoai, new { @id = "phone", required = "", oninput = "checkPhoneNumberLength()" })
+                                    <label>
+                                        <i class="fa fa-phone"></i> @Html.DisplayNameFor(model => model.SoDienThoai)
+                                    </label>
+                                    @*@Html.LabelFor(model => model.SoDienThoai, "Số điện thoại")*@
+                                    <span></span>
+                                </div>
+                                <div class="clear"> </div>
+                                <div>
+                                    @Html.Captcha("Làm mới", "Nhập mã", 5)
+                                </div>
+                                <div class="clear"> </div>
+                                <label class="checkbox"><input id="agreeCheckbox" style="margin-left: 0px; -webkit-appearance: auto; position: relative " type="checkbox" name="checkbox"><i></i>Tôi đồng ý với các <a href="#">Điều khoản dịch vụ</a></label>
                             </div>
-                            <div class="styled-input">
-                                @Html.TextBoxFor(model => model.HoTen, new { required = "" })
-                                <label>
-                                    <i class="fa fa fa-address-card"></i> @Html.DisplayNameFor(model => model.HoTen)
-                                </label>
-                                @*@Html.LabelFor(model => model.HoTen, "Họ và tên")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.TextBoxFor(model => model.Email, new { @id = "email", required = "", oninput = "validateEmail()" })
-                                <label>
-                                    <i class="fa fa-envelope"></i> @Html.DisplayNameFor(model => model.Email)
-                                </label>
-                                @*@Html.LabelFor(model => model.Email, "Email")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.PasswordFor(model => model.MatKhau, new { @id = "password", required = "", oninput = "checkPasswordLength();" })
-                                <label>
-                                    <i class="fa fa-lock"></i> @Html.DisplayNameFor(model => model.MatKhau)
-                                </label>
-                                @*@Html.LabelFor(model => model.MatKhau, "Mật khẩu")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.PasswordFor(model => model.MatKhau, new { @id = "confirmPassword", required = "", oninput = "checkPasswordMatch()" })
-                                <label>
-                                    <i class="fa fa-lock"></i> Nhập lại mật khẩu
-                                </label>
-                                @*@Html.LabelFor(model => model.MatKhau, "Nhập lại mật khẩu")*@
-                                <span></span>
-                            </div>
-                            <div class="styled-input">
-                                @Html.TextBoxFor(model => model.SoDienThoai, new { @id = "phone", required = "", oninput = "checkPhoneNumberLength()" })
-                                <label>
-                                    <i class="fa fa-phone"></i> @Html.DisplayNameFor(model => model.SoDienThoai)
-                                </label>
-                                @*@Html.LabelFor(model => model.SoDienThoai, "Số điện thoại")*@
-                                <span></span>
-                            </div>
-                            <div class="clear"> </div>
-                            <div>
-                                @Html.Captcha("Làm mới", "Nhập mã", 5)
-                            </div>
-                            <div class="clear"> </div>
-                            <label class="checkbox"><input id="agreeCheckbox" style="margin-left: 0px; -webkit-appearance: auto; position: relative " type="checkbox" name="checkbox"><i></i>Tôi đồng ý với các <a href="#">Điều khoản dịch vụ</a></label>
-                        </div>
                             <div style="display: flex; justify-content: center">
                                 <input class=".register-button" type="submit" value="Đăng ký">
                             </div>
@@ -221,3 +221,27 @@
     // Gọi hàm validateForm() khi biểu mẫu được gửi đi
     document.querySelector('form').addEventListener('submit', validateForm);
 </script>
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#TaiKhoan").blur(function () {
+            var laygt = $(this).val(); // Lấy giá trị từ textbox
+            if (laygt) {
+                $.ajax({
+                    url: "/Register/KTTaiKhoan", // Thay đổi đường dẫn và tên controller của bạn
+                    data: { username: laygt },
+                    type: "GET",
+                    success: function (result) {
+                        if (result) {
+                            $("#errorTaiKhoan").text('Tên tài khoản đã tồn tại');
+                        }
+                        else {
+                            $("#errorTaiKhoan").text('');
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+

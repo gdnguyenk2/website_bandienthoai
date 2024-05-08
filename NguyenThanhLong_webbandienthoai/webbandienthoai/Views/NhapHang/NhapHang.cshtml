@@ -10,7 +10,6 @@
     IEnumerable<NhaCungCap> lstNCC = ViewBag.MaNCC as IEnumerable<NhaCungCap>;
 }
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
-<script src="~/Scripts/jquery-3.7.1.js"></script>
 @*Hiển thị ngày*@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -46,7 +45,8 @@
             Ngày Nhập
         </div>
         <div class="col-md-5">
-            <input name="NgayNhap" type="text" class="datepicker" />
+            <input name="NgayNhap"  type="text" class="datepicker ngaynhap" />
+            
         </div>
     </div>
     <div class="clearfix"></div>
@@ -140,6 +140,9 @@
         CapNhapID();
     });
     $("#btnNhapHang").click(function () {
+        if (kiemtrangaynhap() == false) {
+            return false;
+        }
         if (kiemtranhapdongia() == false) {
             return false;
         }
@@ -148,12 +151,21 @@
         }
         return true;
     });
-
+    function kiemtrangaynhap() {
+        var bl = true;
+        var ngaynhap = $(".ngaynhap").val();
+        if (ngaynhap == "") {
+            alert("vui lòng nhập ngày nhập");
+            bl = false;
+            return bl;
+        }
+        return bl;
+    }
     function kiemtranhapdongia() {
         var bl = true;
         $(".txtDonGia").each(function () {
             var giatri = $(this).val();
-            if (isNaN(giatri) == true || parseInt(giatri)<0) {
+            if (isNaN(giatri) == true || parseInt(giatri)<=0) {
                 alert("Đơn giá nhập không hợp lệ");
                 bl = false;
                 return bl;
@@ -165,7 +177,7 @@
         var bl = true;
         $(".txtSoLuong").each(function () {
             var giatri = $(this).val();
-            if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+            if (isNaN(giatri) == true || parseInt(giatri) <= 0) {
                 alert("Số lượng nhập không hợp lệ");
                 bl = false;
                 return bl;

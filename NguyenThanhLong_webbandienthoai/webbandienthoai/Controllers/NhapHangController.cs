@@ -21,6 +21,7 @@ namespace webbandienthoai.Controllers
         [HttpPost]
         public ActionResult NhapHang(PhieuNhap Model,IEnumerable<ChiTietPhieuNhap> lstModel)
         {
+            
             //Sau khi kiểm tra dữ liệu đầu vào đúng
             ViewBag.MaNCC = db.NhaCungCaps;
             ViewBag.ListSanPham = db.SanPhams;

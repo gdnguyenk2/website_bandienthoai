@@ -85,7 +85,8 @@
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <a class="review-link" href="#">@Model.LuotXem Lượt xem</a>
+                        <a class="review-link" href="#">Sản phẩm còn @Model.SoLuongTon </a>|
+                        <a class="review-link" href="#">Đã bán @Model.SoLanMua</a>
                     </div>
                     <div>
                         <h3 class="product-price">@string.Format("{0:N0} \u20ab", Model.DonGia) <del class="product-old-price"></del></h3>
@@ -94,7 +95,7 @@
                     <div class="qty-label">
                         <b>Số Lượng</b> 
                         <div class="input-number" style="width: 85px; margin: 12px 0">
-                            <input type="number" class="qutity" value="1">
+                            <input type="number" class="qutity" value="1" readonly>
                             <span class="qty-up">+</span>
                             <span class="qty-down">-</span>
                         </div>

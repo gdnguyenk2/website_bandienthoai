@@ -29,9 +29,20 @@ namespace webbandienthoai.Controllers
         public ActionResult SanPhamPatial2()
         {
             //sp bán chạy
-            var lstBanChay = db.SanPhams.Where(m => m.BanChay == true && m.DaXoa == false).ToList();
-            ViewBag.BanChay = lstBanChay;
-            return PartialView(lstBanChay);
+            List<SanPham> lstsp = new List<SanPham>();
+            var lstBanChay = db.SanPhams.Where(m=> m.DaXoa == false).ToList();
+            foreach(var item in lstBanChay)
+            {
+                if(item.SoLanMua > 5)
+                {
+                    lstsp.Add(item);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            return PartialView(lstsp);
         }
 
         public ActionResult ChiTietSanPham(int? id)
@@ -84,9 +95,20 @@ namespace webbandienthoai.Controllers
         }
         public ActionResult BanChayPhu()
         {
-            var lstBanChay = db.SanPhams.Where(m => m.BanChay == true && m.DaXoa == false).ToList();
-            ViewBag.BanChay = lstBanChay;
-            return PartialView(lstBanChay);
+            List<SanPham> lstsp = new List<SanPham>();
+            var lstBanChay = db.SanPhams.Where(m => m.DaXoa == false).ToList();
+            foreach (var item in lstBanChay)
+            {
+                if (item.SoLanMua > 5)
+                {
+                    lstsp.Add(item);
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            return PartialView(lstsp);
         }
     }
 }

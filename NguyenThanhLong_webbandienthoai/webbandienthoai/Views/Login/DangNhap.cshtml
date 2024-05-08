@@ -48,6 +48,7 @@
                     @Html.PasswordFor(model => model.MatKhau, new{@id = "password",@placeholder = "Mật khẩu", @required = "",oninput = "checkPasswordLength()" })
                 </div>
             </div>
+            <p style="color:red">@ViewBag.Loi</p>
             <div class="forgot">
                 <a href="#">Quên mật khẩu?</a>
                 <p><input type="checkbox">Ghi nhớ tài khoản</p>

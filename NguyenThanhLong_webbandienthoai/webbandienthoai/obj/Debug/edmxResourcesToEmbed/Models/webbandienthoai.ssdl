@@ -94,8 +94,8 @@
     <Property Name="TenKhuyenMai" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="MoTa" Type="nvarchar(max)" />
     <Property Name="PhanTramGiamGia" Type="int" Nullable="false" />
-    <Property Name="NgayBatDau" Type="date" Nullable="false" />
-    <Property Name="NgayKetThuc" Type="date" Nullable="false" />
+    <Property Name="NgayBatDau" Type="datetime" Nullable="false" />
+    <Property Name="NgayKetThuc" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="LoaiSanPham">
     <Key>
@@ -153,6 +153,15 @@
     <Property Name="NgayNhap" Type="datetime" Nullable="false" />
     <Property Name="DaXoa" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="QuangCao">
+    <Key>
+      <PropertyRef Name="MaQuangCao" />
+    </Key>
+    <Property Name="MaQuangCao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenQC" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="HinhAnh" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NgayCapNhat" Type="datetime" />
+  </EntityType>
   <EntityType Name="Quyen">
     <Key>
       <PropertyRef Name="MaQuyen" />
@@ -184,7 +193,6 @@
     <Property Name="LuotBinhLuan" Type="int" />
     <Property Name="SoLanMua" Type="int" />
     <Property Name="Moi" Type="bit" Nullable="false" />
-    <Property Name="BanChay" Type="bit" Nullable="false" />
     <Property Name="DaXoa" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ThanhVien">
@@ -486,6 +494,7 @@
     <EntitySet Name="NhaCungCap" EntityType="Self.NhaCungCap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NhaSanXuat" EntityType="Self.NhaSanXuat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuangCao" EntityType="Self.QuangCao" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ThanhVien" EntityType="Self.ThanhVien" Schema="dbo" store:Type="Tables" />
