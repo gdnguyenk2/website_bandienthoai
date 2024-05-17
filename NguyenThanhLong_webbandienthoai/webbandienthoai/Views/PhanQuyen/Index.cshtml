@@ -76,3 +76,11 @@
 
     )
 )
+<script>
+    $(document).ready(function () {
+        var capquyen = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["capquyen"]))';
+        if (capquyen) {
+            alert(capquyen);
+        }
+    });
+</script>

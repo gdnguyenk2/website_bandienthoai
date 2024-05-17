@@ -64,19 +64,32 @@
 }
 <script>
     $("#btnNhapHang").click(function () {
+        if (kiemtranhapsoluong() == false) {
+            return false;
+        }
         if (kiemtranhapdongia() == false) {
             return false;
         }
-        if (kiemtranhapsoluong() == false) {
+        if (kiemtrangaynhap() == false) {
             return false;
         }
         return true;
     });
+    function kiemtrangaynhap() {
+        var bl = true;
+        var ngaynhap = $("#NgayNhap").val();
+        if (ngaynhap == "") {
+            alert("vui lòng nhập ngày nhập");
+            bl = false;
+            return bl;
+        }
+        return bl;
+    }
 
     function kiemtranhapdongia() {
         var bl = true;
         var giatri = $(".txtDonGia").val();
-        if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+        if (isNaN(giatri) == true || parseInt(giatri) <= 0) {
             alert("Đơn giá nhập không hợp lệ");
             bl = false;
             return bl;
@@ -86,7 +99,7 @@
     function kiemtranhapsoluong() {
         var bl = true;
         var giatri = $(".txtSoLuong").val();
-        if (isNaN(giatri) == true || parseInt(giatri) < 0) {
+        if (isNaN(giatri) == true || parseInt(giatri) <= 0) {
             alert("Số lượng nhập không hợp lệ");
             bl = false;
             return bl;

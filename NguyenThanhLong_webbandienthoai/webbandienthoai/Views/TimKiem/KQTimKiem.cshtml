@@ -36,21 +36,46 @@
             <!-- product -->
             <div class="col-md-4 col-xs-6">
                 <div class="product">
-                    <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
-                        <div class="product-img">
-                            <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="">
-                            <div class="product-label">
-                                @if (percent != 0)
-                                {
-                                    <span class="sale">@percent%</span>
-                                }
-                                @if (item.Moi == true)
-                                {
-                                    <span class="new">NEW</span>
-                                }
+                    @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
+                    {
+                        <a href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.MaSP })">
+                            <div class="product-img">
+                                <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="">
+                                <div class="product-label">
+                                    @if (percent != 0)
+                                    {
+                                        <span class="sale">@percent%</span>
+                                    }
+                                    @if (item.Moi == true)
+                                    {
+                                        <span class="new">NEW</span>
+                                    }
+
+
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("DangNhap", "Login")">
+                            <div class="product-img">
+                                <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="">
+                                <div class="product-label">
+                                    @if (percent != 0)
+                                    {
+                                        <span class="sale">@percent%</span>
+                                    }
+                                    @if (item.Moi == true)
+                                    {
+                                        <span class="new">NEW</span>
+                                    }
+
+
+                                </div>
+                            </div>
+                        </a>
+                    }
                     <div class="product-body">
                         <p class="product-category">@item.NhaSanXuat.TenNSX</p>
                         <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
@@ -62,11 +87,7 @@
                             }
                         </h4>
                         <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                            @Html.Raw(webbandienthoai.Models.Common.html_danhgia(item.DanhGia))
                         </div>
                         <div class="product-btns">
                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Thêm Vào Yêu Thích</span></button>
@@ -94,7 +115,7 @@
     <!-- /store products -->
     <!-- store bottom filter -->
     <div class="dlink">
-        @Html.PagedListPager(Model, page => Url.Action("hienThiLoaiSP", new { page = page, @MaNSX = ViewBag.MaNSX }))
+        @Html.PagedListPager(Model, page => Url.Action("KQTimKiem", new { page = page, @sTuKhoa = ViewBag.TuKhoa }))
     </div>
     <!-- /store bottom filter -->
 </div>
@@ -102,5 +123,11 @@
 <script>
     function redirectToLoginPage() {
         window.location.href = '@Url.Action("DangNhap", "Login")'; // Chuyển hướng đến trang đăng nhập
+    }
+</script>
+<script>
+    var themtc = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["themthanhcong"]))';
+    if (themtc) {
+        alert(themtc);
     }
 </script>

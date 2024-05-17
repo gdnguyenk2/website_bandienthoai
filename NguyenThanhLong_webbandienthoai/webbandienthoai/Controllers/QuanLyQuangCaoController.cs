@@ -7,52 +7,70 @@ using System.Web.Mvc;
 using webbandienthoai.Models;
 namespace webbandienthoai.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class QuanLyQuangCaoController : Controller
     {
         WebBanDienThoaiEntities db = new WebBanDienThoaiEntities();
         // GET: QuanLyQuangCao
         public ActionResult Index()
         {
-            return View(db.QuangCaos.OrderByDescending(n=>n.NgayCapNhat));
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            if (tv != null)
+            {
+                return View(db.QuangCaos.OrderByDescending(n => n.NgayCapNhat));
+            }
+            else
+            {
+                return RedirectToAction("DangNhap","Login");
+            }
         }
         public ActionResult ThemQuangCao()
         {
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ThemQuangCao(QuangCao qc, HttpPostedFileBase HinhAnh)
         {
-            //Kiểm tra hình có tồn tại trong csdl ko
-            if (HinhAnh != null)
+            if (ModelState.IsValid)
             {
-                if (HinhAnh.ContentLength > 0)
+                //Kiểm tra hình có tồn tại trong csdl ko
+                if (HinhAnh != null)
                 {
-                    //Lấy tên hình ảnh
-                    var fileName = Path.GetFileName(HinhAnh.FileName);
-                    //Lấy hình ảnh chuyển vào thư mục hình ảnh
-                    var path = Path.Combine(Server.MapPath("~/Content/Images/Banners"), fileName);
-                    //Nếu thư mục có hình ảnh rồi thì thông báo
-                    if (System.IO.File.Exists(path))
+                    if (HinhAnh.ContentLength > 0)
                     {
-                        ViewBag.upload = "Hình đã tồn tại";
-                        return View(qc);
-                    }
-                    else
-                    {
-                        //Lấy hình ảnh đưa vào thư mục
-                        HinhAnh.SaveAs(path);
-                        qc.HinhAnh = fileName;
+                        //Lấy tên hình ảnh
+                        var fileName = Path.GetFileName(HinhAnh.FileName);
+                        //Lấy hình ảnh chuyển vào thư mục hình ảnh
+                        var path = Path.Combine(Server.MapPath("~/Content/Images/Banners"), fileName);
+                        //Nếu thư mục có hình ảnh rồi thì thông báo
+                        if (System.IO.File.Exists(path))
+                        {
+                            ViewBag.upload = "Hình đã tồn tại";
+                            return View(qc);
+                        }
+                        else
+                        {
+                            //Lấy hình ảnh đưa vào thư mục
+                            HinhAnh.SaveAs(path);
+                            qc.HinhAnh = fileName;
+                        }
                     }
                 }
+                else
+                {
+                    return View(qc);
+                }
+                db.QuangCaos.Add(qc);
+                db.SaveChanges();
+                TempData["themthanhcong"] = "Thêm quảng cáo thành công!";
+                return RedirectToAction("Index");
             }
             else
             {
                 return View(qc);
             }
-            db.QuangCaos.Add(qc);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
         }
         public ActionResult XoaQC(int? id)
         {
@@ -69,6 +87,7 @@ namespace webbandienthoai.Controllers
             return View(qc);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult XoaQC(int MaQuangCao)
         {
             QuangCao qc = db.QuangCaos.SingleOrDefault(n => n.MaQuangCao == MaQuangCao);
@@ -80,7 +99,7 @@ namespace webbandienthoai.Controllers
 
             db.QuangCaos.Remove(qc);
             db.SaveChanges();
-
+            TempData["xoathanhcong"] = "Xóa quảng cáo thành công!";
             return RedirectToAction("Index");
         }
     }

@@ -13,17 +13,25 @@ namespace webbandienthoai.Controllers
         // GET: ThongKe
         public ActionResult Index()
         {
-            ViewBag.SoNguoiTruyCap = HttpContext.Application["SoNguoiTruyCap"];//Lấy số lượng người từ application
-            ViewBag.SoNguoiTrucTuyen = HttpContext.Application["SoNguoiTrucTuyen"];
-            ViewBag.TongDoanhThu = ThongKeDoanhThu();
-            ViewBag.TongDonDatHang = DonDatHang();
-            ViewBag.TongThanhVien = ThanhVien();
-            return View();
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            if (tv != null)
+            {
+                ViewBag.SoNguoiTruyCap = HttpContext.Application["SoNguoiTruyCap"];//Lấy số lượng người từ application
+                ViewBag.SoNguoiTrucTuyen = HttpContext.Application["SoNguoiTrucTuyen"];
+                ViewBag.TongDoanhThu = ThongKeDoanhThu();
+                ViewBag.TongDonDatHang = DonDatHang();
+                ViewBag.TongThanhVien = ThanhVien();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
         }
         protected decimal ThongKeDoanhThu()
         {
 
-            var listRevenue = db.DonDatHangs.Where(row => row.TinhTrang == "Đã giao hàng" && row.DaThanhToan == true);
+            var listRevenue = db.DonDatHangs.Where(row => row.TinhTrang == "Đã giao hàng");
 
             decimal total = decimal.Zero;
             foreach (var item in listRevenue)

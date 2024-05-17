@@ -14,7 +14,7 @@
                 {
                     ThanhVien tv = (ThanhVien)Session["TaiKhoans"];
                     <li><i class="fa fa-car"></i>@Html.ActionLink("Đơn Hàng", "XemDonHang", "DonHang")</li>
-                    <li style="color:#fff"><i class="fa fa-user-o"></i>@tv.HoTen </li>
+                    <li style="color:#fff"><a href="@Url.Action("ThongTinCaNhan","Home")"><i class="fa fa-user-o"></i>@tv.HoTen </a></li>
                     <li><i class="fa fa-lock"></i>@Html.ActionLink("Đăng Xuất", "DangXuat", "Login")</li>
                 }
                 else
@@ -46,7 +46,7 @@
                     <div class="header-search">
                         @using (Html.BeginForm("LayTuKhoaTimKiem", "TimKiem"))
                         { 
-                            <input type="text" name="sTuKhoa" class="input" placeholder="Tìm kiếm ở đây" style="width: calc(100% - 160px); margin-right: -4px; border-radius: 40px 0px 0px 40px;">
+                            <input type="text" name="sTuKhoa" class="input" placeholder="Tìm kiếm ở đây" style="width: calc(100% - 160px); margin-right: -4px; border-radius: 40px 0px 0px 40px;" required="">
                             <input type="submit" class="search-btn" value="Tìm Kiếm"/>
                         }
                     </div>

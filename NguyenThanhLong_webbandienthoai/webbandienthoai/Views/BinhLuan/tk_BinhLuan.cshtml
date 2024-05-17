@@ -1,0 +1,64 @@
+﻿@model IEnumerable<webbandienthoai.Models.BinhLuan>
+<div class="col-md-3">
+    <div id="rating" class="text-center">
+        <div class="rating-avg">
+            <span>@ViewBag.danhgiatb.ToString("#.#")</span>
+
+            <div class="rating-stars">
+                @Html.Raw(webbandienthoai.Models.Common.html_danhgia(ViewBag.nguyendg))
+            </div>
+        </div>
+        <ul class="rating">
+            <li>
+                <div class="rating-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+                <span class="sum"><b style="padding:0 2px">@ViewBag.danhgia5s</b> bình luận</span>
+            </li>
+            <li>
+                <div class="rating-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <span class="sum"><b style="padding:0 2px">@ViewBag.danhgia4s</b> bình luận</span>
+            </li>
+            <li>
+                <div class="rating-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <span class="sum"><b style="padding:0 2px">@ViewBag.danhgia3s</b> bình luận</span>
+            </li>
+            <li>
+                <div class="rating-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <span class="sum"><b style="padding:0 2px">@ViewBag.danhgia2s</b> bình luận</span>
+            </li>
+            <li>
+                <div class="rating-stars">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <span class="sum"><b style="padding:0 2px">@ViewBag.danhgia1s</b> bình luận</span>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -24,6 +24,7 @@ namespace webbandienthoai.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DangKy(ThanhVien tv)
         {
             if (this.IsCaptchaValid("Mã captcha không đúng."))
@@ -44,6 +45,10 @@ namespace webbandienthoai.Controllers
             bool kttaikhoan = db.ThanhViens.Any(row => row.TaiKhoan == username);
             return Json(kttaikhoan, JsonRequestBehavior.AllowGet);
         }
-
+        public JsonResult KTEmail(string email)
+        {
+            bool ktemail = db.ThanhViens.Any(row => row.Email == email);
+            return Json(ktemail, JsonRequestBehavior.AllowGet);
+        }
     }
 }

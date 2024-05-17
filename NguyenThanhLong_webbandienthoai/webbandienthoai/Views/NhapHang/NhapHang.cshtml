@@ -21,7 +21,7 @@
     });
 </script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("NhapHang", "NhapHang", FormMethod.Post, new {@id="formnhaphang"}))
 {
     <div class="row">
         <div class="ThongTinPhieuNhap col-md-12">
@@ -163,7 +163,7 @@
     }
     function kiemtranhapdongia() {
         var bl = true;
-        $(".txtDonGia").each(function () {
+        $(".trAppended .txtDonGia").each(function () {
             var giatri = $(this).val();
             if (isNaN(giatri) == true || parseInt(giatri)<=0) {
                 alert("Đơn giá nhập không hợp lệ");
@@ -175,7 +175,7 @@
     }
     function kiemtranhapsoluong() {
         var bl = true;
-        $(".txtSoLuong").each(function () {
+        $(".trAppended .txtSoLuong").each(function () {
             var giatri = $(this).val();
             if (isNaN(giatri) == true || parseInt(giatri) <= 0) {
                 alert("Số lượng nhập không hợp lệ");
@@ -185,4 +185,25 @@
         });
         return bl;
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#formnhaphang").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("NhapHang","NhapHang")",
+                data: $(this).serialize(),
+                success: function(data){
+                    console.log("Success:", data);
+                    alert(data.message);
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.log("error: ", error);
+                    alert("Có lỗi khi nhập hàng");
+                }
+            });
+        });
+    });
 </script>

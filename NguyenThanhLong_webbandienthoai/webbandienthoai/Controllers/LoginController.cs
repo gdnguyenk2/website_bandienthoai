@@ -22,6 +22,7 @@ namespace webbandienthoai.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DangNhap(ThanhVien truycap, bool RememberMe = false)
         {
             ThanhVien tv = db.ThanhViens.Where(row => row.TaiKhoan == truycap.TaiKhoan && row.MatKhau == truycap.MatKhau).SingleOrDefault();

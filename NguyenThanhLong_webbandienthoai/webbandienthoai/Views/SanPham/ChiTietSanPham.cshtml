@@ -1,5 +1,5 @@
 ﻿@using webbandienthoai.Models;
-@model SanPham
+@model SanPham 
 @{
     ViewBag.Title = "Sản Phẩm";
     Layout = "~/Views/Shared/_Layout_chitietsp.cshtml";
@@ -79,11 +79,7 @@
                     <h2 class="product-name">@Model.TenSP</h2>
                     <div>
                         <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
+                            @Html.Raw(webbandienthoai.Models.Common.html_danhgia(Model.DanhGia))
                         </div>
                         <a class="review-link" href="#">Sản phẩm còn @Model.SoLuongTon </a>|
                         <a class="review-link" href="#">Đã bán @Model.SoLanMua</a>
@@ -144,11 +140,15 @@
             <!-- tab2  -->
             <div id="tab2" class="tab-pane fade in">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="a">
-                            <div class="fb-comments" data-href="@ViewBag.masp" data-width="100%" data-numposts="5"></div>
-                        </div>
-                    </div>
+                    <!-- Rating -->
+                    @Html.Action("tk_BinhLuan", "BinhLuan", new { @MaSP = Model.MaSP })
+                    <!-- /Rating -->
+                    <!-- Reviews -->
+                    @Html.Action("ds_BinhLuan", "BinhLuan", new { @MaSP = Model.MaSP })
+                    <!-- /Reviews -->
+                    <!-- Review Form -->
+                    @Html.Action("Form_BinhLuan", "BinhLuan", new { @MaSP = Model.MaSP })
+                    <!-- /Review Form -->
                 </div>
             </div><br />
             <!-- /tab2  -->
@@ -172,22 +172,47 @@
             </div>
             @foreach (var item in tuongtu.Take(4))
             {
+                decimal? deal = item.DonGia;
+                decimal percent = 0;
+                if (item.MaKhuyenMai != null)
+                {
+                    if (DateTime.Now >= item.KhuyenMai.NgayBatDau && DateTime.Now <= item.KhuyenMai.NgayKetThuc)
+                    {
+                        percent = item.KhuyenMai.PhanTramGiamGia;
+                    }
+                }
+                decimal? price = deal - (deal * (percent / 100));
                 <div class="col-md-3 col-xs-6">
                     <div class="product">
-                        <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
+                        <a href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.MaSP })">
                             <div class="product-img">
-                                <img src="@Url.Content("~/Content/Images/Products/"+ item.HinhAnh)" alt="">
+                                <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="">
                                 <div class="product-label">
-                                    <span class="sale">-30%</span>
-                                    <span class="new">NEW</span>
+                                    @if (percent != 0)
+                                    {
+                                        <span class="sale">@percent%</span>
+                                    }
+                                    @if (item.Moi == true)
+                                    {
+                                        <span class="new">NEW</span>
+                                    }
+
+
                                 </div>
                             </div>
                         </a>
                         <div class="product-body">
                             <p class="product-category">@item.NhaSanXuat.TenNSX</p>
                             <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
-                            <h4 class="product-price">@string.Format("{0:N0} \u20ab", item.DonGia)<del class="product-old-price"></del></h4>
+                            <h4 class="product-price">
+                                @string.Format("{0:N0} \u20ab", price)
+                                @if (price != deal)
+                                {
+                                    <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
+                                }
+                            </h4>
                             <div class="product-rating">
+                                @Html.Raw(webbandienthoai.Models.Common.html_danhgia(item.DanhGia))
                             </div>
                             <div class="product-btns">
                                 <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">yêu thích</span></button>
@@ -202,7 +227,6 @@
                 </div>
             }
             <!-- /product -->
-
         </div>
         <!-- /row -->
     </div>
@@ -215,10 +239,16 @@
             var soluong = $(".qutity").val();
             var id = $(".aurl").attr("data-id");
             var url = $(".aurl").attr("data-url");
-            url = "@Url.Action("ThemGioHang", "GioHang")" + "?iMaSP=" + id + "&sl=" + soluong + "&Url=" + url;
-
-            window.location.href = url;
+            if (soluong <= @Model.SoLuongTon) {
+                alert("Thêm sản phẩm thành công");
+                url = "@Url.Action("ThemGioHang", "GioHang")" + "?iMaSP=" + id + "&sl=" + soluong + "&Url=" + url;
+                window.location.href = url;
+            }
+            else {
+                alert("Sản phẩm hết hàng");
+            }
         })
+
     })
 </script>
 <script>

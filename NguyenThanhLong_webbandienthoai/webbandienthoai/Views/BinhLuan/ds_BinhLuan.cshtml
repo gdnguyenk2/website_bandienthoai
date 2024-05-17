@@ -1,0 +1,23 @@
+﻿@using webbandienthoai.Models
+@model IEnumerable<BinhLuan>
+<div class="col-md-5">
+    <div id="reviews">
+        <ul class="reviews">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="review-heading">
+                        <h5 class="name">@item.ThanhVien.HoTen</h5>
+                        <p class="date">@item.NgayBL.ToString("dd/MM/yyyy")</p>
+                        <div class="review-rating">
+                            @Html.Raw(webbandienthoai.Models.Common.html_danhgia(item.DanhGia))
+                        </div>
+                    </div>
+                    <div class="review-body">
+                        @item.NoiDungBL
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

@@ -6,15 +6,23 @@ using System.Web.Mvc;
 using webbandienthoai.Models;
 namespace webbandienthoai.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class KhuyenMaiController : Controller
     {
         // GET: KhuyenMai
         WebBanDienThoaiEntities db = new WebBanDienThoaiEntities();
         public ActionResult Index()
         {
-            var lstKhuyenMai = db.KhuyenMais.OrderBy(n=>n.PhanTramGiamGia);
-            return View(lstKhuyenMai);
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            if (tv != null)
+            {
+                var lstKhuyenMai = db.KhuyenMais.OrderBy(n => n.PhanTramGiamGia);
+                return View(lstKhuyenMai);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
         }
         public ActionResult ThemKM()
         {
@@ -22,6 +30,7 @@ namespace webbandienthoai.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ThemKM(KhuyenMai km)
         {
             if (ModelState.IsValid) // Kiểm tra dữ liệu đã được nhập đúng chưa
@@ -50,6 +59,7 @@ namespace webbandienthoai.Controllers
             return View(km);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Sua(KhuyenMai km)
         {
             if (ModelState.IsValid) // Kiểm tra dữ liệu đã được nhập đúng chưa
@@ -78,6 +88,7 @@ namespace webbandienthoai.Controllers
             return View(km);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Xoa(int MaKhuyenMai)
         {
             KhuyenMai km = db.KhuyenMais.SingleOrDefault(n => n.MaKhuyenMai == MaKhuyenMai);

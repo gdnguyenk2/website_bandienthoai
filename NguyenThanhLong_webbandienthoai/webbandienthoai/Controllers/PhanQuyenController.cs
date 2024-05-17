@@ -15,11 +15,18 @@ namespace webbandienthoai.Controllers
         // GET: PhanQuyen
         public ActionResult Index()
         {
-            ThanhVien member = Session["TaiKhoans"] as ThanhVien;
-            int currentMemberId = member.MaTV;
-            ViewBag.MaTV = member.MaTV;
-            List<ThanhVien> listMember = db.ThanhViens.ToList();
-            return View(listMember);
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            if (tv == null)
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
+            else
+            {
+                int currentMemberId = tv.MaTV;
+                ViewBag.MaTV = tv.MaTV;
+                List<ThanhVien> listMember = db.ThanhViens.ToList();
+                return View(listMember);
+            }
         }
         public ActionResult CapQuyen(int? MaTV)
         {
@@ -30,10 +37,12 @@ namespace webbandienthoai.Controllers
         [HttpPost]
         public ActionResult CapQuyen(ThanhVien tv)
         {
+
             ThanhVien tvUpdate = db.ThanhViens.SingleOrDefault(row => row.MaTV == tv.MaTV);
 
             tvUpdate.MaLoaiTV = tv.MaLoaiTV;
             db.SaveChanges();
+            TempData["capquyen"] = "Cấp quyền thành công!";
             return RedirectToAction("Index", "PhanQuyen");
         }
         public ActionResult DangXuat()

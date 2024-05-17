@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using webbandienthoai.Models;
 
 namespace webbandienthoai.Controllers
@@ -15,18 +16,80 @@ namespace webbandienthoai.Controllers
         {
             ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
             List<KhachHang> kh = db.KhachHangs.Where(n=>n.MaTV==tv.MaTV).ToList();
-            var listctdonhang = new List<ChiTietDonDatHang>();
-            foreach(var item in kh)
+            var lstiddonhang = new List<DonDatHang>();
+            foreach (var item in kh)
             {
                 var iddonhang = db.DonDatHangs.SingleOrDefault(n => n.MaKH == item.MaKH);
-                var ctdh = db.ChiTietDonDatHangs.Where(n => n.MaDDH == iddonhang.MaDDH);
-                foreach(var item2 in ctdh)
+                if (iddonhang != null)
                 {
-                    listctdonhang.Add(item2);
+                    lstiddonhang.Add(iddonhang);
+                } 
+            }
+
+            return View(lstiddonhang.Where(n => n.TinhTrang == "Chưa phê duyệt" || n.TinhTrang=="Hủy đơn hàng").OrderByDescending(n=>n.NgayDatHang));
+        }
+        [HttpPost]
+        public ActionResult HuyDonHang(int MaDDH)
+        {
+            var ddh = db.DonDatHangs.SingleOrDefault(n=>n.MaDDH==MaDDH);
+            if (ddh != null)
+            {
+                ddh.TinhTrang = "Hủy đơn hàng";
+                db.SaveChanges();
+                return Json(new {message="Đã gửi yêu cầu hủy đơn hàng"});
+            }
+            else
+            {
+                return Json(new { message = "Lỗi khi gửi đơn hàng" });
+            }
+        }
+        public ActionResult DangGiao()
+        {
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            List<KhachHang> kh = db.KhachHangs.Where(n => n.MaTV == tv.MaTV).ToList();
+            var lstiddonhang = new List<DonDatHang>();
+            foreach (var item in kh)
+            {
+                var iddonhang = db.DonDatHangs.SingleOrDefault(n => n.MaKH == item.MaKH);
+                if (iddonhang != null)
+                {
+                    lstiddonhang.Add(iddonhang);
                 }
             }
-            
-            return View(listctdonhang.OrderByDescending(n=>n.DonDatHang.NgayDatHang));
+
+            return View(lstiddonhang.Where(n=>n.TinhTrang=="Đã phê duyệt").OrderByDescending(n => n.NgayDatHang));
+        }
+        public ActionResult DaHoanThanh()
+        {
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            List<KhachHang> kh = db.KhachHangs.Where(n => n.MaTV == tv.MaTV).ToList();
+            var lstiddonhang = new List<DonDatHang>();
+            foreach (var item in kh)
+            {
+                var iddonhang = db.DonDatHangs.SingleOrDefault(n => n.MaKH == item.MaKH);
+                if (iddonhang != null)
+                {
+                    lstiddonhang.Add(iddonhang);
+                }
+            }
+
+            return View(lstiddonhang.Where(n => n.TinhTrang == "Đã giao hàng").OrderByDescending(n => n.NgayDatHang));
+        }
+        public ActionResult DaHuy()
+        {
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            List<KhachHang> kh = db.KhachHangs.Where(n => n.MaTV == tv.MaTV).ToList();
+            var lstiddonhang = new List<DonDatHang>();
+            foreach (var item in kh)
+            {
+                var iddonhang = db.DonDatHangs.SingleOrDefault(n => n.MaKH == item.MaKH);
+                if (iddonhang != null)
+                {
+                    lstiddonhang.Add(iddonhang);
+                }
+            }
+
+            return View(lstiddonhang.Where(n => n.TinhTrang == "Đã hủy").OrderByDescending(n => n.NgayDatHang));
         }
     }
 }

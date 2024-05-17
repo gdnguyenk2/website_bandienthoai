@@ -1,5 +1,5 @@
 ﻿@using webbandienthoai.Models
-@model IEnumerable<ChiTietDonDatHang>
+@model IEnumerable<DonDatHang>
 @{
     ViewBag.Title = "XemDonHang";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -51,6 +51,12 @@
     .kichthuoc {
         width: 100%;
     }
+    .nav-pills > li.active > a{
+        background-color:#000;
+    }
+    .nav-pills > li.active:hover > a {
+        background-color: #000;
+    }
 </style>
 <!-- BREADCRUMB -->
 <div id="breadcrumb" class="section">
@@ -70,54 +76,82 @@
     <!-- /container -->
 </div>
 <!-- /BREADCRUMB -->
-<div class="contact">
-    <h3 class="tittle col-md-12">
-        Đơn Hàng
-        <span class="heading-style">
-            <i></i>
-            <i></i>
-            <i></i>
-        </span>
-    </h3>
+<div class="col-md-12 menudh">
+    <ul class="nav nav-pills" style="background-color:#ff6a00">
+        <li role="presentation" class="active" style="width: 24.9%; text-align: center"><a href="@Url.Action("XemDonHang","DonHang")">Đơn Hàng</a></li>
+        <li role="presentation" style="width: 24.9%; text-align: center"><a href="@Url.Action("DangGiao","DonHang")">Đang Giao Hàng</a></li>
+        <li role="presentation" style="width: 24.9%; text-align: center"><a href="@Url.Action("DaHoanThanh","DonHang")">Đã Giao Hàng</a></li>
+        <li role="presentation" style="width: 24.8%; text-align: center"><a href="@Url.Action("DaHuy","DonHang")">Đã Hủy</a></li>
+    </ul>
 </div>
 <div class="clearfix"></div>
 <div class="all">
     @if (Model == null)
     {
-        <h1 style="text-align:center">Giỏ hàng rỗng !</h1>
+        <h1 style="text-align:center">Đơn hàng rỗng !</h1>
     }
     else
     {
-        <table class="table ab">
-            <tr>
-                <th>Mã Sản Phẩm</th>
-                <th>Hình Ảnh</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Đơn Giá</th>
-                <th>Số Lượng</th>
-                <th>Thành Tiền</th>
-            </tr>
-            @{decimal thanhtien = decimal.Zero;
-                decimal tongtien = decimal.Zero;
-            }
-            @foreach (var item in Model)
+            foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.MaSP</td>
-                    <td><img src="@Url.Content("~/Content/Images/Products/" + item.SanPham.HinhAnh)" width="50" height="50" /></td>
-                    <td>@item.TenSP</td>
-                    <td>@item.DonGia.ToString("#,##") đ</td>
-                    <td>@item.SoLuong</td>
-                    @{thanhtien = item.DonGia * item.SoLuong;
-                        tongtien += thanhtien;}
-                    <td>@thanhtien.ToString("#,##")</td>
-                </tr>
+                <table class="table ab">
+                    <tr>
+                        <th>Mã Sản Phẩm</th>
+                        <th>Hình Ảnh</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Đơn Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Thành Tiền</th>
+                    </tr>
+                    @{decimal thanhtien = decimal.Zero;
+                        decimal tongtien = decimal.Zero;
+                    }
+                    @foreach (var item2 in item.ChiTietDonDatHangs)
+                    {
+                        <tr>
+                            <td>@item2.MaSP</td>
+                            <td><img src="@Url.Content("~/Content/Images/Products/" + item2.SanPham.HinhAnh)" width="50" height="50" /></td>
+                            <td>@item2.TenSP</td>
+                            <td>@item2.DonGia.ToString("#,##") đ</td>
+                            <td>@item2.SoLuong</td>
+                            @{thanhtien = item2.DonGia * item2.SoLuong;
+                                tongtien += thanhtien;}
+                            <td>@thanhtien.ToString("#,##") đ</td>
+                        </tr>
 
+                    }
+                    <tr>
+                        <td class="text-right" colspan="6">
+                            <p>Tổng Tiền: @tongtien.ToString("#,##") đ</p>
+                            <input type="submit" value="Hủy đơn hàng" class="btn btn-danger huy" data-maddh="@item.MaDDH"/>
+                        </td>
+                    </tr>
+                </table>
             }
-            <tr>
-                <td colspan="6" style="text-align:right">Tổng Tiền: @tongtien.ToString("#,##")</td>
-            </tr>
-
-        </table>
     }
 </div>
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".huy").on('click', function () {
+            var xacnhan = confirm("Bạn chắc chắn muốn hủy đơn hàng ?");
+            var maDDH = $(this).data('maddh');
+            if (xacnhan == true) {
+                //đi đến controller xử lý rồi đóng thông báo
+                $.post({
+                    url: "/DonHang/HuyDonHang",
+                    type: "POST",
+                    data: { MaDDH: maDDH },
+                    success: function (data) {
+                        alert(data.message);
+                    },
+                    error: function () {
+                        alert("Đã xảy ra lỗi khi gửi yêu cầu");
+                    }
+                })
+            } else {
+                window.close();
+            }
+        })
+    })
+</script>

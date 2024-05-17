@@ -22,6 +22,8 @@ namespace webbandienthoai.Models
             public string HinhAnh { get; set; }
             [DisplayName("Ngày Cập Nhật")]
             [Required(ErrorMessage = "Ngay cap nhat không được để trống!")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{dd/mm/yyyy}")]
             public Nullable<System.DateTime> NgayCapNhat { get; set; }
         }
     }

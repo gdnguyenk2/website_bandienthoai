@@ -96,7 +96,7 @@ namespace webbandienthoai.Controllers
                     cartDetail.SoLuong = productCheck.SoLuong;
 
                     db.SaveChanges();
-
+                    TempData["themthanhcong"] = "Thêm sản phẩm thành công";
                     return Redirect(Url);
                 }
                 else
@@ -119,7 +119,7 @@ namespace webbandienthoai.Controllers
 
                     db.ChiTietGioHangs.Add(cartDetail);
                     db.SaveChanges();
-
+                    TempData["themthanhcong"] = "Thêm sản phẩm thành công";
                     return Redirect(Url);
                 }
                 else
@@ -257,7 +257,7 @@ namespace webbandienthoai.Controllers
         }
         //Xây dựng chức năng đặt hàng
         [HttpPost]
-        public ActionResult DatHang(KhachHang kh)
+        public ActionResult DatHang(KhachHang kh,string DaThanhToan)
         {
             
             if (LayGioHang() == null)
@@ -278,7 +278,7 @@ namespace webbandienthoai.Controllers
             ddh.MaKH = khang.MaKH;
             ddh.NgayDatHang=DateTime.Now;
             ddh.TinhTrang = "Chưa phê duyệt";
-            ddh.DaThanhToan = false;
+            ddh.DaThanhToan = DaThanhToan;
             ddh.QuaTang = "không";
             ddh.DaXoa = false;
             db.DonDatHangs.Add(ddh);
@@ -308,29 +308,29 @@ namespace webbandienthoai.Controllers
             var sdt = khang.SoDienThoai;
             var email = khang.Email;
             var diachi = khang.DiaChi;
-            foreach(var item in lstGH)
+            foreach (var item in lstGH)
             {
                 strSanPham += "<tr>";
-                strSanPham += "<td>"+item.TenSP+"</td>";
-                strSanPham += "<td>"+item.SoLuong+"</td>";
-                strSanPham += "<td>"+item.DonGia.ToString("#,##")+"</td>";
+                strSanPham += "<td>" + item.TenSP + "</td>";
+                strSanPham += "<td>" + item.SoLuong + "</td>";
+                strSanPham += "<td>" + item.DonGia.ToString("#,##") + "</td>";
                 strSanPham += "</tr>";
                 thanhtien += item.SoLuong * item.DonGia;
 
             }
-            var TongTien = TongThanhTien();
+            /*var TongTien = thanhtien;
             string contentPath = Server.MapPath("~/Common/send2.html");
             string content = System.IO.File.ReadAllText(contentPath);
-            content = content.Replace("{{MaDon}}",ddh.MaDDH.ToString());
+            content = content.Replace("{{MaDon}}", ddh.MaDDH.ToString());
             content = content.Replace("{{NgayDat}}", ddh.NgayDatHang.ToString());
-            content = content.Replace("{{SanPham}}",strSanPham);
-            content = content.Replace("{{ThanhTien}}",thanhtien.ToString("#,##"));
-            content = content.Replace("{{TongTien}}",TongTien.ToString("#,##"));
-            content = content.Replace("{{TenKH}}",tenKh);
-            content = content.Replace("{{SoDienThoai}}",sdt);
-            content = content.Replace("{{Email}}",email);
-            content = content.Replace("{{DiaChi}}",diachi);
-            GuiMail("Đơn đặt hàng từ DragonPhone",email,"dragonphone17@gmail.com", "tgarnlbhgqedgzpt", content);
+            content = content.Replace("{{SanPham}}", strSanPham);
+            content = content.Replace("{{ThanhTien}}", thanhtien.ToString("#,##"));
+            content = content.Replace("{{TongTien}}", TongTien.ToString("#,##"));
+            content = content.Replace("{{TenKH}}", tenKh);
+            content = content.Replace("{{SoDienThoai}}", sdt);
+            content = content.Replace("{{Email}}", email);
+            content = content.Replace("{{DiaChi}}", diachi);
+            GuiMail("Đơn đặt hàng từ DragonPhone", email, "dragonphone17@gmail.com", "tgarnlbhgqedgzpt", content);
             string contentPath2 = Server.MapPath("~/Common/send1.html");
             string content2 = System.IO.File.ReadAllText(contentPath2);
             content2 = content2.Replace("{{MaDon}}", ddh.MaDDH.ToString());
@@ -342,8 +342,8 @@ namespace webbandienthoai.Controllers
             content2 = content2.Replace("{{SoDienThoai}}", sdt);
             content2 = content2.Replace("{{Email}}", email);
             content2 = content2.Replace("{{DiaChi}}", diachi);
+            GuiMail("Đơn đặt hàng mới", "dragonphone17@gmail.com", "dragonphone17@gmail.com", "tgarnlbhgqedgzpt", content2);*/
             int cartId = db.GioHangs.Where(row => row.MaTV == tv.MaTV).Select(row => row.MaGioHang).SingleOrDefault();
-            GuiMail("Đơn đặt hàng mới", "dragonphone17@gmail.com", "dragonphone17@gmail.com", "tgarnlbhgqedgzpt", content2);
             List<ChiTietGioHang> listCartDetail = db.ChiTietGioHangs.Where(row => row.MaGioHang == cartId).ToList();
 
             foreach (var item in listCartDetail)
@@ -355,7 +355,7 @@ namespace webbandienthoai.Controllers
             GioHang cart = db.GioHangs.Where(row => row.MaGioHang == cartId).SingleOrDefault();
             db.GioHangs.Remove(cart);
             db.SaveChanges();
-            return RedirectToAction("XemGioHang","GioHang");
+            return Json(new {message="Đặt hàng thành công"},JsonRequestBehavior.AllowGet);
         }
         public void GuiMail(string Title, string ToEmail, string FromEmail, string PassWord, string Content)
         {

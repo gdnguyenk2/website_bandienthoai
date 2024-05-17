@@ -14,41 +14,62 @@ namespace webbandienthoai.Controllers
         // GET: NhapHang
         public ActionResult NhapHang()
         {
-            ViewBag.MaNCC = db.NhaCungCaps;
-            ViewBag.ListSanPham = db.SanPhams;
-            return View();
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            if (tv != null)
+            {
+                ViewBag.MaNCC = db.NhaCungCaps;
+                ViewBag.ListSanPham = db.SanPhams;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
         }
         [HttpPost]
         public ActionResult NhapHang(PhieuNhap Model,IEnumerable<ChiTietPhieuNhap> lstModel)
         {
-            
             //Sau khi kiểm tra dữ liệu đầu vào đúng
             ViewBag.MaNCC = db.NhaCungCaps;
             ViewBag.ListSanPham = db.SanPhams;
-            //Gán đã xóa bằng false
-            Model.DaXoa = false;
-            db.PhieuNhaps.Add(Model);
-            db.SaveChanges();
-            //lấy MaPN để gán cho bên CHiTietPhieuNhap
-            SanPham sp;
-            foreach ( var item in lstModel)
+            if (lstModel != null)
             {
-                //Cập nhật số lượng tồn trong sp
-                sp = db.SanPhams.Single(n=>n.MaSP==item.MaSP);
-                sp.SoLuongTon += item.SoLuongNhap;
-                item.MaPN = Model.MaPN;
-            }
-            
-            //thêm vào cơ sở dữ liệu với danh sách phương thức AddRange()
-            db.ChiTietPhieuNhaps.AddRange(lstModel);
-            db.SaveChanges();
+                //Gán đã xóa bằng false
+                Model.DaXoa = false;
+                db.PhieuNhaps.Add(Model);
+                db.SaveChanges();
+                //lấy MaPN để gán cho bên CHiTietPhieuNhap
+                SanPham sp;
+                foreach (var item in lstModel)
+                {
+                    //Cập nhật số lượng tồn trong sp
+                    sp = db.SanPhams.Single(n => n.MaSP == item.MaSP);
+                    sp.SoLuongTon += item.SoLuongNhap;
+                    item.MaPN = Model.MaPN;
+                }
 
-            return View();
+                //thêm vào cơ sở dữ liệu với danh sách phương thức AddRange()
+                db.ChiTietPhieuNhaps.AddRange(lstModel);
+                db.SaveChanges();
+                return Json( new {message="Nhập hàng thành công"});
+            }
+            else
+            {
+                return Json(new {message="Nhập hàng không thành công"});
+            }
         }
         public ActionResult DSSapHetHang()
         {
-            var lstSanPham = db.SanPhams.Where(n => n.DaXoa == false && n.SoLuongTon <= 5).ToList();
-            return View(lstSanPham);
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            if (tv != null)
+            {
+                var lstSanPham = db.SanPhams.Where(n => n.DaXoa == false && n.SoLuongTon <= 5).ToList();
+                return View(lstSanPham);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
         }
         //Tạo View để nhập từng sản phẩm
         public ActionResult NhapHangDon(int? MaSP)

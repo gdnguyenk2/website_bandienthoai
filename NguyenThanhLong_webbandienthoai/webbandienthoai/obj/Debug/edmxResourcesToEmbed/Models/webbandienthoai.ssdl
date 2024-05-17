@@ -7,6 +7,8 @@
     <Property Name="MaBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaTV" Type="int" Nullable="false" />
     <Property Name="MaSP" Type="int" Nullable="false" />
+    <Property Name="DanhGia" Type="int" Nullable="false" />
+    <Property Name="NgayBL" Type="datetime" Nullable="false" />
     <Property Name="NoiDungBL" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ChiTietDonDatHang">
@@ -63,9 +65,9 @@
     <Property Name="MaKH" Type="int" />
     <Property Name="NgayDatHang" Type="datetime" Nullable="false" />
     <Property Name="NgayGiao" Type="datetime" />
-    <Property Name="DaThanhToan" Type="bit" Nullable="false" />
+    <Property Name="DaThanhToan" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="QuaTang" Type="nvarchar" MaxLength="255" />
-    <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
+    <Property Name="TinhTrang" Type="nvarchar" MaxLength="100" />
     <Property Name="DaXoa" Type="bit" />
   </EntityType>
   <EntityType Name="GioHang">
@@ -188,9 +190,7 @@
     <Property Name="HinhAnh3" Type="nvarchar(max)" />
     <Property Name="HinhAnh4" Type="nvarchar(max)" />
     <Property Name="SoLuongTon" Type="int" Nullable="false" />
-    <Property Name="LuotXem" Type="int" />
-    <Property Name="LuotBinhChon" Type="int" />
-    <Property Name="LuotBinhLuan" Type="int" />
+    <Property Name="DanhGia" Type="int" />
     <Property Name="SoLanMua" Type="int" />
     <Property Name="Moi" Type="bit" Nullable="false" />
     <Property Name="DaXoa" Type="bit" Nullable="false" />

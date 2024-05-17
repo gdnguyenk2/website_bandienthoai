@@ -12,14 +12,14 @@
     <!-- meta data -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Đăn ký" />
+    <meta name="keywords" content="Đăng ký" />
     <script type="application/x-javascript">
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
                function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //meta data -->
     <link href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700&amp;subset=cyrillic,latin-ext,vietnamese" rel="stylesheet">
     <!-- css files -->
-    <link href="~/Content_Admin/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="@Url.Content("~/Content_Admin/css/style.css")" type="text/css" rel="stylesheet" media="all">
     <!-- //css files -->
     <link href="~/Content_Admin/css/fontawesome-all.css" rel="stylesheet" />
     <style>
@@ -86,12 +86,12 @@
                                     <span></span>
                                 </div>
                                 <div class="styled-input">
-                                    @Html.TextBoxFor(model => model.Email, new { @id = "email", required = "", oninput = "validateEmail()" })
+                                    @Html.TextBoxFor(model => model.Email, new { required = "", oninput = "validateEmail()" })
                                     <label>
                                         <i class="fa fa-envelope"></i> @Html.DisplayNameFor(model => model.Email)
                                     </label>
                                     @*@Html.LabelFor(model => model.Email, "Email")*@
-                                    <span></span>
+                                    <p id="errorEmail" style="color: red;"></p>
                                 </div>
                                 <div class="styled-input">
                                     @Html.PasswordFor(model => model.MatKhau, new { @id = "password", required = "", oninput = "checkPasswordLength();" })
@@ -237,6 +237,28 @@
                         }
                         else {
                             $("#errorTaiKhoan").text('');
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#Email").blur(function () {
+            var laygt = $(this).val(); // Lấy giá trị từ textbox
+            if (laygt) {
+                $.ajax({
+                    url: "/Register/KTEmail", // Thay đổi đường dẫn và tên controller của bạn
+                    data: { email: laygt },
+                    type: "GET",
+                    success: function (result) {
+                        if (result) {
+                            $("#errorEmail").text('Email đã tồn tại');
+                        }
+                        else {
+                            $("#errorEmail").text('');
                         }
                     }
                 });

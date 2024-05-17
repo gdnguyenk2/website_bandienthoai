@@ -40,16 +40,18 @@
     }
 
     .nav li {
-        width: 33.2%;
+        width: 19.8%;
         text-align: center;
     }
 </style>
 <h2 style="margin:10px 0">Quản Lý Đơn Hàng</h2>
 <div class="clear"></div>
 <ul class="nav nav-pills" style="background-color:aqua; width:100%">
-    <li role="presentation"><a href="@Url.Action("PheDuyet","QuanLyDonHang")">Duyệt Đơn Hàng</a></li>
-    <li role="presentation"><a href="@Url.Action("ChuaGiao","QuanLyDonHang")">Đang Giao Hàng</a></li>
-    <li role="presentation" class="active"><a href="@Url.Action("DaGiaoDaThanhToan","QuanLyDonHang")">Đã Giao Và Thanh Toán</a></li>
+    <li role="presentation"><a href="@Url.Action("YeuCauHuy","QuanLyDonHang")">Yêu cầu hủy</a></li>
+    <li role="presentation"><a href="@Url.Action("PheDuyet","QuanLyDonHang")">Duyệt Đơn</a></li>
+    <li role="presentation"><a href="@Url.Action("ChuaGiao","QuanLyDonHang")">Đang Giao</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("DaGiaoDaThanhToan","QuanLyDonHang")">Đã Giao</a></li>
+    <li role="presentation"><a href="@Url.Action("HuyHang","QuanLyDonHang")">Đã Hủy</a></li>
 </ul>
 <br />
 <br />
@@ -65,7 +67,7 @@
     grid.Column("MaKH", "Tên Khách Hàng", format: p => p.MaKH != null ? p.KhachHang.TenKH : ""),
     grid.Column("NgayDatHang", "Ngày Đặt Hàng"),
     grid.Column("NgayGiao", "Ngày Giao"),
-    grid.Column("DaThanhToan", "Thanh Toán", format: p => p.DaThanhToan == true ? "Đã Thanh Toán" : "Chưa Thanh Toán"),
+    grid.Column("DaThanhToan", "Thanh Toán"),
     grid.Column("QuaTang", "Quà tặng"),
     grid.Column("TinhTrang", "Tình Trạng"),
     grid.Column("DaXoa", "Đã Xóa"),

@@ -12,6 +12,8 @@
           <Property Name="MaBinhLuan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaTV" Type="int" Nullable="false" />
           <Property Name="MaSP" Type="int" Nullable="false" />
+          <Property Name="DanhGia" Type="int" Nullable="false" />
+          <Property Name="NgayBL" Type="datetime" Nullable="false" />
           <Property Name="NoiDungBL" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ChiTietDonDatHang">
@@ -68,9 +70,9 @@
           <Property Name="MaKH" Type="int" />
           <Property Name="NgayDatHang" Type="datetime" Nullable="false" />
           <Property Name="NgayGiao" Type="datetime" />
-          <Property Name="DaThanhToan" Type="bit" Nullable="false" />
+          <Property Name="DaThanhToan" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="QuaTang" Type="nvarchar" MaxLength="255" />
-          <Property Name="TinhTrang" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrang" Type="nvarchar" MaxLength="100" />
           <Property Name="DaXoa" Type="bit" />
         </EntityType>
         <EntityType Name="GioHang">
@@ -193,9 +195,7 @@
           <Property Name="HinhAnh3" Type="nvarchar(max)" />
           <Property Name="HinhAnh4" Type="nvarchar(max)" />
           <Property Name="SoLuongTon" Type="int" Nullable="false" />
-          <Property Name="LuotXem" Type="int" />
-          <Property Name="LuotBinhChon" Type="int" />
-          <Property Name="LuotBinhLuan" Type="int" />
+          <Property Name="DanhGia" Type="int" />
           <Property Name="SoLanMua" Type="int" />
           <Property Name="Moi" Type="bit" Nullable="false" />
           <Property Name="DaXoa" Type="bit" Nullable="false" />
@@ -600,6 +600,8 @@
           <Property Name="MaBinhLuan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaTV" Type="Int32" Nullable="false" />
           <Property Name="MaSP" Type="Int32" Nullable="false" />
+          <Property Name="DanhGia" Type="Int32" Nullable="false" />
+          <Property Name="NgayBL" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NoiDungBL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK_BL_SP" FromRole="BinhLuan" ToRole="SanPham" />
           <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BL_TV" FromRole="BinhLuan" ToRole="ThanhVien" />
@@ -666,9 +668,9 @@
           <Property Name="MaKH" Type="Int32" />
           <Property Name="NgayDatHang" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NgayGiao" Type="DateTime" Precision="3" />
-          <Property Name="DaThanhToan" Type="Boolean" Nullable="false" />
+          <Property Name="DaThanhToan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="QuaTang" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TinhTrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DaXoa" Type="Boolean" />
           <NavigationProperty Name="ChiTietDonDatHangs" Relationship="Self.FK_CTDDH_DDH" FromRole="DonDatHang" ToRole="ChiTietDonDatHang" />
           <NavigationProperty Name="KhachHang" Relationship="Self.FK_DDH_KH" FromRole="DonDatHang" ToRole="KhachHang" />
@@ -811,9 +813,7 @@
           <Property Name="HinhAnh3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HinhAnh4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SoLuongTon" Type="Int32" Nullable="false" />
-          <Property Name="LuotXem" Type="Int32" />
-          <Property Name="LuotBinhChon" Type="Int32" />
-          <Property Name="LuotBinhLuan" Type="Int32" />
+          <Property Name="DanhGia" Type="Int32" />
           <Property Name="SoLanMua" Type="Int32" />
           <Property Name="Moi" Type="Boolean" Nullable="false" />
           <Property Name="DaXoa" Type="Boolean" Nullable="false" />
@@ -1230,6 +1230,8 @@
                 <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
                 <ScalarProperty Name="MaTV" ColumnName="MaTV" />
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="DanhGia" ColumnName="DanhGia" />
+                <ScalarProperty Name="NgayBL" ColumnName="NgayBL" />
                 <ScalarProperty Name="NoiDungBL" ColumnName="NoiDungBL" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1428,9 +1430,7 @@
                 <ScalarProperty Name="HinhAnh3" ColumnName="HinhAnh3" />
                 <ScalarProperty Name="HinhAnh4" ColumnName="HinhAnh4" />
                 <ScalarProperty Name="SoLuongTon" ColumnName="SoLuongTon" />
-                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
-                <ScalarProperty Name="LuotBinhChon" ColumnName="LuotBinhChon" />
-                <ScalarProperty Name="LuotBinhLuan" ColumnName="LuotBinhLuan" />
+                <ScalarProperty Name="DanhGia" ColumnName="DanhGia" />
                 <ScalarProperty Name="SoLanMua" ColumnName="SoLanMua" />
                 <ScalarProperty Name="Moi" ColumnName="Moi" />
                 <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />

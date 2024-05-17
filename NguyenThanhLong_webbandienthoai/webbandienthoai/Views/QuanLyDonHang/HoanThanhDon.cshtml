@@ -21,8 +21,16 @@
                             <td>Mã khách hàng:<b style="color:red">@Model.MaKH</b></td>
                             <td>Tên khách hàng:<b style="color:red">@Model.KhachHang.TenKH</b></td>
                             <td>Ngày Đặt:@Model.NgayDatHang.ToString("dd/MM/yyyy")</td>
-                            <td>Đã Thanh toán:@ViewBag.DaThanhToan</td>
-                            <td>Tình Trạng giao:@ViewBag.TinhTrang</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table style="width:100%">
+                        <tr>
+                            <td>Thanh toán: @Model.DaThanhToan</td>
+                            <td>Tình Trạng: @Model.TinhTrang</td>
                         </tr>
                     </table>
                 </td>

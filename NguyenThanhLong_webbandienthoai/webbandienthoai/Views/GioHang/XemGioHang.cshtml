@@ -119,18 +119,18 @@
                     <td>@item.SoLuong</td>
                     <td>@item.ThanhTien.ToString("#,##") đ</td>
                     <td>
-                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP },new{ style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })
-                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP }, new{style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" })
+                        @Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP }, new { style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })
+                        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSP = item.MaSP }, new { style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" })
                     </td>
 
                 </tr>
             }
             <tr>
-                <td colspan="6" style="text-align:right">Tổng Tiền: @ViewBag.TongThanhTien</td>
+                <td colspan="6" style="text-align:right">Tổng Tiền: @ViewBag.TongThanhTien.ToString("#,##") đ</td>
             </tr>
 
         </table>
-        using (Html.BeginForm("DatHang", "GioHang"))
+        using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post, new { @id = "ktdathang" }))
         {
             if (Session["TaiKhoans"] == null)
             {
@@ -186,7 +186,7 @@
                         </tr>
                         <tr>
                             <td style="text-align:right">Họ tên</td>
-                            <td>@Html.TextBox("TenKH", thanhvien.HoTen, new { @class = "kichthuoc" })</td>
+                            <td>@Html.TextBox("TenKH", thanhvien.HoTen, new { @class = "kichthuoc", @disabled = "disabled" })</td>
                         </tr>
                         <tr>
                             <td style="text-align:right">Địa chỉ</td>
@@ -198,16 +198,16 @@
                         <tr>
                             <td style="text-align:right">Email</td>
                             <td>
-                                @Html.TextBox("Email", thanhvien.Email, new { @class = "kichthuoc" })
+                                @Html.TextBox("Email", thanhvien.Email, new { @class = "kichthuoc", @disabled = "disabled" })
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align:right">Điện thoại</td>
-                            <td>@Html.TextBox("SoDienThoai", thanhvien.SoDienThoai, new { @class = "kichthuoc" })</td>
+                            <td>@Html.TextBox("SoDienThoai", thanhvien.SoDienThoai, new { @class = "kichthuoc", @disabled = "disabled" })</td>
                         </tr>
                         <tr>
                             <td style="text-align:right">Phương thức thanh toán</td>
-                            <td><input type="text" value="Thanh Toán Khi Nhận Hàng" readonly style="width:100%"/></td>
+                            <td><input type="text" value="Thanh Toán Khi Nhận Hàng" readonly style="width:100%" name="DaThanhToan" /></td>
                         </tr>
                     </table>
                 </div>
@@ -248,5 +248,27 @@
         return true
     }
 </script>
+<script src="~/Scripts/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#ktdathang").submit(function (e) {
+            e.preventDefault();  // Sửa lỗi đánh máy ở đây
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DatHang","GioHang")",
+                data: $("#ktdathang").serialize(),
+                success: function (data) {
+                    console.log("Success:", data); // Log dữ liệu trả về để kiểm tra
+                    alert(data.message);
+                    window.location.reload();
+                },
+                error: function () {
+                    alert("Đã xảy ra lỗi khi đặt hàng");
+                }
+            });
+        });
+    });
+</script>
+
 
 

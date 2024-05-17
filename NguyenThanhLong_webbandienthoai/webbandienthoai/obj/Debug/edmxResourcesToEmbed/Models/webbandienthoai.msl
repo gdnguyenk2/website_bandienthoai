@@ -7,6 +7,8 @@
           <ScalarProperty Name="MaBinhLuan" ColumnName="MaBinhLuan" />
           <ScalarProperty Name="MaTV" ColumnName="MaTV" />
           <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+          <ScalarProperty Name="DanhGia" ColumnName="DanhGia" />
+          <ScalarProperty Name="NgayBL" ColumnName="NgayBL" />
           <ScalarProperty Name="NoiDungBL" ColumnName="NoiDungBL" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -205,9 +207,7 @@
           <ScalarProperty Name="HinhAnh3" ColumnName="HinhAnh3" />
           <ScalarProperty Name="HinhAnh4" ColumnName="HinhAnh4" />
           <ScalarProperty Name="SoLuongTon" ColumnName="SoLuongTon" />
-          <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
-          <ScalarProperty Name="LuotBinhChon" ColumnName="LuotBinhChon" />
-          <ScalarProperty Name="LuotBinhLuan" ColumnName="LuotBinhLuan" />
+          <ScalarProperty Name="DanhGia" ColumnName="DanhGia" />
           <ScalarProperty Name="SoLanMua" ColumnName="SoLanMua" />
           <ScalarProperty Name="Moi" ColumnName="Moi" />
           <ScalarProperty Name="DaXoa" ColumnName="DaXoa" />

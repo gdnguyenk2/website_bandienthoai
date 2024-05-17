@@ -4,15 +4,6 @@
     ViewBag.Title = "Sửa khuyến mãi";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script>
-    $(function () {
-        $("#datepicker").datepicker();
-    });
-</script>
 
 <h2 style="margin:10px 0">Khuyến Mãi/Sửa khuyến mãi</h2>
 
@@ -53,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NgayBatDau, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                @Html.TextBoxFor(model => model.NgayBatDau, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
                 @Html.ValidationMessageFor(model => model.NgayBatDau, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,7 +52,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NgayKetThuc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
+                @Html.TextBoxFor(model => model.NgayKetThuc, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
                 @Html.ValidationMessageFor(model => model.NgayKetThuc, "", new { @class = "text-danger" })
             </div>
         </div>

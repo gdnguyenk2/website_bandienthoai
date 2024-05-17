@@ -38,10 +38,8 @@ namespace webbandienthoai.Models
         public string HinhAnh3 { get; set; }
         public string HinhAnh4 { get; set; }
         public int SoLuongTon { get; set; }
-        public Nullable<int> LuotXem { get; set; }
-        public Nullable<int> LuotBinhChon { get; set; }
-        public Nullable<int> LuotBinhLuan { get; set; }
-        public Nullable<int> SoLanMua { get; set; }
+        public int DanhGia { get; set; }
+        public int SoLanMua { get; set; }
         public bool Moi { get; set; }
         public bool DaXoa { get; set; }
     

@@ -25,9 +25,13 @@ namespace webbandienthoai.Models
             public int PhanTramGiamGia { get; set; }
             [Required(ErrorMessage = "Ngày bắt đầu không được để trống!")]
             [DisplayName("Ngày Bắt Đầu")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{dd/mm/yyyy}")]
             public Nullable<System.DateTime> NgayBatDau { get; set; }
             [Required(ErrorMessage = "Ngày kết thúc không được để trống!")]
             [DisplayName("Ngày Kết Thúc")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{dd/mm/yyyy}")]
             public Nullable<System.DateTime> NgayKetThuc { get; set; }
         }
     }

@@ -14,7 +14,15 @@ namespace webbandienthoai.Controllers
         // GET: QuanLySanPham
         public ActionResult Index()
         {
-            return View(db.SanPhams.Where(n=>n.DaXoa==false).OrderByDescending(n=>n.MaSP));
+            ThanhVien tv = Session["TaiKhoans"] as ThanhVien;
+            if (tv != null)
+            {
+                return View(db.SanPhams.Where(n => n.DaXoa == false).OrderByDescending(n => n.MaSP));
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
         }
         [HttpGet]
         public ActionResult TimTenSP(string Search)
@@ -33,6 +41,7 @@ namespace webbandienthoai.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult TaoMoi(SanPham sp,HttpPostedFileBase HinhAnh, HttpPostedFileBase HinhAnh2, HttpPostedFileBase HinhAnh3, HttpPostedFileBase HinhAnh4)
         {
             ViewBag.MaNCC = new SelectList(db.NhaCungCaps.OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
@@ -127,9 +136,7 @@ namespace webbandienthoai.Controllers
                 }
                 sp.SoLuongTon = 0;
                 sp.SoLanMua = 0;
-                sp.LuotXem = 0;
-                sp.LuotBinhChon = 0;
-                sp.LuotBinhLuan = 0;
+                sp.DanhGia = 0;
                 db.SanPhams.Add(sp);
                 db.SaveChanges();
                 return RedirectToAction("Index", "QuanLySanPham");
@@ -160,25 +167,26 @@ namespace webbandienthoai.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SuaSP(SanPham sp, HttpPostedFileBase HinhAnh, HttpPostedFileBase HinhAnh2, HttpPostedFileBase HinhAnh3, HttpPostedFileBase HinhAnh4)
-        {
+        {            
             ViewBag.MaNCC = new SelectList(db.NhaCungCaps.OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sp.MaNCC);
             ViewBag.MaNSX = new SelectList(db.NhaSanXuats.OrderBy(n => n.TenNSX), "MaNSX", "TenNSX", sp.MaNSX);
             ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams.OrderBy(n => n.MaLoaiSP), "MaLoaiSP", "TenLoaiSP", sp.MaLoaiSP);
             ViewBag.MaKhuyenMai = new SelectList(db.KhuyenMais.OrderBy(n => n.MaKhuyenMai), "MaKhuyenMai", "TenKhuyenMai", sp.MaKhuyenMai);
             SanPham product = db.SanPhams.Where(row => row.MaSP == sp.MaSP).SingleOrDefault();
-
+            
             product.MaNCC = sp.MaNCC;
             product.MaNSX = sp.MaNSX;
             product.MaLoaiSP = sp.MaLoaiSP;
             product.TenSP = sp.TenSP;
+            product.DonGia = sp.DonGia;
             product.MaKhuyenMai = sp.MaKhuyenMai;
-            product.NgayCapNhat = sp.NgayCapNhat;
-            product.SoLuongTon = sp.SoLuongTon;
-            product.MoTa = sp.MoTa;
             product.CauHinh = sp.CauHinh;
             product.MoTa = sp.MoTa;
             product.DaXoa = sp.DaXoa;
+            product.Moi = sp.Moi;
+            product.NgayCapNhat=sp.NgayCapNhat;
             if (HinhAnh != null && HinhAnh2 != null && HinhAnh3 != null && HinhAnh4 != null)
             {
                 if (HinhAnh.ContentLength > 0)
@@ -292,6 +300,7 @@ namespace webbandienthoai.Controllers
             return View(sp);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult XoaSP(int MaSP)
         {
             SanPham sp = db.SanPhams.SingleOrDefault(row => row.MaSP == MaSP);

@@ -16,9 +16,18 @@
         decimal? price = deal - (deal * (percent / 100));
         <div class="product-widget">
             <div class="product-img">
-                <a href="@Url.Action("ChiTietSanPham","SanPham",new {id=item.MaSP})">
-                    <img src="@Url.Content("~/Content/images/Products/"+item.HinhAnh)" alt="" style="width:60px;height:60px">
-                </a>
+                @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
+                {
+                    <a href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.MaSP })">
+                        <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="" style="width:60px;height:60px">
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("DangNhap", "Login")">
+                        <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="" style="width:60px;height:60px">
+                    </a>
+                }
             </div>
             <div class="product-body">
                 <p class="product-category">@item.NhaSanXuat.TenNSX</p>

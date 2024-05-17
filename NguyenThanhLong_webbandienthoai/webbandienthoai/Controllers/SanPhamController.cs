@@ -8,7 +8,6 @@ using webbandienthoai.Models;
 using PagedList;
 using static System.Net.WebRequestMethods;
 using System.Web.Configuration;
-
 namespace webbandienthoai.Controllers
 {
     public class SanPhamController : Controller
@@ -23,7 +22,7 @@ namespace webbandienthoai.Controllers
             //sp moi
             var lstMoi = db.SanPhams.Where(m => m.Moi == true && m.DaXoa == false).ToList();
             ViewBag.Moi = lstMoi;
-            return PartialView(lstMoi);
+            return PartialView(lstMoi.OrderByDescending(n=>n.NgayCapNhat));
         }
         [ChildActionOnly]
         public ActionResult SanPhamPatial2()
@@ -42,7 +41,7 @@ namespace webbandienthoai.Controllers
                     continue;
                 }
             }
-            return PartialView(lstsp);
+            return PartialView(lstsp.OrderByDescending(n=>n.SoLanMua));
         }
 
         public ActionResult ChiTietSanPham(int? id)
@@ -63,6 +62,44 @@ namespace webbandienthoai.Controllers
             List<SanPham> sp_tuongtu = db.SanPhams.Where(m => m.MaLoaiSP == loaiid.MaLoaiSP).ToList();
             ViewBag.sptuongtu= sp_tuongtu;
             ViewBag.masp = id;
+
+            var dg = db.BinhLuans.Where(n => n.MaSP == id);
+            int tongdg = 0;
+            int danhgia1s = 0;
+            int danhgia2s = 0;
+            int danhgia3s = 0;
+            int danhgia4s = 0;
+            int danhgia5s = 0;
+            foreach (var item in dg)
+            {
+                if (item.DanhGia == 1)
+                {
+                    danhgia1s++;
+                }
+                if (item.DanhGia == 2)
+                {
+                    danhgia2s++;
+                }
+                if (item.DanhGia == 3)
+                {
+                    danhgia3s++;
+                }
+                if (item.DanhGia == 4)
+                {
+                    danhgia4s++;
+                }
+                if (item.DanhGia == 5)
+                {
+                    danhgia5s++;
+                }
+                tongdg++;
+            }
+            ViewBag.tongdg = tongdg;
+            ViewBag.danhgia1s = danhgia1s;
+            ViewBag.danhgia2s = danhgia2s;
+            ViewBag.danhgia3s = danhgia3s;
+            ViewBag.danhgia4s = danhgia4s;
+            ViewBag.danhgia5s = danhgia5s;
             return View(product);
         }
         public ActionResult hienThiLoaiSP(int? MaNSX, int? page)
@@ -82,7 +119,7 @@ namespace webbandienthoai.Controllers
             }
             //thực hiện phân trang sản phẩm
             //Tạo biến số sản phẩm trên trang
-            int PageSize = 9;
+            int PageSize = 6;
             //Tạo biến thứ 2 : số trang hiện tại
             int PageNumber = (page ?? 1);
             ViewBag.MaNSX = MaNSX;
@@ -108,7 +145,7 @@ namespace webbandienthoai.Controllers
                     continue;
                 }
             }
-            return PartialView(lstsp);
+            return PartialView(lstsp.OrderByDescending(n=>n.SoLanMua));
         }
     }
 }

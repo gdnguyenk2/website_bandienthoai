@@ -139,6 +139,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaoHanhController.cs" />
+    <Compile Include="Controllers\BinhLuanController.cs" />
     <Compile Include="Controllers\CauHoiController.cs" />
     <Compile Include="Controllers\DonHangController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Models\ChiTietPhieuNhap.cs">
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Common.cs" />
     <Compile Include="Models\CongNo.cs">
       <DependentUpon>webbandienthoai.tt</DependentUpon>
     </Compile>
@@ -410,7 +412,6 @@
     <Content Include="Content_Admin\css\fontawesome-all.css" />
     <Content Include="Content_Admin\css\style.css" />
     <Content Include="Content_Admin\css\style_login.css" />
-    <Content Include="Content_Admin\images\4.jpg" />
     <Content Include="Content_Admin\images\cover4.jpg" />
     <Content Include="Content_Admin\js\tinymce\icons\default\icons.min.js" />
     <Content Include="Content_Admin\js\tinymce\models\dom\model.min.js" />
@@ -658,7 +659,6 @@
     <Content Include="Views\Shared\_Layout_Admin.cshtml" />
     <Content Include="Views\QuanLySanPham\Index.cshtml" />
     <Content Include="Views\QuanLySanPham\TaoMoi.cshtml" />
-    <Content Include="Views\QuanLySanPham\SuaSP.cshtml" />
     <Content Include="Views\QuanLySanPham\XoaSP.cshtml" />
     <Content Include="Views\NhapHang\NhapHang.cshtml" />
     <Content Include="Views\NhapHang\DSSapHetHang.cshtml" />
@@ -691,6 +691,18 @@
     <Content Include="Views\QuanLyQuangCao\Index.cshtml" />
     <Content Include="Views\QuanLyQuangCao\ThemQuangCao.cshtml" />
     <Content Include="Views\QuanLyQuangCao\XoaQC.cshtml" />
+    <Content Include="Views\BinhLuan\Form_BinhLuan.cshtml" />
+    <Content Include="Views\BinhLuan\ds_BinhLuan.cshtml" />
+    <Content Include="Views\BinhLuan\tk_BinhLuan.cshtml" />
+    <Content Include="Views\QuanLyDonHang\HuyHang.cshtml" />
+    <Content Include="Views\QuanLyDonHang\YeuCauHuy.cshtml" />
+    <Content Include="Views\QuanLyDonHang\HuyDonHang.cshtml" />
+    <Content Include="Views\DonHang\DangGiao.cshtml" />
+    <Content Include="Views\DonHang\DaHoanThanh.cshtml" />
+    <Content Include="Views\DonHang\DaHuy.cshtml" />
+    <Content Include="Views\QuanLySanPham\SuaSP.cshtml" />
+    <Content Include="Views\Home\ThongTinCaNhan.cshtml" />
+    <Content Include="Views\Home\ThayMatKhau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,7 +6,7 @@
     <!-- row -->
     <div class="row">
         <div class="col-md-12">
-            <div id="myCarousel" class="carousel slide">
+            <div id="myCarousel" class="carousel slide" >
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     @foreach (var item in Model)
@@ -52,14 +52,14 @@
             var nextSlide;
 
             if (control.hasClass('left')) {
-                nextSlide = currentSlide.prev('.item');
-                if (nextSlide.length === 0) {
-                    nextSlide = carousel.find('.item:last');
-                }
-            } else {
-                nextSlide = currentSlide.next('.item');
+                nextSlide = currentSlide.prev('.item').next();
                 if (nextSlide.length === 0) {
                     nextSlide = carousel.find('.item:first');
+                }
+            } else {
+                nextSlide = currentSlide.next('.item').prev();
+                if (nextSlide.length === 0) {
+                    nextSlide = carousel.find('.item:last');
                 }
             }
 

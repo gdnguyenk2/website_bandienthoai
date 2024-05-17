@@ -27,6 +27,8 @@ namespace webbandienthoai.Models
             public Nullable<decimal> DonGia { get; set; }
             [Required(ErrorMessage ="Ngày cập nhật không được bỏ trống!")]
             [DisplayName("Ngày cập nhật")]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
             public Nullable<System.DateTime> NgayCapNhat { get; set; }
             [Required(ErrorMessage ="Mô tả không được bỏ trống!")]
             [DisplayName("Mô tả")]
@@ -49,14 +51,10 @@ namespace webbandienthoai.Models
             [Required(ErrorMessage = "Số lượng tồn không được để trống!")]
             [DisplayName("Số lượng Tồn")]
             public int SoLuongTon { get; set; }
-            [DisplayName("Lượt Xem")]
-            public Nullable<int> LuotXem { get; set; }
-            [DisplayName("Lượt Bình Chọn")]
-            public Nullable<int> LuotBinhChon { get; set; }
-            [DisplayName("Lượt Bình Luận")]
-            public Nullable<int> LuotBinhLuan { get; set; }
+            [DisplayName("Đánh giá")]
+            public int DanhGia { get; set; }
             [DisplayName("Số Lần Mua")]
-            public Nullable<int> SoLanMua { get; set; }
+            public int SoLanMua { get; set; }
             [DisplayName("Mới")]
             public bool Moi { get; set; }
             [DisplayName("Đã Xóa")]

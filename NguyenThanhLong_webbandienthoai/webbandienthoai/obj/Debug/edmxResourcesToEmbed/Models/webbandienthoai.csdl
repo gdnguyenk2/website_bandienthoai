@@ -7,6 +7,8 @@
     <Property Name="MaBinhLuan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="MaTV" Type="Int32" Nullable="false" />
     <Property Name="MaSP" Type="Int32" Nullable="false" />
+    <Property Name="DanhGia" Type="Int32" Nullable="false" />
+    <Property Name="NgayBL" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NoiDungBL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="SanPham" Relationship="Self.FK_BL_SP" FromRole="BinhLuan" ToRole="SanPham" />
     <NavigationProperty Name="ThanhVien" Relationship="Self.FK_BL_TV" FromRole="BinhLuan" ToRole="ThanhVien" />
@@ -73,9 +75,9 @@
     <Property Name="MaKH" Type="Int32" />
     <Property Name="NgayDatHang" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="NgayGiao" Type="DateTime" Precision="3" />
-    <Property Name="DaThanhToan" Type="Boolean" Nullable="false" />
+    <Property Name="DaThanhToan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="QuaTang" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="TinhTrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TinhTrang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="DaXoa" Type="Boolean" />
     <NavigationProperty Name="ChiTietDonDatHangs" Relationship="Self.FK_CTDDH_DDH" FromRole="DonDatHang" ToRole="ChiTietDonDatHang" />
     <NavigationProperty Name="KhachHang" Relationship="Self.FK_DDH_KH" FromRole="DonDatHang" ToRole="KhachHang" />
@@ -218,9 +220,7 @@
     <Property Name="HinhAnh3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="HinhAnh4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SoLuongTon" Type="Int32" Nullable="false" />
-    <Property Name="LuotXem" Type="Int32" />
-    <Property Name="LuotBinhChon" Type="Int32" />
-    <Property Name="LuotBinhLuan" Type="Int32" />
+    <Property Name="DanhGia" Type="Int32" />
     <Property Name="SoLanMua" Type="Int32" />
     <Property Name="Moi" Type="Boolean" Nullable="false" />
     <Property Name="DaXoa" Type="Boolean" Nullable="false" />
