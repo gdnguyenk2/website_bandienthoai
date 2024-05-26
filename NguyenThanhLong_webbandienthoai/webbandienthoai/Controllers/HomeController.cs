@@ -18,7 +18,7 @@ namespace webbandienthoai.Controllers
         public ActionResult Slider()
         {
             var listQuangCao = db.QuangCaos;
-            return PartialView(listQuangCao);
+            return PartialView(listQuangCao.OrderByDescending(n=>n.NgayCapNhat));
         }
         public ActionResult MenuPar()
         {

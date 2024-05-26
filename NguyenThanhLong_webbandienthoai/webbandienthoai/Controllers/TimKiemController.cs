@@ -24,7 +24,7 @@ namespace webbandienthoai.Controllers
             //Tạo biến thứ 2 : số trang hiện tại
             int PageNumber = (page ?? 1);
             //Tìm kiếm theo tên sản phẩm
-            var lstSP = db.SanPhams.Where(n=>n.TenSP.Contains(sTuKhoa));
+            var lstSP = db.SanPhams.Where(n=>n.TenSP.Contains(sTuKhoa) && n.DaXoa==false);
             ViewBag.TuKhoa = sTuKhoa;
             return View(lstSP.OrderBy(n=>n.TenSP).ToPagedList(PageNumber,PageSize));
         }

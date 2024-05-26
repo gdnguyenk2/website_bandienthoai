@@ -8,6 +8,7 @@ using webbandienthoai.Models;
 using PagedList;
 using static System.Net.WebRequestMethods;
 using System.Web.Configuration;
+using Microsoft.Ajax.Utilities;
 namespace webbandienthoai.Controllers
 {
     public class SanPhamController : Controller
@@ -57,10 +58,6 @@ namespace webbandienthoai.Controllers
             {
                 return HttpNotFound();
             }
-
-            LoaiSanPham loaiid= db.LoaiSanPhams.SingleOrDefault(m=>m.MaLoaiSP ==product.MaLoaiSP);
-            List<SanPham> sp_tuongtu = db.SanPhams.Where(m => m.MaLoaiSP == loaiid.MaLoaiSP).ToList();
-            ViewBag.sptuongtu= sp_tuongtu;
             ViewBag.masp = id;
 
             var dg = db.BinhLuans.Where(n => n.MaSP == id);
@@ -108,7 +105,7 @@ namespace webbandienthoai.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var lstSP = db.SanPhams.Where(n =>n.MaNSX == MaNSX);
+            var lstSP = db.SanPhams.Where(n =>n.MaNSX == MaNSX && n.DaXoa==false);
             if(lstSP.Count() == 0)
             {
                 return HttpNotFound();
@@ -146,6 +143,19 @@ namespace webbandienthoai.Controllers
                 }
             }
             return PartialView(lstsp.OrderByDescending(n=>n.SoLanMua));
+        }
+        public ActionResult SanPhamTuongTu(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            SanPham product = db.SanPhams.Where(row => row.MaSP == id && row.DaXoa == false).SingleOrDefault();
+
+            LoaiSanPham loaiid = db.LoaiSanPhams.SingleOrDefault(m => m.MaLoaiSP == product.MaLoaiSP);
+            List<SanPham> sp_tuongtu = db.SanPhams.Where(m => m.MaLoaiSP == loaiid.MaLoaiSP).ToList();
+            return PartialView(sp_tuongtu);
         }
     }
 }

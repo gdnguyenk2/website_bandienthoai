@@ -49,16 +49,6 @@
     <NavigationProperty Name="PhieuNhap" Relationship="Self.FK_CTPN_PN" FromRole="ChiTietPhieuNhap" ToRole="PhieuNhap" />
     <NavigationProperty Name="SanPham" Relationship="Self.FK_CTPN_SP" FromRole="ChiTietPhieuNhap" ToRole="SanPham" />
   </EntityType>
-  <EntityType Name="CongNo">
-    <Key>
-      <PropertyRef Name="MaCongNo" />
-    </Key>
-    <Property Name="MaCongNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaNCC" Type="Int32" Nullable="false" />
-    <Property Name="SoTienNo" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="NgayCongNo" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="NhaCungCap" Relationship="Self.FK_CongNo_NCC" FromRole="CongNo" ToRole="NhaCungCap" />
-  </EntityType>
   <EntityType Name="DanhMuc">
     <Key>
       <PropertyRef Name="MaDanhMuc" />
@@ -159,7 +149,6 @@
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SoDienThoai" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CongNoes" Relationship="Self.FK_CongNo_NCC" FromRole="NhaCungCap" ToRole="CongNo" />
     <NavigationProperty Name="PhieuNhaps" Relationship="Self.FK_PN_NCC" FromRole="NhaCungCap" ToRole="PhieuNhap" />
     <NavigationProperty Name="SanPhams" Relationship="Self.FK_SP_NCC" FromRole="NhaCungCap" ToRole="SanPham" />
   </EntityType>
@@ -220,8 +209,8 @@
     <Property Name="HinhAnh3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="HinhAnh4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SoLuongTon" Type="Int32" Nullable="false" />
-    <Property Name="DanhGia" Type="Int32" />
-    <Property Name="SoLanMua" Type="Int32" />
+    <Property Name="DanhGia" Type="Int32" Nullable="false" />
+    <Property Name="SoLanMua" Type="Int32" Nullable="false" />
     <Property Name="Moi" Type="Boolean" Nullable="false" />
     <Property Name="DaXoa" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="BinhLuans" Relationship="Self.FK_BL_SP" FromRole="SanPham" ToRole="BinhLuan" />
@@ -348,20 +337,6 @@
       </Principal>
       <Dependent Role="ChiTietPhieuNhap">
         <PropertyRef Name="MaSP" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CongNo_NCC">
-    <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NhaCungCap">
-        <PropertyRef Name="MaNCC" />
-      </Principal>
-      <Dependent Role="CongNo">
-        <PropertyRef Name="MaNCC" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -524,7 +499,6 @@
     <EntitySet Name="ChiTietDonDatHangs" EntityType="Self.ChiTietDonDatHang" />
     <EntitySet Name="ChiTietGioHangs" EntityType="Self.ChiTietGioHang" />
     <EntitySet Name="ChiTietPhieuNhaps" EntityType="Self.ChiTietPhieuNhap" />
-    <EntitySet Name="CongNoes" EntityType="Self.CongNo" />
     <EntitySet Name="DanhMucs" EntityType="Self.DanhMuc" />
     <EntitySet Name="DonDatHangs" EntityType="Self.DonDatHang" />
     <EntitySet Name="GioHangs" EntityType="Self.GioHang" />
@@ -571,10 +545,6 @@
     <AssociationSet Name="FK_CTPN_SP" Association="Self.FK_CTPN_SP">
       <End Role="SanPham" EntitySet="SanPhams" />
       <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhaps" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CongNo_NCC" Association="Self.FK_CongNo_NCC">
-      <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
-      <End Role="CongNo" EntitySet="CongNoes" />
     </AssociationSet>
     <AssociationSet Name="FK_LSP_DM" Association="Self.FK_LSP_DM">
       <End Role="DanhMuc" EntitySet="DanhMucs" />

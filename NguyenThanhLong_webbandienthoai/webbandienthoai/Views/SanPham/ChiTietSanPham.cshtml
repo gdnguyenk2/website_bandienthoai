@@ -6,6 +6,16 @@
 }
 @{
     IEnumerable<SanPham> tuongtu = (IEnumerable<SanPham>)ViewBag.sptuongtu;
+    decimal? deal = Model.DonGia;
+    decimal percent = 0;
+    if (Model.MaKhuyenMai != null)
+    {
+        if (DateTime.Now >= Model.KhuyenMai.NgayBatDau && DateTime.Now <= Model.KhuyenMai.NgayKetThuc)
+        {
+            percent = Model.KhuyenMai.PhanTramGiamGia;
+        }
+    }
+    decimal? price = deal - (deal * (percent / 100));
 }
 <script src="~/Scripts/jquery-3.7.1.min.js"></script>
 <!-- BREADCRUMB -->
@@ -85,7 +95,13 @@
                         <a class="review-link" href="#">Đã bán @Model.SoLanMua</a>
                     </div>
                     <div>
-                        <h3 class="product-price">@string.Format("{0:N0} \u20ab", Model.DonGia) <del class="product-old-price"></del></h3>
+                        <h3 class="product-price">
+                            @string.Format("{0:N0} \u20ab", price)
+                            @if (price != deal)
+                            {
+                                <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
+                            }
+                        </h3>
                     </div>
                     <p>@Html.Raw(Model.MoTa)</p>
                     <div class="qty-label">
@@ -99,9 +115,7 @@
                     <div class="add-to-cart">
                         @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
                         {
-                            <a href="#" data-id="@Model.MaSP" data-url="@Request.Url.ToString()" class="aurl">
-                                <button class="add-to-cart-btn btnthemgiohang" data-id="@Model.MaSP"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
-                            </a>
+                            <button class="add-to-cart-btn btnthem" onclick="themgiohang(@Model.MaSP)"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
                         }
                         else
                         {
@@ -158,101 +172,35 @@
     </div>
 </div>
 <!-- /product tab -->
-<!-- /SECTION -->
-<div class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-
-            <div class="col-md-12">
-                <div class="section-title text-center">
-                    <h3 class="title">Sản Phẩm tương tự</h3>
-                </div>
-            </div>
-            @foreach (var item in tuongtu.Take(4))
-            {
-                decimal? deal = item.DonGia;
-                decimal percent = 0;
-                if (item.MaKhuyenMai != null)
-                {
-                    if (DateTime.Now >= item.KhuyenMai.NgayBatDau && DateTime.Now <= item.KhuyenMai.NgayKetThuc)
-                    {
-                        percent = item.KhuyenMai.PhanTramGiamGia;
-                    }
-                }
-                decimal? price = deal - (deal * (percent / 100));
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <a href="@Url.Action("ChiTietSanPham", "SanPham", new { id = item.MaSP })">
-                            <div class="product-img">
-                                <img src="@Url.Content("~/Content/images/Products/" + item.HinhAnh)" alt="">
-                                <div class="product-label">
-                                    @if (percent != 0)
-                                    {
-                                        <span class="sale">@percent%</span>
-                                    }
-                                    @if (item.Moi == true)
-                                    {
-                                        <span class="new">NEW</span>
-                                    }
-
-
-                                </div>
-                            </div>
-                        </a>
-                        <div class="product-body">
-                            <p class="product-category">@item.NhaSanXuat.TenNSX</p>
-                            <h3 class="product-name"><a href="#">@item.TenSP</a></h3>
-                            <h4 class="product-price">
-                                @string.Format("{0:N0} \u20ab", price)
-                                @if (price != deal)
-                                {
-                                    <del class="product-old-price">@string.Format("{0:N0} \u20ab", deal)</del>
-                                }
-                            </h4>
-                            <div class="product-rating">
-                                @Html.Raw(webbandienthoai.Models.Common.html_danhgia(item.DanhGia))
-                            </div>
-                            <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">yêu thích</span></button>
-                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">so sánh</span></button>
-                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">chi tiết</span></button>
-                            </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
-                        </div>
-                    </div>
-                </div>
-            }
-            <!-- /product -->
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<script>
-    $(document).ready(function () {
-        $(".btnthemgiohang").click(function (e) {
-            e.preventDefault();
-            var soluong = $(".qutity").val();
-            var id = $(".aurl").attr("data-id");
-            var url = $(".aurl").attr("data-url");
-            if (soluong <= @Model.SoLuongTon) {
-                alert("Thêm sản phẩm thành công");
-                url = "@Url.Action("ThemGioHang", "GioHang")" + "?iMaSP=" + id + "&sl=" + soluong + "&Url=" + url;
-                window.location.href = url;
-            }
-            else {
-                alert("Sản phẩm hết hàng");
-            }
-        })
-
-    })
-</script>
+@Html.Action("SanPhamTuongTu", "SanPham", new {@id=Model.MaSP})
 <script>
     function redirectToLoginPage() {
         window.location.href = '@Url.Action("DangNhap", "Login")'; // Chuyển hướng đến trang đăng nhập
+    }
+</script>
+<script>
+    function themgiohang(iMaSP) {
+        var sl = $(".qutity").val();
+        console.log(sl);
+        $.ajax({
+            url: '@Url.Action("ThemGioHang", "GioHang")',
+            type: 'POST',
+            data: {
+                iMaSP: iMaSP,
+                sl: sl
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message); // Thông báo thành công
+                    window.location.reload();
+                } else {
+                    alert(response.message); // Thông báo lỗi
+                }
+            },
+            error: function (e) {
+                console.log(e);
+                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            }
+        });
     }
 </script>

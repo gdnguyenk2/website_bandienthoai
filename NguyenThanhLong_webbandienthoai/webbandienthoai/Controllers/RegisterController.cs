@@ -9,6 +9,7 @@ using webbandienthoai.Models;
 using CaptchaMvc.HtmlHelpers;
 using CaptchaMvc;
 using Microsoft.Ajax.Utilities;
+using System.Web.Helpers;
 namespace webbandienthoai.Controllers
 {
     public class RegisterController : Controller
@@ -31,10 +32,21 @@ namespace webbandienthoai.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var kttaikhoan = db.ThanhViens.Any(row => row.TaiKhoan == tv.TaiKhoan);
+                    if (kttaikhoan)
+                    {
+                        return View();
+                    }
+                    var ktemail = db.ThanhViens.Any(row => row.Email == tv.Email);
+                    if (ktemail)
+                    {
+                        return View();
+                    }
+                    tv.HinhDaiDien = "default.png";
                     db.ThanhViens.Add(tv);
                     db.SaveChanges();
-
-                    return RedirectToAction("Index", "Home");
+                    TempData["dktc"] = "Đăng ký thành công";
+                    return RedirectToAction("DangNhap", "Login");
                 }
             }
 

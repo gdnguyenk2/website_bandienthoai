@@ -3,32 +3,8 @@
   "WorkspaceRootPath": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\views\\sanpham\\sanphampatial2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\views\\sanpham\\sanphampatial2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\views\\sanpham\\hienthiloaisp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\views\\sanpham\\hienthiloaisp.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\views\\timkiem\\kqtimkiem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\views\\timkiem\\kqtimkiem.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\views\\sanpham\\sanphampatial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\views\\sanpham\\sanphampatial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\views\\sanpham\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\views\\sanpham\\chitietsanpham.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\controllers\\sanphamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\controllers\\sanphamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|d:\\doan\\nguyenthanhlong_webbandienthoai\\webbandienthoai\\controllers\\timkiemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{696CA139-4663-4B9F-9254-A72A75D43235}|webbandienthoai\\webbandienthoai.csproj|solutionrelative:webbandienthoai\\controllers\\timkiemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,93 +22,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "hienThiLoaiSP.cshtml",
-              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\hienThiLoaiSP.cshtml",
-              "RelativeDocumentMoniker": "webbandienthoai\\Views\\SanPham\\hienThiLoaiSP.cshtml",
-              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\hienThiLoaiSP.cshtml",
-              "RelativeToolTip": "webbandienthoai\\Views\\SanPham\\hienThiLoaiSP.cshtml",
-              "ViewState": "AQIAAHAAAAAAAAAAAAAAAIIAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-17T03:49:43.405Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "KQTimKiem.cshtml",
-              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\TimKiem\\KQTimKiem.cshtml",
-              "RelativeDocumentMoniker": "webbandienthoai\\Views\\TimKiem\\KQTimKiem.cshtml",
-              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\TimKiem\\KQTimKiem.cshtml",
-              "RelativeToolTip": "webbandienthoai\\Views\\TimKiem\\KQTimKiem.cshtml",
-              "ViewState": "AQIAAFQAAAAAAAAAAAAAAIUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-17T03:49:24.248Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SanPhamPatial2.cshtml",
-              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\SanPhamPatial2.cshtml",
-              "RelativeDocumentMoniker": "webbandienthoai\\Views\\SanPham\\SanPhamPatial2.cshtml",
-              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\SanPhamPatial2.cshtml",
-              "RelativeToolTip": "webbandienthoai\\Views\\SanPham\\SanPhamPatial2.cshtml",
-              "ViewState": "AQIAAHIAAAAAAAAAAAAAAIEAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-17T03:49:07.875Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SanPhamPatial.cshtml",
-              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\SanPhamPatial.cshtml",
-              "RelativeDocumentMoniker": "webbandienthoai\\Views\\SanPham\\SanPhamPatial.cshtml",
-              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\SanPhamPatial.cshtml",
-              "RelativeToolTip": "webbandienthoai\\Views\\SanPham\\SanPhamPatial.cshtml",
-              "ViewState": "AQIAAG4AAAAAAAAAAAAIwIcAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-17T03:35:48.365Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GioHangController.cs",
-              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Controllers\\GioHangController.cs",
-              "RelativeDocumentMoniker": "webbandienthoai\\Controllers\\GioHangController.cs",
-              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Controllers\\GioHangController.cs",
-              "RelativeToolTip": "webbandienthoai\\Controllers\\GioHangController.cs",
-              "ViewState": "AQIAAHABAAAAAAAAAAAQwHkAAABLAAAA",
+              "Title": "TimKiemController.cs",
+              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Controllers\\TimKiemController.cs",
+              "RelativeDocumentMoniker": "webbandienthoai\\Controllers\\TimKiemController.cs",
+              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Controllers\\TimKiemController.cs",
+              "RelativeToolTip": "webbandienthoai\\Controllers\\TimKiemController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T02:45:03.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ChiTietSanPham.cshtml",
-              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\ChiTietSanPham.cshtml",
-              "RelativeDocumentMoniker": "webbandienthoai\\Views\\SanPham\\ChiTietSanPham.cshtml",
-              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Views\\SanPham\\ChiTietSanPham.cshtml",
-              "RelativeToolTip": "webbandienthoai\\Views\\SanPham\\ChiTietSanPham.cshtml",
-              "ViewState": "AQIAAOQAAAAAAAAAAAAAAPIAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-17T02:41:41.979Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SanPhamController.cs",
-              "DocumentMoniker": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Controllers\\SanPhamController.cs",
-              "RelativeDocumentMoniker": "webbandienthoai\\Controllers\\SanPhamController.cs",
-              "ToolTip": "D:\\DoAn\\NguyenThanhLong_webbandienthoai\\webbandienthoai\\Controllers\\SanPhamController.cs",
-              "RelativeToolTip": "webbandienthoai\\Controllers\\SanPhamController.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAYwDAAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-17T02:41:37.351Z",
+              "WhenOpened": "2024-05-26T06:26:18.64Z",
               "EditorCaption": ""
             }
           ]

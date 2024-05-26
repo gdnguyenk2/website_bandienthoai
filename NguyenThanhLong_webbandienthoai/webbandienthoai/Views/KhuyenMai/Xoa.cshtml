@@ -38,14 +38,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NgayBatDau, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.TextBoxFor(model => model.NgayBatDau, "{0:yyyy-MM-dd}",new { @class = "form-control", @disabled = "disabled",type="date" } )
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.NgayKetThuc, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.TextBoxFor(model => model.NgayKetThuc, "{0:yyyy-MM-dd}",new { @class = "form-control", @disabled = "disabled", type = "date" } )
             </div>
         </div>
 

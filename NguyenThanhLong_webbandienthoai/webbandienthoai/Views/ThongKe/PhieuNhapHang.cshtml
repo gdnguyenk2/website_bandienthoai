@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    //khởi tạo control webgrid
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 6);
+}
+<style>
+    .Footer {
+        height: 100px;
+    }
+
+        .Footer a {
+            display: inline-block;
+            text-decoration: none;
+            border: 2px solid #808080;
+            color: #ffffff;
+            background: #2987f0;
+            padding: 5px 10px;
+        }
+
+    .Table, th, tr, td {
+        text-align: center;
+        border: 1px solid #000000;
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    .Table {
+        width: 100%;
+    }
+
+    .Header {
+        background-color: #e6dada;
+    }
+
+    img {
+        width: 160px;
+        height: 120px;
+    }
+</style>
+
+<h2 style="margin:10px 0">Phiếu Nhập Hàng</h2>
+<div class="clearfix"></div>
+<br />
+<br />
+@grid.GetHtml(
+    tableStyle: "Table",
+    headerStyle: "Header",
+    footerStyle: "Footer",
+    rowStyle: "Row",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+    grid.Column("MaPN", "Mã Phiếu Nhập"),
+    grid.Column("NhaCungCap.TenNCC", "Tên Nhà Cung Cấp"),
+    grid.Column("NgayNhap", "Ngày Nhập Hàng",format:p=>p.NgayNhap.ToString("dd/MM/yyyy")),
+    grid.Column(format: p => Html.ActionLink("Chi Tiết", "ChiTietPN", new { id = p.MaPN }, new { style = "display: block;text-decoration: none;background-color: #0094ff;padding:5px 8px;border:1px solid #00ffff;border-radius:3px 4px;" })),
+    grid.Column(format: p => Html.ActionLink("Xóa", "XoaPN", new { id = p.MaPN }, new { style = "display: block;text-decoration: none;background-color: #ff6a00;padding:5px 8px;border:1px solid #ffd800;border-radius:3px 4px;" }))
+    )
+)
+<script>
+    $(document).ready(function () {// HttpUtility.JavascriptStringEncode để đảm báo mã hóa chuỗi an toàn khi dùng các ký tự đặc biệt
+        var xoapn = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["xoapn"]))';
+        console.log(xoapn);
+        if (xoapn) {
+            alert(xoapn);
+        }
+    });
+</script>
+

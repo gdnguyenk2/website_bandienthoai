@@ -50,7 +50,7 @@ namespace webbandienthoai.Controllers
             if (tv != null)
             {
                 //lấy danh sách các đơn hàng chưa đc duyệt
-                var lstGiao = db.DonDatHangs.Where(n => n.TinhTrang == "Đã giao hàng" && n.DaThanhToan == "Đã thanh toán").OrderByDescending(n => n.NgayGiao);
+                var lstGiao = db.DonDatHangs.Where(n => n.TinhTrang == "Đã giao hàng" ).OrderByDescending(n => n.NgayGiao);
                 return View(lstGiao);
             }
             else
@@ -145,7 +145,6 @@ namespace webbandienthoai.Controllers
                 SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == item.MaSP);
                 sp.SoLanMua += item.SoLuong;
             }
-            ddhup.DaThanhToan = "Đã thanh toán";
             ddhup.TinhTrang = "Đã giao hàng";
             ddhup.NgayGiao = DateTime.Now;
             db.SaveChanges();

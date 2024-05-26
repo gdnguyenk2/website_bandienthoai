@@ -98,9 +98,7 @@
                     <div class="add-to-cart">
                         @if (Session["TaiKhoans"] != null && Session["TaiKhoans"].ToString() != "")
                         {
-                            <a href="@Url.Action("ThemGioHang", "GioHang", new { @iMaSP = item.MaSP, @sl = 1, @Url = Request.Url.ToString() })">
-                                <button class="add-to-cart-btn btnthem"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
-                            </a>
+                            <button class="add-to-cart-btn btnthem" onclick="themgiohang(@item.MaSP)"><i class="fa fa-shopping-cart"></i> Thêm Vào Giỏ Hàng</button>
                         }
                         else
                         {
@@ -126,8 +124,25 @@
     }
 </script>
 <script>
-    var themtc = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["themthanhcong"]))';
-    if (themtc) {
-        alert(themtc);
+    function themgiohang(iMaSP) {
+        $.ajax({
+            url: '@Url.Action("ThemGioHang", "GioHang")',
+            type: 'POST',
+            data: {
+                iMaSP: iMaSP,
+                sl: 1
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert(response.message); // Thông báo thành công
+                    window.location.reload();
+                } else {
+                    alert(response.message); // Thông báo lỗi
+                }
+            },
+            error: function() {
+                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+            }
+        });
     }
 </script>

@@ -71,3 +71,9 @@
         }
     }
 </script>
+<script>
+        var dktc = '@Html.Raw(HttpUtility.JavaScriptStringEncode((string)TempData["dktc"]))';// HttpUtility.JavascriptStringEncode để đảm báo mã hóa chuỗi an toàn khi dùng các ký tự đặc biệt
+        if (dktc) {
+            alert(dktc);
+        }
+</script>

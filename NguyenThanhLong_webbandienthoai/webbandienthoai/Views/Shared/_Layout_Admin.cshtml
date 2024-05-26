@@ -9,12 +9,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
     <title>DragonPhone</title>
-    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content_Admin/LayoutAdmin/css/bootstrap.css" rel="stylesheet" type='text/css' />
+    <link href="@Url.Content("~/Content/css/font-awesome.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content_Admin/LayoutAdmin/css1/bootstrap.css")" rel="stylesheet" type='text/css' />
     <!-- Custom Theme files -->
-    <link href="~/Content_Admin/LayoutAdmin/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="@Url.Content("~/Content_Admin/LayoutAdmin/css1/style.css")" rel="stylesheet" type="text/css" media="all" />
     <!-- Custom Theme files -->
-    <script src="~/Content_Admin/LayoutAdmin/js/jquery.min.js"></script>
+    <script src="@Url.Content("~/Content_Admin/LayoutAdmin/js/jquery.min.js")"></script>
     <link rel="stylesheet" href="~/Content_Admin/LayoutAdmin/css/font-awesome.css">
     <!-- Custom Theme files -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -173,7 +173,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h3>Chức Năng</h3>
                 <ul>
                     <li><a href="#" style="margin:0 5px"><i class="fa fa-bar-chart" aria-hidden="true"></i></a></li>
-                    <li><a href="@Url.Action("Index","ThongKe")">Thống Kê</a></li>
+                    <li><a href="@Url.Action("Index","ThongKe")">Quản lý thống Kê</a></li>
                 </ul>
                 <ul>
                     <li><a href="#" style="margin:0 5px"><i class="fa fa-cubes"></i></a></li>
@@ -185,7 +185,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
                 <ul>
                     <li><a href="#" style="margin:0 5px"><i class="fa fa-pencil-square-o"></i></a></li>
-                    <li><a href="@Url.Action("NhapHang","NhapHang")">Nhập hàng</a></li>
+                    <li><a href="@Url.Action("NhapHang","NhapHang")">Quản lý nhập hàng</a></li>
                 </ul>
                 <ul>
                     <li><a href="#" style="margin:0 5px"><i class="fa fa-calendar-times-o"></i></a></li>
@@ -198,6 +198,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul>
                     <li><a href="#" style="margin:0 5px"><i class="fa fa-calendar-minus-o"></i></a></li>
                     <li><a href="@Url.Action("Index","QuanLyQuangCao")">Quản lý quảng cáo</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-calendar-minus-o"></i></a></li>
+                    <li><a href="@Url.Action("Index","QuanLyNSX")">Quản lý nhà sản xuất</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-calendar-minus-o"></i></a></li>
+                    <li><a href="@Url.Action("Index","QuanLyNCC")">Quản lý nhà cung cấp</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#" style="margin:0 5px"><i class="fa fa-calendar-minus-o"></i></a></li>
+                    <li><a href="@Url.Action("Index","QuanLyDanhMuc")">Quản lý loại sản phẩm</a></li>
                 </ul>
                 <ul>
                     <li><a href="#" style="margin:0 5px"><i class="fa fa-users"></i></a></li>

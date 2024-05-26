@@ -96,6 +96,11 @@ namespace webbandienthoai.Controllers
             {
                 return HttpNotFound();
             }
+            var lstSanPham = db.SanPhams.Where(n => n.MaKhuyenMai == MaKhuyenMai);
+            foreach(var item in lstSanPham)
+            {
+                item.MaKhuyenMai = null;
+            }
             db.KhuyenMais.Remove(km);
             db.SaveChanges();
             return RedirectToAction("Index","KhuyenMai");

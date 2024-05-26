@@ -29,7 +29,6 @@ namespace webbandienthoai.Models
         public virtual DbSet<ChiTietDonDatHang> ChiTietDonDatHangs { get; set; }
         public virtual DbSet<ChiTietGioHang> ChiTietGioHangs { get; set; }
         public virtual DbSet<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
-        public virtual DbSet<CongNo> CongNoes { get; set; }
         public virtual DbSet<DanhMuc> DanhMucs { get; set; }
         public virtual DbSet<DonDatHang> DonDatHangs { get; set; }
         public virtual DbSet<GioHang> GioHangs { get; set; }

@@ -43,21 +43,22 @@
                 <td><b>Số lượng đặt</b></td>
                 <td><b>Đơn giá đặt</b></td>
             </tr>
+            @{ decimal thanhtien = 0;}
             @foreach (var item in lstChiTietDH)
             {
                 <tr>
                     <td>@item.SanPham.TenSP</td>
                     <td><img src="@Url.Content("~/Content/Images/Products/" + item.SanPham.HinhAnh)" style="width:120px;height:100px" /></td>
                     <td>@item.SoLuong</td>
-                    <td>@item.DonGia</td>
-
+                    <td>@item.DonGia.ToString("#,##") đ</td>
+                    @{ thanhtien += item.SoLuong * item.DonGia;}
                 </tr>
             }
             <tr>
                 <td align="right" colspan="4">Tổng số lượng: @Model.ChiTietDonDatHangs.Sum(n => n.SoLuong)</td>
             </tr>
             <tr>
-                <td align="right" colspan="4">Tổng tiền: @Model.ChiTietDonDatHangs.Sum(n => n.SoLuong * n.SanPham.DonGia).Value.ToString("#,##")</td>
+                <td align="right" colspan="4">Tổng tiền: @thanhtien.ToString("#,##") đ</td>
             </tr>
         </table>
         <br /><br />

@@ -9,55 +9,121 @@
         <div class="icon">
             <i class="visit"></i>
         </div>
+        <div class="clearfix"></div>
         <div class="icon-text">
             <h3>@ViewBag.SoNguoiTrucTuyen</h3>
             <p>Trực tuyến</p>
         </div>
         <div class="clearfix"></div>
     </div>
-    <div class="new-users">
-        <div class="icon">
-            <i class="user1"></i>
+    <a href="@Url.Action("Index","PhanQuyen")">
+        <div class="new-users">
+            <div class="icon">
+                <i class="user1"></i>
+            </div>
+            <div class="clearfix"></div>
+            <div class="icon-text">
+                <h3>@ViewBag.TongThanhVien</h3>
+                <p>Người Dùng</p>
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="icon-text">
-            <h3>@ViewBag.TongThanhVien</h3>
-            <p>Người Dùng</p>
+    </a>
+        <div class="orders">
+            <a href="@Url.Action("PheDuyet","QuanLyDonHang")">
+                <div class="icon">
+                    <i class="order"></i>
+                </div>
+                <div class="clearfix"></div>
+                <div class="icon-text">
+                    <h3>@ViewBag.TongDonDatHang</h3>
+                    <p>Đơn Hàng Chờ Duyệt</p>
+                </div>
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="visitors">
+            <div class="icon">
+                <i class="visit"></i>
+            </div>
+            <div class="clearfix"></div>
+            <div class="icon-text">
+                <h3>@ViewBag.SoNguoiTruyCap</h3>
+                <p>Truy Cập</p>
+            </div>
+            <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
-    </div>
-    <div class="orders">
-        <div class="icon">
-            <i class="order"></i>
-        </div>
-        <div class="icon-text">
-            <h3>@ViewBag.TongDonDatHang</h3>
-            <p>Đơn Hàng</p>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="visitors">
-        <div class="icon">
-            <i class="visit"></i>
-        </div>
-        <div class="icon-text">
-            <h3>@ViewBag.SoNguoiTruyCap</h3>
-            <p>Truy Cập</p>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="clearfix"></div>
 </div>
 <div class="list_of_members">
     <div class="sales">
         <div class="icon">
             <i class="dollar"></i>
         </div>
+        <div class="clearfix"></div>
         <div class="icon-text">
-            @{ decimal TongDoanhThu = decimal.Parse(ViewBag.TongDoanhThu.ToString());}
-            <h3>@TongDoanhThu.ToString("#,##") đ</h3>
-            <p>Doanh Thu</p>
+            @{ var thongkethang = ViewBag.TKDoanhThuThang;
+                if (thongkethang == 0 || thongkethang == null)
+                {
+                    thongkethang = 0;
+                }
+                else
+                {
+                    thongkethang = thongkethang.ToString("#,##");
+                }
+            }
+            <h3>@thongkethang đ</h3>
+            <p>Doanh Thu Theo Tháng</p>
         </div>
         <div class="clearfix"></div>
     </div>
+    <div class="sales">
+        <div class="icon">
+            <i class="dollar"></i>
+        </div>
+        <div class="clearfix"></div>
+        <div class="icon-text">
+            @{ var thongketuan = ViewBag.TKDoanhThuTuan;
+                if (thongketuan == 0 || thongketuan == null)
+                {
+                    thongketuan = 0;
+                }
+                else
+                {
+                    thongketuan = thongketuan.ToString("#,##");
+                }
+            }
+            <h3>@thongketuan đ</h3>
+            <p>Doanh Thu Theo Tuần</p>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="orders">
+        <a href="@Url.Action("Index","QuanLySanPham")">
+            <div class="icon">
+                <i class="order"></i>
+            </div>
+            <div class="clearfix"></div>
+            <div class="icon-text">
+                <h3>@ViewBag.ThongKeSP</h3>
+                <p>Sản Phẩm</p>
+            </div>
+            <div class="clearfix"></div>
+        </a>
+    </div>
+    <a href="@Url.Action("PhieuNhapHang","ThongKe")">
+        <div class="visitors">
+            <div class="icon">
+                <i class="visit"></i>
+            </div>
+            <div class="clearfix"></div>
+            <div class="icon-text">
+                <h3>@ViewBag.ThongKePhieuNhap</h3>
+                <p>Phiếu Nhập Hàng</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+     </a>
 </div>
 

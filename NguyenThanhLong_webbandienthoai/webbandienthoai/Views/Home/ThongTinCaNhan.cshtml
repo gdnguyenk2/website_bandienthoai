@@ -72,7 +72,7 @@
                         <h2 class="card-title text-center" style="margin:20px 10px"><strong>Hồ Sơ Của Tôi</strong></h2>
                         <p style="color: #000;text-align:center">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
                         <hr />
-                        @using (Html.BeginForm("CapNhatThongTin", "Home", FormMethod.Post, new { @style = "margin-top: 10px", @enctype = "multipart/form-data" ,@id="updateinfor"}))
+                        @using (Html.BeginForm("CapNhatThongTin", "Home", FormMethod.Post, new { @style = "margin-top: 10px", @enctype = "multipart/form-data", @id = "updateinfor" }))
                         {
                             @Html.HiddenFor(model => model.MaTV)
                             @Html.HiddenFor(model => model.MatKhau)
@@ -147,32 +147,39 @@
 <script>
     function checkPhoneNumberLength() {
         var phoneField = document.getElementById('phone');
-        var phoneNumber = phoneField.value.replace(/\D/g, ''); 
+        var phoneNumber = phoneField.value;
+        var phoneRegex = /^\d+$/;
 
-        if (phoneNumber.length < 10) {
+        if (!phoneRegex.test(phoneNumber)) {
+            phoneField.setCustomValidity('Số điện thoại phải là số');
+        }
+        else if (phoneNumber.length < 10) {
             phoneField.setCustomValidity('Số điện thoại phải chứa ít nhất 10 chữ số.');
-        } else {
+        }
+        else {
             phoneField.setCustomValidity('');
         }
     }
 </script>
 
 <script>
-    $(document).ready(function () {
-        $('#avartar').change(function (e) {
-            var input = e.target;
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+    $(document).ready(function () { // Chờ tài liệu được tải xong
+        $('#avartar').change(function (e) { // Khi file input thay đổi
+            var input = e.target; // Lấy đối tượng input
 
-                reader.onload = function (e) {
-                    $('#imgAvartar').attr('src', e.target.result);
+            if (input.files && input.files[0]) { // Kiểm tra xem có file nào được chọn không
+                var reader = new FileReader(); // Tạo đối tượng FileReader
+
+                reader.onload = function (e) { // Khi file được đọc xong
+                    $('#imgAvartar').attr('src', e.target.result); // Gán kết quả đọc được cho thuộc tính src của img
                 }
 
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(input.files[0]); // Đọc file dưới dạng URL
             }
         });
     });
 </script>
+
 <script>
     $(document).ready(function () {
         $('#updateinfor').submit(function (e) {

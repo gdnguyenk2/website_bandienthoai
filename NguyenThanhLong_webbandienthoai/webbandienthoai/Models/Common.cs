@@ -60,6 +60,15 @@ namespace webbandienthoai.Models
             }
             return str;
         }
+        public static List<string> GetOnlineUsers()
+        {
+            var onlineUsers = HttpContext.Current.Application["OnlineUsers"] as List<string>;
+            if (onlineUsers != null)
+            {
+                return new List<string>(onlineUsers);
+            }
+            return new List<string>();
+        }
 
     }
 }

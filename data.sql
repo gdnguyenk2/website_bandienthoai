@@ -235,18 +235,6 @@ CREATE TABLE BinhLuan
 )
 GO
 
-CREATE TABLE CongNo
-(
-    MaCongNo INT IDENTITY NOT NULL,
-    MaNCC INT NOT NULL,
-    SoTienNo DECIMAL(18, 0) NOT NULL,
-    NgayCongNo DATE NOT NULL,
-
-    CONSTRAINT PK_CongNo PRIMARY KEY (MaCongNo),
-    CONSTRAINT FK_CongNo_NCC FOREIGN KEY (MaNCC) REFERENCES NhaCungCap(MaNCC) ON DELETE CASCADE
-)
-GO
-
 CREATE TABLE Quyen
 (
     MaQuyen NVARCHAR(50) NOT NULL,
@@ -323,9 +311,7 @@ GO
 
 INSERT INTO KhachHang(MaTV, TenKH, DiaChi, Email, SoDienThoai) VALUES
 (1, N'NguyenThanhLong', N'An Tân, Thái Thụy, Thái Bình', N'thanhlong02@gmail.com', '05725756331'),
-(2, N'Lê Hữu Tài', N'Số nhà 123, Xã Dĩ An, Huyện Dĩ An, Tỉnh Bình Dương', N'lehuutai09@gmail.com', '0324195842'),
-(null, N'Lê Trí Cường', null, null, null),
-(null, N'Nguyễn Quốc Tiến', null, null, null)
+(2, N'Lê Hữu Tài', N'Số nhà 123, Xã Dĩ An, Huyện Dĩ An, Tỉnh Bình Dương', N'lehuutai09@gmail.com', '0324195842')
 GO
 
 --INSERT DONDATHANG
@@ -532,9 +518,4 @@ INSERT INTO QuangCao(TenQC,HinhAnh,NgayCapNhat) VALUES
 (N'Quang Cao 3',N'quangcao3.png','2024-03-01'),
 (N'Quang Cao 4',N'quangcao4.jpg','2024-03-01')
 GO
-
---INSERT MAU
---MaMau INT IDENTITY NOT NULL,
---TenMau NVARCHAR(50) NULL
-
 

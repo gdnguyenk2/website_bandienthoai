@@ -17,7 +17,6 @@ namespace webbandienthoai.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NhaCungCap()
         {
-            this.CongNoes = new HashSet<CongNo>();
             this.PhieuNhaps = new HashSet<PhieuNhap>();
             this.SanPhams = new HashSet<SanPham>();
         }
@@ -29,8 +28,6 @@ namespace webbandienthoai.Models
         public string SoDienThoai { get; set; }
         public string Fax { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CongNo> CongNoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuNhap> PhieuNhaps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

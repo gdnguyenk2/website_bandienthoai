@@ -41,15 +41,6 @@
     <Property Name="DonGiaNhap" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="SoLuongNhap" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="CongNo">
-    <Key>
-      <PropertyRef Name="MaCongNo" />
-    </Key>
-    <Property Name="MaCongNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="MaNCC" Type="int" Nullable="false" />
-    <Property Name="SoTienNo" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="NgayCongNo" Type="date" Nullable="false" />
-  </EntityType>
   <EntityType Name="DanhMuc">
     <Key>
       <PropertyRef Name="MaDanhMuc" />
@@ -190,8 +181,8 @@
     <Property Name="HinhAnh3" Type="nvarchar(max)" />
     <Property Name="HinhAnh4" Type="nvarchar(max)" />
     <Property Name="SoLuongTon" Type="int" Nullable="false" />
-    <Property Name="DanhGia" Type="int" />
-    <Property Name="SoLanMua" Type="int" />
+    <Property Name="DanhGia" Type="int" Nullable="false" />
+    <Property Name="SoLanMua" Type="int" Nullable="false" />
     <Property Name="Moi" Type="bit" Nullable="false" />
     <Property Name="DaXoa" Type="bit" Nullable="false" />
   </EntityType>
@@ -234,20 +225,6 @@
       </Principal>
       <Dependent Role="BinhLuan">
         <PropertyRef Name="MaTV" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CongNo_NCC">
-    <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="CongNo" Type="Self.CongNo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="NhaCungCap">
-        <PropertyRef Name="MaNCC" />
-      </Principal>
-      <Dependent Role="CongNo">
-        <PropertyRef Name="MaNCC" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -482,7 +459,6 @@
     <EntitySet Name="ChiTietDonDatHang" EntityType="Self.ChiTietDonDatHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChiTietGioHang" EntityType="Self.ChiTietGioHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChiTietPhieuNhap" EntityType="Self.ChiTietPhieuNhap" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CongNo" EntityType="Self.CongNo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DonDatHang" EntityType="Self.DonDatHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
@@ -505,10 +481,6 @@
     <AssociationSet Name="FK_BL_TV" Association="Self.FK_BL_TV">
       <End Role="ThanhVien" EntitySet="ThanhVien" />
       <End Role="BinhLuan" EntitySet="BinhLuan" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CongNo_NCC" Association="Self.FK_CongNo_NCC">
-      <End Role="NhaCungCap" EntitySet="NhaCungCap" />
-      <End Role="CongNo" EntitySet="CongNo" />
     </AssociationSet>
     <AssociationSet Name="FK_CTDDH_DDH" Association="Self.FK_CTDDH_DDH">
       <End Role="DonDatHang" EntitySet="DonDatHang" />

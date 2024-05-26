@@ -17,7 +17,7 @@
 </script>
 <h2>Quan lý sản phẩm</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SuaSP", "QuanLySanPham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -100,7 +100,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" class="form-control-file" id="HinhAnh" name="HinhAnh">
+                <input type="file" name="HinhAnh">
                 <span style="color: red;">@ViewBag.upload</span>
                 <br />
                 <img src="@Url.Content("~/Content/Images/Products/" + Model.HinhAnh)" alt="Alternate Text" style="width:120px;height:auto;" />
@@ -111,7 +111,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh2, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" class="form-control-file" id="HinhAnh" name="HinhAnh2">
+                <input type="file" name="HinhAnh2">
                 <span style="color: red;">@ViewBag.upload</span>
                 <br />
                 <img src="@Url.Content("~/Content/Images/Products/" + Model.HinhAnh2)" alt="Alternate Text" style="width:120px;height:auto;" />
@@ -122,7 +122,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh3, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" class="form-control-file" id="HinhAnh" name="HinhAnh3">
+                <input type="file" name="HinhAnh3">
                 <span style="color: red;">@ViewBag.upload</span>
                 <br />
                 <img src="@Url.Content("~/Content/Images/Products/" + Model.HinhAnh3)" alt="Alternate Text" style="width:120px;height:auto;" />
@@ -133,7 +133,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh4, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" class="form-control-file" id="HinhAnh" name="HinhAnh4">
+                <input type="file" name="HinhAnh4">
                 <span style="color: red;">@ViewBag.upload</span>
                 <br />
                 <img src="@Url.Content("~/Content/Images/Products/" + Model.HinhAnh4)" alt="Alternate Text" style="width:120px;height:auto;" />
@@ -175,12 +175,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <a href="@Url.Action("Index", "QuanLySanPham")" class="btn btn-danger">Quay lại</a>
+                <input type="submit" value="Sửa" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

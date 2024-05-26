@@ -46,16 +46,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CongNoes">
-      <EntityTypeMapping TypeName="WebBanDienThoaiModel.CongNo">
-        <MappingFragment StoreEntitySet="CongNo">
-          <ScalarProperty Name="MaCongNo" ColumnName="MaCongNo" />
-          <ScalarProperty Name="MaNCC" ColumnName="MaNCC" />
-          <ScalarProperty Name="SoTienNo" ColumnName="SoTienNo" />
-          <ScalarProperty Name="NgayCongNo" ColumnName="NgayCongNo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="DanhMucs">
       <EntityTypeMapping TypeName="WebBanDienThoaiModel.DanhMuc">
         <MappingFragment StoreEntitySet="DanhMuc">
